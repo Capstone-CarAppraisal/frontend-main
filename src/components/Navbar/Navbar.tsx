@@ -1,9 +1,19 @@
+"use client";
+import { useEffect, useState } from "react";
 import Hamburger from "./Hamburger";
 import Link from "next/link";
 import Image from "next/image";
 import questionIcon from "@/../public/assets/Nav/questionIcon.svg";
 import homeLogo from "@/../public/assets/Nav/homeLogo.svg";
+import closeIcon from "@/../public/assets/Nav/closeIcon.svg";
+
 export default function Navbar() {
+  const [isNavOpen, setNavIsOpen] = useState(false);
+
+  const handleToggleNavMenu = () => {
+    setNavIsOpen((prev) => !prev);
+  };
+
   return (
     <div className="">
       <div>
@@ -18,7 +28,7 @@ export default function Navbar() {
 
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-dark-blue text-sm py-4">
         <nav
-          className="w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
+          className="w-full mx-auto px-6 sm:flex sm:items-center sm:justify-between"
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
@@ -49,8 +59,13 @@ export default function Navbar() {
                 data-hs-collapse="#navbar-collapse-with-animation"
                 aria-controls="navbar-collapse-with-animation"
                 aria-label="Toggle navigation"
+                onClick={handleToggleNavMenu}
               >
-                <Hamburger />
+                {isNavOpen ? (
+                  <Image src={closeIcon} alt="close-icon"></Image>
+                ) : (
+                  <Hamburger />
+                )}
               </button>
             </div>
           </div>
@@ -58,7 +73,7 @@ export default function Navbar() {
             id="navbar-collapse-with-animation"
             className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block "
           >
-            <div className="font-sans font-semibold flex flex-col align-center justify-center h-screen sm:h-[50px] text-xl flex-col items-center gap-12 text-white mt-5 sm:flex-row sm:items-center sm:space-x-3 sm:justify-end sm:mt-0 sm:ps-5">
+            <div className="font-sans font-semibold flex flex-col align-center justify-center h-screen sm:h-[50px] text-xl flex-col items-center gap-y-20 gap-x-8 text-white mt-5 sm:flex-row sm:items-center sm:space-x-3 sm:justify-end sm:mt-0 sm:ps-5">
               <Link className="" href="#">
                 เกี่ยวกับเรา
               </Link>
