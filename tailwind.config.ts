@@ -8,24 +8,19 @@ const config: Config = {
     "./node_modules/preline/preline.js",
   ],
   theme: {
-    colors: {
-      "dark-blue": "#112D4E",
-      "light-blue": "#DBE2EF",
-      blue: "#3F72AF",
-      rose: "#ED5656",
-      grey: "#7D7D7D",
-      white: "#FFFFFF",
-      black: "#000000",
-    },
     extend: {
+      colors: {
+        "dark-blue": "#112D4E",
+        "light-blue": "#DBE2EF",
+        blue: "#3F72AF",
+        rose: "#ED5656",
+        grey: "#7D7D7D",
+        white: "#FFFFFF",
+        black: "#000000",
+      },
       fontFamily: {
         sans: ["var(--font-noto-sans)"],
         worksans: ["var(--font-work-sans)"],
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
