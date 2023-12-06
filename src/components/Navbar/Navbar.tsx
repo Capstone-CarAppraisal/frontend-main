@@ -1,0 +1,90 @@
+import Hamburger from "./Hamburger";
+import Link from "next/link";
+import Image from "next/image";
+import questionIcon from "@/../public/assets/Nav/questionIcon.svg";
+import homeLogo from "@/../public/assets/Nav/homeLogo.svg";
+export default function Navbar() {
+  return (
+    <div className="">
+      <div>
+        <div className="flex items-center space-x-10 pr-14 font-semibold justify-end h-[40px]  w-full bg-black max-sm:hidden">
+          <Link className="text-base font-sans text-white" href="#">
+            ติดต่อเรา
+          </Link>
+        </div>
+      </div>
+
+      {/* TODO: Language toggle */}
+
+      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-dark-blue text-sm py-4">
+        <nav
+          className="w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
+          aria-label="Global"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex flex-row space-x-3">
+              <div>
+                <Link
+                  className="flex flex-row space-x-3 font-worksans lg:ml-[8rem] text-4xl font-black text-white"
+                  href="#"
+                >
+                  CAR
+                  <span className="text-rose">APP</span>
+                  <div className="w-[50px]">
+                    <Image
+                      src={homeLogo}
+                      alt="home-logo"
+                      width={50}
+                      height={50}
+                    ></Image>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            <div className="sm:hidden">
+              <button
+                type="button"
+                className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2"
+                data-hs-collapse="#navbar-collapse-with-animation"
+                aria-controls="navbar-collapse-with-animation"
+                aria-label="Toggle navigation"
+              >
+                <Hamburger />
+              </button>
+            </div>
+          </div>
+          <div
+            id="navbar-collapse-with-animation"
+            className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block "
+          >
+            <div className="font-sans font-semibold flex flex-col align-center justify-center h-screen sm:h-[50px] text-xl flex-col items-center gap-12 text-white mt-5 sm:flex-row sm:items-center sm:space-x-3 sm:justify-end sm:mt-0 sm:ps-5">
+              <Link className="" href="#">
+                เกี่ยวกับเรา
+              </Link>
+              <Link className="flex flex-row items-center" href="#">
+                วิธีใช้งาน
+                <span className="pl-2">
+                  <Image src={questionIcon} alt="question-icon"></Image>
+                </span>
+              </Link>
+              <div className="sm:hidden">
+                <Link href="#">ประเมินราคา</Link>
+              </div>
+              <div className="hidden sm:block">
+                <Link href="#">
+                  <button
+                    type="button"
+                    className="py-3 px-6 inline-flex text-xl items-center gap-x-2 text-sm rounded-2xl bg-blue text-white "
+                  >
+                    ประเมินราคา
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+  );
+}
