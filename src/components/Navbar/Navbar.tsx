@@ -15,7 +15,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="">
+    <div className="z-50 fixed top-0 right-0 left-0">
       <div>
         <div className="flex items-center space-x-10 pr-14 font-semibold justify-end h-[40px]  w-full bg-black max-sm:hidden">
           <Link className="text-base font-sans text-white" href="#">
@@ -35,7 +35,7 @@ export default function Navbar() {
             <div className="flex flex-row space-x-3">
               <div>
                 <Link
-                  className="flex flex-row space-x-3 font-worksans lg:ml-[8rem] text-4xl font-black text-white"
+                  className="flex flex-row space-x-3 font-worksans lg:ml-[165px] text-4xl font-black text-white"
                   href="#"
                 >
                   CAR
