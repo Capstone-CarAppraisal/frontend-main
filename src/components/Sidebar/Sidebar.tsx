@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import sidebarToggle from "@/../public/assets/Sidebar/vector.svg";
+import sidebarToggle from "@/../public/assets/Sidebar/sidebarToggle.svg";
 import Image from "next/image";
 export default function SideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
