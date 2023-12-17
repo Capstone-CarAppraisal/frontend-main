@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSansThai.variable} ${workSans.variable}`}>
         <Navbar />
-        <div className="mt-[75px] sm:mt-[120px] flex flex-col">{children}</div>
+        <div className="mt-[75px] sm:mt-[135px] flex flex-col">{children}</div>
       </body>
       <PrelineScript />
     </html>

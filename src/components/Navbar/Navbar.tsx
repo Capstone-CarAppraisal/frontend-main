@@ -73,7 +73,7 @@ export default function Navbar() {
             id="navbar-collapse-with-animation"
             className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block "
           >
-            <div className="font-sans font-semibold flex flex-col align-center justify-center h-screen sm:h-[50px] text-xl flex-col items-center gap-y-20 gap-x-8 text-white mt-5 sm:flex-row sm:items-center sm:space-x-3 sm:justify-end sm:mt-0 sm:ps-5">
+            <div className="font-sans font-semibold flex flex-col align-center justify-center h-screen sm:h-[65px] text-xl flex-col items-center gap-y-20 gap-x-8 text-white mt-5 sm:flex-row sm:items-center sm:space-x-3 sm:justify-end sm:mt-0 sm:ps-5 sm:mr-8">
               <Link className="" href="#">
                 เกี่ยวกับเรา
               </Link>
@@ -90,7 +90,7 @@ export default function Navbar() {
                 <Link href="#">
                   <button
                     type="button"
-                    className="py-3 px-6 inline-flex text-xl items-center gap-x-2 text-sm rounded-2xl bg-blue text-white "
+                    className="h-[51px] py-3 px-6 inline-flex text-xl items-center gap-x-2 text-sm rounded-2xl bg-blue text-white"
                   >
                     ประเมินราคา
                   </button>
