@@ -22,7 +22,7 @@ export default function SideBar() {
         type="button"
         className={`transform duration-300 transition ${
           isSidebarOpen ? "rotate-180 sm:right-[15px]" : "rotate-0"
-        } z-10 fixed  top-[75px] sm:top-[130px]  sm:right-[28px] hs-collapse-toggle text-gray-500 hover:text-gray-600 p-3 mt-3`}
+        } z-10 fixed  top-[75px] right-1 sm:top-[130px]  sm:right-[28px] hs-collapse-toggle text-gray-500 hover:text-gray-600 p-3 mt-3`}
         onClick={toggleSidebarHandler}
         aria-label="Toggle navigation"
       >
