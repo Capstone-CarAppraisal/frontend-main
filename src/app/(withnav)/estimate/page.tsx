@@ -5,7 +5,7 @@ export default function EstimatePage() {
   return (
     <main>
       <div>
-        <div className="flex flex-col bg-white m-4 border shadow-sm rounded-xl m-10 p-6 h-fit">
+        <div className="flex flex-col bg-white m-4 border rounded-[20px] m-10 px-6 py-3 h-fit">
           <h3 className="text-2xl sm:text-4xl font-sans font-bold text-dark-blue">
             ผลการประเมิน
           </h3>
@@ -15,7 +15,7 @@ export default function EstimatePage() {
             [&::-webkit-scrollbar]:w-2
             [&::-webkit-scrollbar-track]:bg-gray-100
             [&::-webkit-scrollbar-thumb]:bg-gray-300
-           sm:grid sm:grid-cols-2 gap-2 mt-8"
+           sm:grid sm:grid-cols-2 space-y-4 mt-4"
           >
             <PriceCard />
             <PriceCard />
