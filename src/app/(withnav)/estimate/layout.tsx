@@ -6,9 +6,8 @@ export default function EstimatePageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-blue h-[100vh]">
-      <SideBar />
-      <div className="ml-[70px] sm:ml-[120px]">{children}</div>
+    <div className="bg-white h-[100vh]">
+      <div>{children}</div>
     </div>
   );
 }
