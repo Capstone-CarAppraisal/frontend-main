@@ -120,6 +120,11 @@
   resolved "https://registry.yarnpkg.com/@preline/collapse/-/collapse-2.0.1.tgz#0fb333549d8ab258098377c0e424a5fc21e76f90"
   integrity sha512-/+pfIbRHRJYYOVHCvuveKiDDf1m7WQH3jGsv3Wu/Y3d+2cEyQrUpJYmE4dSyA0zCYp4FxXumMz5KcUh0IlBoew==
 
+"@preline/stepper@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@preline/stepper/-/stepper-2.0.2.tgz#6c26e2f1d9adc78b5394529a828205bb9336451d"
+  integrity sha512-BaB3PxRAhg7LwayDuQ40jtyfwNZu65D7bSsMB7Xfrhpmj/472nHE/zV9WD1lK2FS/J+5YO5LOwVE8DxYi8Vk9w==
+
 "@preline/toggle-count@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@preline/toggle-count/-/toggle-count-2.0.1.tgz"
