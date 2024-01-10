@@ -67,7 +67,7 @@ export default function Form() {
   ];
   return (
     <main>
-      <div className="mt-8 mx-12 font-sans">
+      <div className="mt-12 mb-2 mx-12 font-sans">
         <div>
           <ul className="relative flex justify-center gap-0">
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
