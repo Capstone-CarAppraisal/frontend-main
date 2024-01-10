@@ -73,7 +73,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold text-white ${
+                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
                     step === 0 || step === 1
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
@@ -91,7 +91,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold text-white ${
+                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
                     step === 2
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
@@ -109,7 +109,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold text-white ${
+                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
                     step === 3
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
