@@ -135,7 +135,7 @@ export default function Form() {
               เลือกวิธีระบุลักษณะภายนอกของรถยนต์
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-              <div className="flex flex-row justify-center space-x-20 mb-10 w-full">
+              <div className="flex flex-row justify-center space-x-20 mb-20 w-full">
                 {options.map((option, index) => (
                   <button
                     type="button"
@@ -158,11 +158,11 @@ export default function Form() {
                   </button>
                 ))}
               </div>
-              <div className="absolute bottom-5  space-x-10">
+              <div className="absolute bottom-5 space-x-10">
                 <button
                   type="button"
                   onClick={() => nextStep()}
-                  className="py-2 px-3 w-[7vw] h-[50px] items-center gap-x-2 text-xl text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
+                  className="py-2 px-3 w-[9vw] h-[50px] items-center gap-x-2 text-lg text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
                 >
                   ถัดไป
                 </button>
