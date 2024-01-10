@@ -6,7 +6,7 @@ export default function EstimatePageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white h-[100vh]">
+    <div className="bg-white h-[80vh]">
       <div>{children}</div>
     </div>
   );
