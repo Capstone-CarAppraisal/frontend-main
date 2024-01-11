@@ -16,16 +16,6 @@ export default function Navbar() {
 
   return (
     <div className="z-50 fixed top-0 right-0 left-0">
-      <div>
-        <div className="flex items-center space-x-10 pr-14 font-semibold justify-end h-[40px]  w-full bg-black max-sm:hidden">
-          <Link className="text-base font-sans text-white" href="#">
-            ติดต่อเรา
-          </Link>
-        </div>
-      </div>
-
-      {/* TODO: Language toggle */}
-
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-dark-blue text-sm py-4">
         <nav
           className="w-full mx-auto px-6 sm:flex sm:items-center sm:justify-between"
