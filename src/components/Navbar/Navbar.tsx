@@ -26,7 +26,7 @@ export default function Navbar() {
               <div>
                 <Link
                   className="flex flex-row space-x-3 font-worksans lg:ml-[165px] text-4xl font-black text-white"
-                  href="#"
+                  href="/"
                 >
                   CAR
                   <span className="text-rose">APP</span>
@@ -77,7 +77,7 @@ export default function Navbar() {
                 <Link href="#">ประเมินราคา</Link>
               </div>
               <div className="hidden sm:block">
-                <Link href="#">
+                <Link href="/estimate">
                   <button
                     type="button"
                     className="h-[51px] py-3 px-6 inline-flex text-xl items-center gap-x-2 text-sm rounded-2xl bg-blue text-white"
