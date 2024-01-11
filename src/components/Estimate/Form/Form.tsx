@@ -45,7 +45,6 @@ export default function Form() {
   const handleClick = (buttonNumber: any) => {
     setActiveButton(activeButton === buttonNumber ? null : buttonNumber);
     setSelectedOption(buttonNumber);
-    console.log(activeButton);
   };
 
   const options = [
@@ -162,6 +161,7 @@ export default function Form() {
                 <button
                   type="button"
                   onClick={() => nextStep()}
+                  disabled={!activeButton}
                   className="py-2 px-3 w-[9vw] h-[50px] items-center gap-x-2 text-lg text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
                 >
                   ถัดไป
@@ -171,7 +171,7 @@ export default function Form() {
           </div>
         </div>
       )}
-      {selectedOption === "1" && step !== 0 && (
+      {selectedOption === "1" && step !== 0 && activeButton !== null && (
         <EstimateByDataForm
           prevStep={prevStep}
           nextStep={nextStep}
