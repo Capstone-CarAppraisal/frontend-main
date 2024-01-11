@@ -23,7 +23,7 @@ export default function EstimateByDataForm({
   return (
     <div>
       {step === 1 && (
-        <div className="flex justify-center w-full h-[60vh] font-sans pt-8">
+        <div className="flex justify-center w-full h-[65vh] font-sans pt-8">
           <div className="flex flex-col w-[80vw]">
             <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
               กรอกลักษณะภายนอกรถ
@@ -72,7 +72,7 @@ export default function EstimateByDataForm({
         </div>
       )}
       {step === 2 && (
-        <div className="flex justify-center w-full h-[70vh] font-sans pt-8">
+        <div className="flex justify-center w-full h-[65vh] font-sans pt-8">
           <div className="flex flex-col w-[80vw]">
             <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
               กรอกลักษณะภายในรถ

@@ -73,7 +73,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
+                  className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 0 || step === 1
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
@@ -83,7 +83,7 @@ export default function Form() {
                     1
                   </span>
                 </span>
-                <span className="ms-2  text-2xl font-normal text-dark-blue">
+                <span className="ms-2  text-xl font-normal text-dark-blue">
                   ลักษณะภายนอก
                 </span>
               </span>
@@ -91,7 +91,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
+                  className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 2
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
@@ -101,7 +101,7 @@ export default function Form() {
                     2
                   </span>
                 </span>
-                <span className="ms-2 text-2xl font-normal text-dark-blue">
+                <span className="ms-2 text-xl font-normal text-dark-blue">
                   ลักษณะภายใน
                 </span>
               </span>
@@ -109,7 +109,7 @@ export default function Form() {
             <li className="flex items-center justify-center gap-x-2 shrink basis-0 flex-1 group">
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
-                  className={`w-11 h-11 flex justify-center items-center flex-shrink-0 text-2xl font-bold ${
+                  className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 3
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
@@ -119,7 +119,7 @@ export default function Form() {
                     3
                   </span>
                 </span>
-                <span className="ms-2  text-2xl font-normal text-dark-blue">
+                <span className="ms-2  text-xl font-normal text-dark-blue">
                   ผลการประเมิน
                 </span>
               </span>
@@ -129,9 +129,9 @@ export default function Form() {
       </div>
 
       {step === 0 && (
-        <div className="flex justify-center w-full h-[60vh] font-sans pt-8">
+        <div className="flex justify-center w-full h-[65vh] font-sans pt-8">
           <div className="flex flex-col w-[80vw]">
-            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+            <div className="bg-dark-blue font-bold text-white text-xl w-fit px-5 py-3">
               เลือกวิธีระบุลักษณะภายนอกของรถยนต์
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
