@@ -7,6 +7,7 @@ import CarBrandCard from "../../Summary/CarBrandCard";
 import CarImageCard from "../../Summary/CarImageCard";
 import LowestPriceCard from "../../Summary/LowestPriceCard";
 import HighestPriceCard from "../../Summary/HighestPriceCard";
+import AverageMarketPriceCard from "../../Summary/AverageMarketPriceCard";
 
 export default function EstimateByDataForm({
   step,
@@ -211,7 +212,7 @@ export default function EstimateByDataForm({
                   <HighestPriceCard />
                 </div>
                 <div>
-                  <PriceCard price={421} percent={66} />
+                  <AverageMarketPriceCard />
                 </div>
                 <div>
                   <PriceCard price={421} percent={66} />
