@@ -108,7 +108,7 @@ export default function EstimateByDataForm({
                         <input
                           type="radio"
                           name="hs-radio-group"
-                          className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                          className="border-[#707070] text-rose focus:ring-0"
                           id="hs-radio-group-1"
                         />
                         <label
@@ -122,7 +122,7 @@ export default function EstimateByDataForm({
                         <input
                           type="radio"
                           name="hs-radio-group"
-                          className="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                          className="border-[#707070]  text-rose focus:ring-0"
                           id="hs-radio-group-3"
                         />
                         <label
