@@ -11,10 +11,12 @@
   "dependencies": {
     "@preline/collapse": "^2.0.1",
     "@preline/toggle-count": "^2.0.1",
+    "apexcharts": "^3.45.1",
     "chart.js": "^4.4.1",
     "next": "14.0.3",
     "preline": "^2.0.2",
     "react": "^18",
+    "react-apexcharts": "^1.4.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"
   },
