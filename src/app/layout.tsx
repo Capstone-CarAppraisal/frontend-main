@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSansThai.variable} ${workSans.variable}`}>
         <Navbar />
-        <div className="mt-[75px] sm:mt-[135px] h-auto flex flex-col bg-white">
+        <div className="mt-[75px] sm:mt-[135px] h-auto flex flex-col bg-white max-w-screen">
           {children}
         </div>
         <Footer />
