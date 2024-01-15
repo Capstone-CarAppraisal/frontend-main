@@ -2,7 +2,11 @@
 
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import React, { useState } from "react";
-import PriceCard from "../../PriceCard";
+import PriceCard from "../../Summary/PriceCard";
+import CarBrandCard from "../../Summary/CarBrandCard";
+import CarImageCard from "../../Summary/CarImageCard";
+import LowestPriceCard from "../../Summary/LowestPriceCard";
+import HighestPriceCard from "../../Summary/HighestPriceCard";
 
 export default function EstimateByDataForm({
   step,
@@ -185,8 +189,8 @@ export default function EstimateByDataForm({
         </div>
       )}
       {step === 3 && (
-        <div className="flex justify-center w-full h-auto font-sans pt-8">
-          <div className="flex flex-col w-[80vw]">
+        <div className="flex justify-center w-full h-auto font-sans pt-8 items-center">
+          <div className="flex flex-col w-[80vw] justify-center  max-w-[1200px]">
             <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
               ผลการประเมิน
             </div>
@@ -196,15 +200,15 @@ export default function EstimateByDataForm({
                   <PriceCard price={421} percent={66} />
                 </div>
                 <div>
-                  <PriceCard price={421} percent={66} />
+                  <CarBrandCard />
                 </div>
 
                 <div>
-                  <PriceCard price={421} percent={66} />
+                  <CarImageCard />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <PriceCard price={421} percent={66} />
-                  <PriceCard price={421} percent={66} />
+                  <LowestPriceCard />
+                  <HighestPriceCard />
                 </div>
                 <div>
                   <PriceCard price={421} percent={66} />
