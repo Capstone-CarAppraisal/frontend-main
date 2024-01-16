@@ -1,24 +1,4 @@
-// components/LineChart.js
-import LineChart from "../Summary/Chart/LineChart";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  PointElement,
-  LineElement,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-import { ExampleChart } from "./Chart/Test";
-
-// Register ChartJS components using ChartJS.register
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
+import { LineChart } from "./Chart/LineChart";
 
 export default function AverageMarketPriceCard() {
   const chartData = {
@@ -35,9 +15,11 @@ export default function AverageMarketPriceCard() {
 
   return (
     <div className="flex bg-light-blue  h-[200px] w-full items-center">
-      <div className="flex flex-col p-5 mt-3  w-full">
-        <h2 className="text-xl font-bold text-dark-blue">ราคาตลาดเฉลี่ย</h2>
-        <ExampleChart />
+      <div className="flex flex-col p-5 w-full">
+        <div className="mt-2">
+          <h2 className="text-xl font-bold text-dark-blue">ราคาตลาดเฉลี่ย</h2>
+          <LineChart />
+        </div>
       </div>
     </div>
   );

@@ -1,48 +1,118 @@
-import React from "react";
-import { Line } from "react-chartjs-2";
+"use client"; // if you use app dir, don't forget this line
 
-export default function LineChart({ data }: { data: any }) {
+import dynamic from "next/dynamic";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+export function LineChart() {
+  const option = {
+    colors: ["#ED5656"],
+    stroke: {
+      show: true,
+      width: 2,
+      dashArray: 0,
+    },
+    chart: {
+      toolbar: {
+        show: false,
+      },
+      style: {
+        fontFamily: "Inter, sans-serif",
+      },
+
+      id: "apexchart-example",
+      zoom: {
+        enabled: false,
+      },
+      offsetX: -10,
+      offsetY: 0,
+    },
+    xaxis: {
+      tickPlacement: "between",
+      categories: ["JUN", "JUL", "AUG", "SEP", "OCT"],
+      labels: {
+        show: true,
+        minHeight: undefined,
+        maxHeight: 120,
+        style: {
+          colors: ["#112D4E"],
+          fontSize: "13px",
+          fontFamily: "Inter , sans-serif",
+          fontWeight: 300,
+        },
+        offsetX: 0,
+        offsetY: 0,
+      },
+    },
+    yaxis: {
+      tickAmount: 3,
+      labels: {
+        show: true,
+        rotateAlways: false,
+        showDuplicates: false,
+        trim: false,
+        minHeight: undefined,
+        maxHeight: 120,
+        formatter: function (value: number) {
+          return value / 1000 + "K";
+        },
+        style: {
+          colors: ["#112D4E"],
+          fontSize: "13px",
+          fontFamily: "Inter , sans-serif",
+          fontWeight: 300,
+          cssClass: "apexcharts-xaxis-label",
+        },
+        offsetX: -3,
+        offsetY: -2,
+      },
+    },
+
+    grid: {
+      show: true,
+      borderColor: "#FFFFFF",
+
+      xaxis: {
+        lines: {
+          show: false,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      row: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      column: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      padding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 10,
+      },
+    },
+  };
+
+  const series = [
+    {
+      name: "price",
+      data: [330000, 300000, 250000, 340000, 400000],
+    },
+  ];
+
   return (
-    <div className="chart-container">
-      <Line
-        data={data}
-        className="font-sans"
-        options={{
-          elements: {
-            point: {
-              radius: 0, // Set the point radius to 0 to hide data points
-            },
-          },
-
-          scales: {
-            x: {
-              beginAtZero: true,
-              grid: {
-                display: false,
-              },
-              ticks: {
-                display: true,
-              },
-            },
-            y: {
-              grid: {
-                display: true,
-                color: "white",
-              },
-              ticks: {
-                display: true,
-              },
-            },
-          },
-          plugins: {
-            title: {
-              display: false,
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
+    <div className="flex justify-center w-full">
+      <ApexChart
+        type="line"
+        options={option}
+        series={series}
+        height={140}
+        width="100%"
       />
     </div>
   );
