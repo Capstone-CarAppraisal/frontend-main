@@ -9,6 +9,8 @@ import LowestPriceCard from "../../Summary/LowestPriceCard";
 import HighestPriceCard from "../../Summary/HighestPriceCard";
 import AverageMarketPriceCard from "../../Summary/AverageMarketPriceCard";
 import AverageMarketPriceByYearCard from "../../Summary/AverageMarketPriceByYearCard";
+import PriceRankCard from "../../Summary/PriceRankCard";
+import CarDetailCard from "../../Summary/CarDetailCard";
 
 export default function EstimateByDataForm({
   step,
@@ -217,6 +219,15 @@ export default function EstimateByDataForm({
                 </div>
                 <div>
                   <AverageMarketPriceByYearCard />
+                </div>
+                <div>
+                  <PriceRankCard />
+                </div>
+                <div>
+                  <CarDetailCard/>
+                </div>
+                <div>
+                  <PriceRankCard />
                 </div>
               </div>
               <div className="absolute bottom-5  space-x-10">
