@@ -6,6 +6,7 @@ import byDataIcon from "@/../public/assets/EstimateOption/ClassifyByData.svg";
 import byPicIcon from "@/../public/assets/EstimateOption/ClassifyByPic.svg";
 import byVINIcon from "@/../public/assets/EstimateOption/ClassifyByVin.svg";
 import Image from "next/image";
+import NextButton from "@/components/Shared/Button/NextButton";
 
 export default function Form() {
   const [step, setStep] = useState(0);
@@ -159,14 +160,7 @@ export default function Form() {
                 ))}
               </div>
               <div className="absolute bottom-5 space-x-10">
-                <button
-                  type="button"
-                  onClick={() => nextStep()}
-                  disabled={!activeButton}
-                  className="py-2 px-3 w-[9vw] h-[50px] items-center gap-x-2 text-lg text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ถัดไป
-                </button>
+                <NextButton handleClick={nextStep} />
               </div>
             </div>
           </div>

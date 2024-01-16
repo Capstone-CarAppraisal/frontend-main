@@ -11,6 +11,9 @@ import AverageMarketPriceCard from "../../Summary/AverageMarketPriceCard";
 import AverageMarketPriceByYearCard from "../../Summary/AverageMarketPriceByYearCard";
 import PriceRankCard from "../../Summary/PriceRankCard";
 import CarDetailCard from "../../Summary/CarDetailCard";
+import NextArrow from "../../../../../public/assets/Nav/NextArrow.svg";
+import NextButton from "@/components/Shared/Button/NextButton";
+import PrevButton from "@/components/Shared/Button/PrevButton";
 
 export default function EstimateByDataForm({
   step,
@@ -60,21 +63,9 @@ export default function EstimateByDataForm({
                   </div>
                 </div>
               </div>
-              <div className="absolute bottom-5  space-x-10">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="py-2 px-3 w-[9vw] h-[50px] font-bold text-lg items-center text-center gap-x-2  font-semibold rounded-3xl border border-transparent bg-dark-blue text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ย้อนกลับ
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="py-2 px-3 w-[9vw] h-[50px] items-center gap-x-2 text-lg text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ถัดไป
-                </button>
+              <div className="absolute bottom-5 flex flex-row space-x-10">
+                <PrevButton handleClick={handlePrev} />
+                <NextButton handleClick={handleNext} />
               </div>
             </div>
           </div>
@@ -172,21 +163,9 @@ export default function EstimateByDataForm({
                   </div>
                 </div>
               </div>
-              <div className="absolute bottom-5  space-x-10">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="py-2 px-3 w-[9vw] h-[50px] font-bold text-lg items-center text-center gap-x-2  font-semibold rounded-3xl border border-transparent bg-dark-blue text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ย้อนกลับ
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="py-2 px-3 w-[9vw] h-[50px] items-center gap-x-2 text-lg text-center font-semibold rounded-3xl border border-transparent bg-rose text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ประเมินราคา
-                </button>
+              <div className="absolute bottom-5 space-x-10 flex flex-row">
+                <PrevButton handleClick={handlePrev} />
+                <NextButton handleClick={handleNext} />
               </div>
             </div>
           </div>
@@ -224,20 +203,14 @@ export default function EstimateByDataForm({
                   <PriceRankCard />
                 </div>
                 <div>
-                  <CarDetailCard/>
+                  <CarDetailCard />
                 </div>
                 <div>
                   <PriceRankCard />
                 </div>
               </div>
               <div className="absolute bottom-5  space-x-10">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="py-2 px-3 w-[9vw] h-[50px] font-bold text-lg items-center text-center gap-x-2  font-semibold rounded-3xl border border-transparent bg-dark-blue text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-                >
-                  ย้อนกลับ
-                </button>
+                <PrevButton handleClick={handlePrev} />
               </div>
             </div>
           </div>
