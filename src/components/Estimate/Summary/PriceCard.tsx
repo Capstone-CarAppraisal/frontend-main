@@ -5,10 +5,12 @@ export default function PriceCard({
   price: number;
   percent: number;
 }) {
+  const progressBarWidth = `${percent}%`;
+
   return (
-    <div className="flex bg-light-blue  h-[200px] w-full items-center ">
+    <div className="flex bg-light-blue h-[200px] w-full items-center ">
       <div className="flex flex-col p-5 w-full">
-        <h1 className=" font-bold text-dark-blue ">
+        <h1 className="font-bold text-dark-blue">
           <span className="text-5xl">฿</span>
           <span className="text-6xl">{price}</span>
           <span className="text-5xl">K</span>
@@ -17,15 +19,15 @@ export default function PriceCard({
         <div>
           <div className="mt-2">
             <div
-              className="flex w-full h-2 bg-gray-200 overflow-hidden"
+              className="flex w-full h-2 bg-white overflow-hidden"
               role="progressbar"
-              aria-valuenow={25}
+              aria-valuenow={percent}
               aria-valuemin={0}
               aria-valuemax={100}
             >
               <div
-                className="flex flex-col justify-center overflow-hidden bg-rose text-xs text-white text-center whitespace-nowrap transition duration-500"
-                style={{ width: "66%" }}
+                className={`flex flex-col w-full h-full justify-center overflow-hidden bg-rose text-xs text-white text-center whitespace-nowrap transition duration-500`}
+                style={{ width: progressBarWidth }}
               />
             </div>
             <div className="mt-2 flex justify-between items-center">
