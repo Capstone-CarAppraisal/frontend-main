@@ -28,8 +28,8 @@ export default function AboutUsPage() {
       <div className="col-span-3">
         <div className="flex flex-col space-y-4 pr-4">
           <div>
-            <p className="block text-2xl font-normal text-dark-blue leading-normal">
-              <span className="font-bold">RACAR </span>
+            <p className="block text-2xl font-normal text-blue leading-normal">
+              <span className="font-bold text-dark-blue">RACAR </span>
               เป็นโปรเจ็คจากนิสิตคณะวิศวกรรมศาสตร์ สาขาวิศวกรรมคอมพิวเตอร์
               จุฬาลงกรณ์มหาวิทยาลัย
               มีวัตถุประสงค์ที่จะทำการศึกษาการประเมินราคารถยนต์
@@ -39,9 +39,9 @@ export default function AboutUsPage() {
             </p>
           </div>
           <div>
-            <p className="block text-2xl font-normal text-dark-blue leading-normal">
+            <p className="block text-2xl font-normal text-blue leading-normal">
               โดย
-              <span className="font-bold"> RACAR </span>
+              <span className="font-bold text-dark-blue"> RACAR </span>
               เป็นโปรเจ็คต้นแบบที่ทำการทดลองกับรถมาสด้า
               ว่าสามารถประเมินราคารถยนต์ให้เหมาะสมกับตลาดด้วย AI
               ดีกว่าการใช้ข้อมูลทางสถิติประเมินหรือไม่
