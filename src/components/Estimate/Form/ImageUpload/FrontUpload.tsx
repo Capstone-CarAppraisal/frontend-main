@@ -47,8 +47,8 @@ export default function FrontUpload() {
             <Image
               src={URL.createObjectURL(selectedImage)}
               alt="Thumb"
-              fill={true}
-              style={{ objectFit: "cover", maxWidth: "100%" }}
+              layout="fill"
+              objectFit="cover"
               objectPosition="center"
             />
             <button onClick={removeSelectedImage}>
