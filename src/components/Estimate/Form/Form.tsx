@@ -7,6 +7,7 @@ import byPicIcon from "@/../public/assets/EstimateOption/ClassifyByPic.svg";
 import byVINIcon from "@/../public/assets/EstimateOption/ClassifyByVin.svg";
 import Image from "next/image";
 import NextButton from "@/components/Shared/Button/NextButton";
+import FileUpload from "./FileUpload";
 
 export default function Form() {
   const [step, setStep] = useState(0);
@@ -130,35 +131,13 @@ export default function Form() {
       </div>
 
       {step === 0 && (
-        <div className="flex justify-center w-full h-[65vh] font-sans pt-8">
+        <div className="flex justify-center w-full h-[1000px] font-sans pt-8">
           <div className="flex flex-col w-[80vw]">
-            <div className="bg-dark-blue font-bold text-white text-xl w-fit px-5 py-3">
-              เลือกวิธีระบุลักษณะภายนอกของรถยนต์
+            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+              เพิ่มภาพรถยนต์
             </div>
-            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-              <div className="flex flex-row justify-center space-x-20 mb-20 w-full">
-                {options.map((option, index) => (
-                  <button
-                    type="button"
-                    onClick={() => handleClick(option.value)}
-                    className={`py-2 px-3 flex flex-col w-[20vw] h-[35vh] items-center justify-center gap-x-2 text-2xl text-black text-center font-bold drop-shadow-2xl  border border-transparent  ${
-                      activeButton === option.value
-                        ? "shadow-2xl shadow-dark-blue"
-                        : ""
-                    } bg-white text-dark-blue `}
-                    key={index}
-                  >
-                    <Image
-                      src={convertIDtoSVG(option.id)}
-                      alt="data"
-                      width={144}
-                      height={144}
-                      className="mb-8"
-                    />
-                    {option.name}
-                  </button>
-                ))}
-              </div>
+            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
+              <FileUpload />
               <div className="absolute bottom-5 space-x-10">
                 <NextButton handleClick={nextStep} />
               </div>
@@ -166,7 +145,7 @@ export default function Form() {
           </div>
         </div>
       )}
-      {selectedOption === "1" && step !== 0 && activeButton !== null && (
+      {step !== 0 && (
         <EstimateByDataForm
           prevStep={prevStep}
           nextStep={nextStep}
