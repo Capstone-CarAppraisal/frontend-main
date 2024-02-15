@@ -5,7 +5,11 @@ import FormCarIcon from "@/../public/assets/Form/FormCarIcon.svg";
 import Image from "next/image";
 import DeleteImageIcon from "@/../public/assets/Form/DeleteImageIcon.png";
 
-export default function FrontUpload() {
+export default function FrontUpload({
+  handleSideRearImage,
+}: {
+  handleSideRearImage: Function;
+}) {
   const [selectedImage, setSelectedImage] = useState<File | null>();
 
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -18,8 +22,7 @@ export default function FrontUpload() {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       setSelectedImage(file);
-      console.log(file);
-      console.log("No file selected.");
+      handleSideRearImage(file);
     }
   };
 
