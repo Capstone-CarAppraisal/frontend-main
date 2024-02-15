@@ -43,7 +43,7 @@ export default function FrontUpload() {
           มุมด้านหลัง
         </div>
         {selectedImage ? (
-          <div className="">
+          <div className="flex w-full h-[200px]">
             <Image
               src={URL.createObjectURL(selectedImage)}
               alt="Thumb"
