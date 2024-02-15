@@ -5,9 +5,8 @@ export default function EstimatePage() {
   return (
     <main>
       <>
-        {/* <Form /> */}
         <div className="mt-[150px]">
-          <FileUpload />
+          <Form />
         </div>
       </>
     </main>
