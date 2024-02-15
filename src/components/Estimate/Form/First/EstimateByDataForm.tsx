@@ -137,22 +137,7 @@ export default function EstimateByDataForm({
                 </div>
                 <div className="grid grid-cols-4 gap-20">
                   <div>
-                    <SelectInputWithLabel
-                      label="โฉมปีเริ่มต้น"
-                      name="เลือกโฉมปี"
-                    />
-                  </div>
-                  <div>
-                    <SelectInputWithLabel
-                      label="โฉมปีล่าสุด"
-                      name="เลือกโฉมปี"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <label
-                      htmlFor="hs-select-label"
-                      className="block text-sm mb-2 text-black text-xl font-normal"
-                    >
+                    <label className="block text-sm mb-2 text-black text-xl font-normal">
                       เลขไมล์ (km)
                     </label>
                     <input
