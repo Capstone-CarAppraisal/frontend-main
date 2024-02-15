@@ -1,19 +1,25 @@
 "use client";
 
-import { useState, useReducer } from "react";
+import React, { useState } from "react";
 import EstimateByDataForm from "./First/EstimateByDataForm";
-import byDataIcon from "@/../public/assets/EstimateOption/ClassifyByData.svg";
-import byPicIcon from "@/../public/assets/EstimateOption/ClassifyByPic.svg";
-import byVINIcon from "@/../public/assets/EstimateOption/ClassifyByVin.svg";
 import Image from "next/image";
+import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
 import FileUpload from "./FileUpload";
+import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
+import PriceCard from "../Summary/PriceCard";
+import CarBrandCard from "../Summary/CarBrandCard";
+import CarImageCard from "../Summary/CarImageCard";
+import LowestPriceCard from "../Summary/LowestPriceCard";
+import HighestPriceCard from "../Summary/HighestPriceCard";
+import AverageMarketPriceCard from "../Summary/AverageMarketPriceCard";
+import AverageMarketPriceByYearCard from "../Summary/AverageMarketPriceByYearCard";
+import PriceRankCard from "../Summary/PriceRankCard";
+import CarDetailCard from "../Summary/CarDetailCard";
+import NextArrow from "../../../../../public/assets/Nav/NextArrow.svg";
 
 export default function Form() {
   const [step, setStep] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<string>();
-  const [activeButton, setActiveButton] = useState(null);
-
   const [formData, setFormData] = useState({
     step1: { field1: "", field2: "", field3: "" },
     step2: {
@@ -22,53 +28,18 @@ export default function Form() {
     // Add more steps as needed
   });
 
-  const convertIDtoSVG = (id: string) => {
-    switch (id) {
-      case "1":
-        return byDataIcon;
-      case "2":
-        return byPicIcon;
-      case "3":
-        return byVINIcon;
-      default:
-        return "";
-    }
-  };
 
   const nextStep = (step?: any, data?: any) => {
     setFormData({ ...formData, [step]: data });
     setStep((prevStep) => prevStep + 1);
-    // Move to the next step logic
   };
 
   const prevStep = () => {
     setStep((prevStep) => prevStep - 1);
   };
-  const handleClick = (buttonNumber: any) => {
-    setActiveButton(activeButton === buttonNumber ? null : buttonNumber);
-    setSelectedOption(buttonNumber);
-  };
-
-  const options = [
-    {
-      id: "1",
-      name: "กรอกด้วยตนเอง",
-      value: "1",
-    },
-    {
-      id: "2",
-      name: "จำแนกจากรูป",
-      value: "2",
-    },
-    {
-      id: "3",
-      name: "ถอดรหัส VIN",
-      value: "3",
-    },
-  ];
 
   return (
-    <main>
+    <div>
       <div className="mb-2 mx-12 font-sans">
         <div>
           <ul className="relative flex justify-center gap-0">
@@ -137,7 +108,7 @@ export default function Form() {
               เพิ่มภาพรถยนต์
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
-              <FileUpload />
+              <FileUpload handleSubmit={nextStep} />
               <div className="absolute bottom-5 space-x-10">
                 <NextButton handleClick={nextStep} />
               </div>
@@ -145,13 +116,173 @@ export default function Form() {
           </div>
         </div>
       )}
-      {step !== 0 && (
-        <EstimateByDataForm
-          prevStep={prevStep}
-          nextStep={nextStep}
-          step={step}
-        />
+      {step === 1 && (
+        <div className="flex justify-center w-full h-[75vh] font-sans pt-8">
+          <div className="flex flex-col w-[80vw]">
+            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+              กรอกลักษณะภายนอกรถ
+            </div>
+            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
+              <div className="grid grid-row-2 w-[80%] mb-20">
+                <div className="grid grid-cols-2 mb-10">
+                  <div className="px-4">
+                    <SelectInputWithLabel label="ยี่ห้อ" name="เลือกยี่ห้อรถ" />
+                  </div>
+                  <div className="px-4">
+                    <SelectInputWithLabel label="รุ่น" name="เลือกรุ่นรถ" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2">
+                  <div className="px-4">
+                    <SelectInputWithLabel
+                      label="ประเภทรถ"
+                      name="เลือกประเภทรถ"
+                    />
+                  </div>
+                  <div className="px-4">
+                    <SelectInputWithLabel label="สี" name="เลือกสีรถ" />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute bottom-5 flex flex-row space-x-10">
+                <PrevButton handleClick={prevStep} />
+                <NextButton handleClick={nextStep} />
+              </div>
+            </div>
+          </div>
+        </div>
       )}
-    </main>
+      {step === 2 && (
+        <div className="flex justify-center w-full h-[75vh] font-sans pt-8">
+          <div className="flex flex-col w-[80vw]">
+            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+              กรอกลักษณะภายในรถ
+            </div>
+            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
+              <div className="grid grid-row-3 w-[87%] mb-20 gap-3">
+                <div className="grid grid-cols-4 gap-20">
+                  <div>
+                    <SelectInputWithLabel label="เลขซีซี" name="เลือกเลขซีซี" />
+                  </div>
+                  <div className="col-span-3">
+                    <SelectInputWithLabel
+                      label="รุ่นย่อย"
+                      name="เลือกรุ่นย่อยรถ"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-20">
+                  <div>
+                    <SelectInputWithLabel label="ปีรถ" name="เลือกปีรถ" />
+                  </div>
+
+                  <div className="col-span-3">
+                    <label
+                      htmlFor="hs-select-label"
+                      className="block text-sm mb-2 text-black text-xl font-normal"
+                    >
+                      ระบบเกียร์
+                    </label>
+
+                    <div className="flex gap-x-32 mt-5">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="hs-radio-group"
+                          className="border-[#707070] text-rose focus:ring-0"
+                          id="hs-radio-group-1"
+                        />
+                        <label
+                          htmlFor="hs-radio-group-1"
+                          className="text-xl text-gray-500 ms-2 dark:text-gray-400"
+                        >
+                          เกียร์ธรรมดา
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="hs-radio-group"
+                          className="border-[#707070]  text-rose focus:ring-0"
+                          id="hs-radio-group-3"
+                        />
+                        <label
+                          htmlFor="hs-radio-group-3"
+                          className="text-xl text-gray-500 ms-2 dark:text-gray-400"
+                        >
+                          เกียร์อัตโนมัติ
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-20">
+                  <div>
+                    <label className="block text-sm mb-2 text-black text-xl font-normal">
+                      เลขไมล์ (km)
+                    </label>
+                    <input
+                      type="text"
+                      className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="ระบุเลขไมล์"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute bottom-5 space-x-10 flex flex-row">
+                <PrevButton handleClick={prevStep} />
+                <NextButton handleClick={nextStep} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {step === 3 && (
+        <div className="flex justify-center w-full h-auto font-sans pt-8 items-center">
+          <div className="flex flex-col w-[80vw] justify-center  max-w-[1200px]">
+            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+              ผลการประเมิน
+            </div>
+            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
+              <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+                <div>
+                  <PriceCard price={421} percent={66} />
+                </div>
+                <div>
+                  <CarBrandCard />
+                </div>
+
+                <div>
+                  <CarImageCard />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <LowestPriceCard />
+                  <HighestPriceCard />
+                </div>
+                <div>
+                  <AverageMarketPriceCard />
+                </div>
+                <div>
+                  <AverageMarketPriceByYearCard />
+                </div>
+                <div>
+                  <PriceRankCard />
+                </div>
+                <div>
+                  <CarDetailCard />
+                </div>
+                <div>
+                  <PriceRankCard />
+                </div>
+              </div>
+              <div className="absolute bottom-5  space-x-10">
+                <PrevButton handleClick={prevStep} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
