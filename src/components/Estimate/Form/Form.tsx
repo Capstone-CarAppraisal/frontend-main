@@ -5,7 +5,6 @@ import EstimateByDataForm from "./First/EstimateByDataForm";
 import Image from "next/image";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
-import FileUpload from "./FileUpload";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import PriceCard from "../Summary/PriceCard";
 import CarBrandCard from "../Summary/CarBrandCard";
@@ -17,6 +16,10 @@ import AverageMarketPriceByYearCard from "../Summary/AverageMarketPriceByYearCar
 import PriceRankCard from "../Summary/PriceRankCard";
 import CarDetailCard from "../Summary/CarDetailCard";
 import NextArrow from "../../../../../public/assets/Nav/NextArrow.svg";
+import FrontUpload from "./ImageUpload/FrontUpload";
+import RearUpload from "./ImageUpload/RearUpload";
+import SideFrontUpload from "./ImageUpload/SideFrontUpload";
+import SideRearUpload from "./ImageUpload/SideRearUpload";
 
 export default function Form() {
   const [step, setStep] = useState(0);
@@ -28,6 +31,32 @@ export default function Form() {
     // Add more steps as needed
   });
 
+  const [frontData, setFrontData] = useState<File>();
+  const [rearData, setRearData] = useState<File>();
+  const [sideFrontData, setSideFrontData] = useState<File>();
+  const [sideRearData, setSideRearData] = useState<File>();
+
+  const handleFrontData = (data: File) => {
+    setFrontData(data);
+  };
+  const handleRearData = (data: any) => {
+    setRearData(data);
+  };
+  const handleSideFrontData = (data: any) => {
+    setSideFrontData(data);
+  };
+  const handleSideRearData = (data: any) => {
+    setSideRearData(data);
+  };
+
+  const handlePredictModel = (data: any) => {
+    /* console.log(frontData);
+    console.log(rearData);
+    console.log(sideFrontData);
+    console.log(sideRearData); */
+    //TODO Connect to API
+    nextStep();
+  };
 
   const nextStep = (step?: any, data?: any) => {
     setFormData({ ...formData, [step]: data });
@@ -108,9 +137,14 @@ export default function Form() {
               เพิ่มภาพรถยนต์
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
-              <FileUpload handleSubmit={nextStep} />
+              <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
+                <FrontUpload handleFrontImage={handleFrontData} />
+                <RearUpload handleRearImage={handleRearData} />
+                <SideFrontUpload handleSideFrontImage={handleSideFrontData} />
+                <SideRearUpload handleSideRearImage={handleSideRearData} />
+              </div>
               <div className="absolute bottom-5 space-x-10">
-                <NextButton handleClick={nextStep} />
+                <NextButton handleClick={handlePredictModel} />
               </div>
             </div>
           </div>
