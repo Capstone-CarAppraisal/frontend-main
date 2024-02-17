@@ -20,8 +20,10 @@ import FrontUpload from "./ImageUpload/FrontUpload";
 import RearUpload from "./ImageUpload/RearUpload";
 import SideFrontUpload from "./ImageUpload/SideFrontUpload";
 import SideRearUpload from "./ImageUpload/SideRearUpload";
+import useHttp from "@/hooks/useHttp";
 
 export default function Form() {
+  const [isLoading, request, data, error] = useHttp();
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     step1: { field1: "", field2: "", field3: "" },
@@ -49,14 +51,33 @@ export default function Form() {
     setSideRearData(data);
   };
 
-  const handlePredictModel = (data: any) => {
+  const handlePredictModel = async () => {
+    /* if (frontData) {
+      const formData = new FormData();
+      formData.append("file", frontData);
+      const response = await fetch("http://localhost:8000/predict/front", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log("Image uploaded successfully");
+        // Optionally reset the file state
+      } else {
+        console.error("Upload failed");
+      }
+    } else {
+      console.error("No file");
+    } */
     /* console.log(frontData);
     console.log(rearData);
     console.log(sideFrontData);
     console.log(sideRearData); */
     //TODO Connect to API
-    nextStep();
+    //nextStep();
   };
+  console.log(data);
+  //console.log(frontData);
 
   const nextStep = (step?: any, data?: any) => {
     setFormData({ ...formData, [step]: data });
