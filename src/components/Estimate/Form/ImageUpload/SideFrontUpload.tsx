@@ -24,16 +24,14 @@ export default function FrontUpload({
       setSelectedImage(file);
       handleSideFrontImage(file);
     }
-  };
-
-  async function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
-    if (!event.target.files || event.target.files.length === 0) {
-      return; // User canceled file selection
+    else {
+      handleSideFrontImage(null);
     }
-  }
+  };
 
   const removeSelectedImage = () => {
     setSelectedImage(null);
+    handleSideFrontImage(null);
   };
 
   return (
