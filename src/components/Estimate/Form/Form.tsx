@@ -74,8 +74,8 @@ export default function Form() {
     car_type: "",
     transmission: "",
     color: "",
-    modelyear_start: 0,
-    modelyear_end: 0,
+    modelyear_start: 2000,
+    modelyear_end: 2000,
     mile: 0,
   });
 
@@ -143,9 +143,10 @@ export default function Form() {
 
   const onModelChange = (event: any) => {
     const { value } = event.target;
+    const model = value.split(" ");
     setFormData({
       ...formData,
-      ["model"]: value,
+      ["model"]: model[1],
     });
     setSelectedModel(value);
     setSelectedType("");
@@ -188,7 +189,7 @@ export default function Form() {
     const { value } = event.target;
     setFormData({
       ...formData,
-      ["car_year"]: value,
+      ["car_year"]: parseInt(value),
     });
     setSelectedCarYear(value);
   };
@@ -221,10 +222,14 @@ export default function Form() {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    try {
+      await request("post", "/predict/value", undefined, formData);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
+  console.log(data.data.prediction);
   return (
     <div>
       <div className="mb-2 mx-12 font-sans">
