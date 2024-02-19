@@ -23,11 +23,15 @@ const useHttp = () => {
           ? { ...headers, "Content-Type": "application/json" }
           : { "Content-Type": "application/json" },
       });
-      setData(response);
+      setData(response.data);
+      setError(false); // Reset error on successful request
+      return response.data; // Return the response data for immediate use
     } catch (error) {
       setError(true);
+      throw error; // Rethrow to allow catching in the calling code
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   return [isLoading, request, data, error];
 };
