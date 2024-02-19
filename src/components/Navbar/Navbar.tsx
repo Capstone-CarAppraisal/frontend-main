@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Hamburger from "./Hamburger";
 import Link from "next/link";
 import Image from "next/image";
 import questionIcon from "@/../public/assets/Nav/questionIcon.svg";
@@ -40,23 +39,6 @@ export default function Navbar() {
                   </div>
                 </Link>
               </div>
-            </div>
-
-            <div className="sm:hidden">
-              <button
-                type="button"
-                className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2"
-                data-hs-collapse="#navbar-collapse-with-animation"
-                aria-controls="navbar-collapse-with-animation"
-                aria-label="Toggle navigation"
-                onClick={handleToggleNavMenu}
-              >
-                {isNavOpen ? (
-                  <Image src={closeIcon} alt="close-icon"></Image>
-                ) : (
-                  <Hamburger />
-                )}
-              </button>
             </div>
           </div>
           <div
