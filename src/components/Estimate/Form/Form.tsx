@@ -18,7 +18,8 @@ import SideFrontUpload from "./ImageUpload/SideFrontUpload";
 import SideRearUpload from "./ImageUpload/SideRearUpload";
 import useHttp from "@/hooks/useHttp";
 import ImageUpload from "@/libs/ImageUpload";
-import { selectData, carYear } from "@/data/select";
+import { selectData, carYear, color } from "@/data/select";
+import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 
 export default function Form() {
   const [isLoading, request, predictValue, error] = useHttp();
@@ -256,7 +257,7 @@ export default function Form() {
       console.log(error);
     }
   };
-  console.log(marketDetail);
+  console.log(formData);
   //
   return (
     <div>
@@ -353,74 +354,37 @@ export default function Form() {
                 <div className="grid grid-row-2 w-[80%] mb-20">
                   <div className="grid grid-cols-2 mb-10">
                     <div className="px-4">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        ยี่ห้อ
-                      </label>
-                      <select
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                        onChange={onBrandChange}
-                      >
-                        <option>เลือกยี่ห้อรถ</option>
-                        {selectData &&
-                          Object.keys(selectData).map((brand) => (
-                            <option key={brand} value={brand}>
-                              {brand}
-                            </option>
-                          ))}
-                      </select>
+                      <SelectInputWithLabel
+                        label="ยี่ห้อ"
+                        name="เลือกยี่ห้อรถ"
+                        handleChange={onBrandChange}
+                        option={Object.keys(selectData)}
+                      />
                     </div>
                     <div className="px-4">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        รุ่น
-                      </label>
-                      <select
-                        onChange={onModelChange}
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                      >
-                        <option value="">เลือกรุ่นรถ</option>
-                        {selectedBrand &&
-                          Object.keys(selectData[selectedBrand]).map(
-                            (model) => (
-                              <option key={model} value={model}>
-                                {model}
-                              </option>
-                            )
-                          )}
-                      </select>
+                      <SelectInputWithLabel
+                        label="รุ่น"
+                        name="เลือกรุ่นรถ"
+                        handleChange={onModelChange}
+                        option={
+                          selectedBrand &&
+                          Object.keys(selectData[selectedBrand])
+                        }
+                      />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2">
                     <div className="px-4">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        ประเภทรถ
-                      </label>
-                      <select
-                        onChange={onTypeChange}
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                      >
-                        <option value="">เลือกประเภทรถ</option>
-                        {selectedModel &&
-                          Object.keys(
-                            selectData[selectedBrand][selectedModel]
-                          ).map((model) => (
-                            <option key={model} value={model}>
-                              {model}
-                            </option>
-                          ))}
-                      </select>
+                      <SelectInputWithLabel
+                        label="ประเภทรถ"
+                        name="เลือกประเภทรถ"
+                        handleChange={onTypeChange}
+                        option={
+                          selectedModel &&
+                          Object.keys(selectData[selectedBrand][selectedModel])
+                        }
+                      />
                     </div>
                     <div className="px-4">
                       <label
@@ -435,14 +399,9 @@ export default function Form() {
                         onChange={onColorChange}
                       >
                         <option value="">เลือกสีรถ</option>
-                        <option value="black">สีดำ</option>
-                        <option value="gray">สีเทา</option>
-                        <option value="brown">สีน้ำตาล</option>
-                        <option value="red">สีแดง</option>
-                        <option value="green">สีเขียว</option>
-                        <option value="blue">สีฟ้า</option>
-                        <option value="lightblue">สีฟ้าอ่อน</option>
-                        <option value="white">สีขาว</option>
+                        {color.map((color) => (
+                          <option value={color.value}>{color.option}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -465,74 +424,42 @@ export default function Form() {
                 <div className="grid grid-row-3 w-[87%] mb-20 gap-3">
                   <div className="grid grid-cols-4 gap-20">
                     <div>
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        เลขซีซี
-                      </label>
-                      <select
-                        onChange={onSubModelChange}
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                      >
-                        <option value="">เลือกเลขซีซี</option>
-                        {selectedType &&
+                      <SelectInputWithLabel
+                        label="เลขซีซี"
+                        name="เลือกเลขซีซี"
+                        handleChange={onSubModelChange}
+                        option={
+                          selectedType &&
                           Object.keys(
                             selectData[selectedBrand][selectedModel][
                               selectedType
                             ]
-                          ).map((model) => (
-                            <option key={model} value={model}>
-                              {model}
-                            </option>
-                          ))}
-                      </select>
+                          )
+                        }
+                      />
                     </div>
                     <div className="col-span-3">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        รุ่นย่อย
-                      </label>
-                      <select
-                        onChange={onSubModelNameChange}
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                      >
-                        <option>เลือกรุ่นย่อยรถ</option>
-                        {selectedSubModel &&
+                      <SelectInputWithLabel
+                        label="รุ่นย่อย"
+                        name="เลือกรุ่นย่อยรถ"
+                        handleChange={onSubModelNameChange}
+                        option={
+                          selectedSubModel &&
                           selectData[selectedBrand][selectedModel][
                             selectedType
-                          ][selectedSubModel].map((name) => (
-                            <option key={name} value={name}>
-                              {name}
-                            </option>
-                          ))}
-                      </select>
+                          ][selectedSubModel]
+                        }
+                      />
                     </div>
                   </div>
                   <div className="grid grid-cols-4 gap-20">
                     <div>
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        ปีรถ
-                      </label>
-                      <select
-                        id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
-                        onChange={onCarYearChange}
-                      >
-                        <option>เลือกปีรถ</option>
-                        {carYear.map((year) => (
-                          <option key={year} value={year}>
-                            {year}
-                          </option>
-                        ))}
-                      </select>
+                      <SelectInputWithLabel
+                        label="ปีรถ"
+                        name="เลือกปีรถ"
+                        handleChange={onCarYearChange}
+                        option={carYear}
+                      />
                     </div>
 
                     <div className="col-span-3">
