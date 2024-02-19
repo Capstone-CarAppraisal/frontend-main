@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
-import PriceCard from "../Summary/SummaryCard/PriceCard";
-import CarBrandCard from "../Summary/SummaryCard/CarBrandCard";
-import CarImageCard from "../Summary/SummaryCard/CarImageCard";
-import LowestPriceCard from "../Summary/SummaryCard/LowestPriceCard";
-import HighestPriceCard from "../Summary/SummaryCard/HighestPriceCard";
-import AverageMarketPriceCard from "../Summary/SummaryCard/AverageMarketPriceCard";
-import AverageMarketPriceByYearCard from "../Summary/SummaryCard/AverageMarketPriceByYearCard";
-import PriceRankCard from "../Summary/SummaryCard/PriceRankCard";
-import CarDetailCard from "../Summary/SummaryCard/CarDetailCard";
 import ImageUpload from "./ImageUpload";
 import Image from "@/libs/Image";
 import useHttp from "@/hooks/useHttp";
 import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
+import Summary from "../Summary/Summary";
 
 export default function Form() {
   const [isLoading, request, predictValue, error] = useHttp();
@@ -250,11 +242,15 @@ export default function Form() {
         undefined,
         undefined
       );
+      nextStep();
     } catch (error) {
-      console.log(error);
+      console.log("kuy");
+      nextStep();
     }
   };
   //console.log(formData);
+  console.log(marketDetail);
+
   //
   return (
     <div>
@@ -545,37 +541,12 @@ export default function Form() {
               ผลการประเมิน
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-              <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
-                <div>
-                  <PriceCard price={421} percent={66} />
-                </div>
-                <div>
-                  <CarBrandCard />
-                </div>
-
-                <div>
-                  <CarImageCard />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <LowestPriceCard />
-                  <HighestPriceCard />
-                </div>
-                <div>
-                  <AverageMarketPriceCard />
-                </div>
-                <div>
-                  <AverageMarketPriceByYearCard />
-                </div>
-                <div>
-                  <PriceRankCard />
-                </div>
-                <div>
-                  <CarDetailCard />
-                </div>
-                <div>
-                  <PriceRankCard />
-                </div>
-              </div>
+              <Summary
+                model={selectedModel}
+                modelDetail={`${selectedSubModel} ${selectedSubModelName} ${selectedType}`}
+                carMarketDetail={marketDetail}
+                predictValue={predictValue}
+              />
               <div className="absolute bottom-5  space-x-10">
                 <PrevButton handleClick={prevStep} />
               </div>
