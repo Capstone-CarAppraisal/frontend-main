@@ -218,8 +218,6 @@ export default function Form() {
     setStep((prevStep) => prevStep + 1);
   };
 
-  //car_market_detail?car_year=2021&brand=Mazda&model=2&sub_model=1.3&sub_model_name=SP Leather&car_type=Sedan&predict_value=600000
-
   const prevStep = () => {
     setStep((prevStep) => prevStep - 1);
   };
@@ -269,7 +267,7 @@ export default function Form() {
                   className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 0 || step === 1
                       ? "bg-dark-blue text-white"
-                      : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
+                      : "bg-white text-dark-blue border-4 border-lightgrey"
                   }  font-bold rounded-full`}
                 >
                   <span className="hs-stepper-success:hidden hs-stepper-completed:hidden">
@@ -287,7 +285,7 @@ export default function Form() {
                   className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 2
                       ? "bg-dark-blue text-white"
-                      : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
+                      : "bg-white text-dark-blue border-4 border-lightgrey"
                   }  font-bold rounded-full`}
                 >
                   <span className="hs-stepper-success:hidden hs-stepper-completed:hidden">
@@ -305,7 +303,7 @@ export default function Form() {
                   className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
                     step === 3
                       ? "bg-dark-blue text-white"
-                      : "bg-white text-dark-blue border-4 border-[#BCBCBC]"
+                      : "bg-white text-dark-blue border-4 border-lightgrey"
                   }  font-bold rounded-full`}
                 >
                   <span className="hs-stepper-success:hidden hs-stepper-completed:hidden">
