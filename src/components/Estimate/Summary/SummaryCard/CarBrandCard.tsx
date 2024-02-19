@@ -1,5 +1,5 @@
 import Image from "next/image";
-import mazdaLogo from "../../../../public/assets/CarLogo/Mazda.svg";
+import mazdaLogo from "../../../../../public/assets/CarLogo/Mazda.svg";
 
 export default function CarBrandCard() {
   return (
