@@ -19,7 +19,6 @@ import SideRearUpload from "./ImageUpload/SideRearUpload";
 import useHttp from "@/hooks/useHttp";
 import ImageUpload from "@/libs/ImageUpload";
 import { selectData, carYear } from "@/data/select";
-import { useForm } from "react-hook-form";
 
 export default function Form() {
   const [isLoading, request, data, error] = useHttp();
