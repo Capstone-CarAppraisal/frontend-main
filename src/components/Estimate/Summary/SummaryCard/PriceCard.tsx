@@ -2,7 +2,7 @@ export default function PriceCard({
   price,
   percent,
 }: {
-  price: number;
+  price: string;
   percent: number;
 }) {
   const progressBarWidth = `${percent}%`;
