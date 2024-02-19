@@ -1,4 +1,3 @@
-import FileUpload from "@/components/Estimate/Form/FileUpload";
 import Form from "@/components/Estimate/Form/Form";
 
 export default function EstimatePage() {

@@ -1,6 +1,6 @@
 "use client";
 
-export default async function ImageUpload(data: any, side: string) {
+export default async function Image(data: any, side: string) {
   if (data) {
     const formData = new FormData();
     formData.append("files", data); // Append the file to the form data

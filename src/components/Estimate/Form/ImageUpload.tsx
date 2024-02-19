@@ -5,9 +5,11 @@ import FormCarIcon from "@/../public/assets/Form/FormCarIcon.svg";
 import Image from "next/image";
 import DeleteImageIcon from "@/../public/assets/Form/DeleteImageIcon.png";
 
-export default function FrontUpload({
+export default function ImageUpload({
+  label,
   handleFrontImage,
 }: {
+  label: string;
   handleFrontImage: Function;
 }) {
   const [selectedImage, setSelectedImage] = useState<File | null>();
@@ -40,7 +42,7 @@ export default function FrontUpload({
         className="flex flex-col justify-center items-center border border-4 border-dashed border-grey space-y-8 h-full w-full"
       >
         <div className="absolute left-0 top-0 bg-blue text-2xl text-white font-normal px-8 py-3 z-10">
-          มุมด้านหน้า
+          {label}
         </div>
         {selectedImage ? (
           <div className="flex w-full h-[200px]">

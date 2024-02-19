@@ -12,12 +12,9 @@ import AverageMarketPriceCard from "../Summary/AverageMarketPriceCard";
 import AverageMarketPriceByYearCard from "../Summary/AverageMarketPriceByYearCard";
 import PriceRankCard from "../Summary/PriceRankCard";
 import CarDetailCard from "../Summary/CarDetailCard";
-import FrontUpload from "./ImageUpload/FrontUpload";
-import RearUpload from "./ImageUpload/RearUpload";
-import SideFrontUpload from "./ImageUpload/SideFrontUpload";
-import SideRearUpload from "./ImageUpload/SideRearUpload";
+import ImageUpload from "./ImageUpload";
+import Image from "@/libs/Image";
 import useHttp from "@/hooks/useHttp";
-import ImageUpload from "@/libs/ImageUpload";
 import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 
@@ -83,16 +80,16 @@ export default function Form() {
   const handlePredictModel = async () => {
     if (frontData && rearData && sideFrontData && sideRearData) {
       console.log("y");
-      ImageUpload(frontData, "front").then((value) => {
+      Image(frontData, "front").then((value) => {
         setFrontResult(value[0]);
       });
-      ImageUpload(rearData, "rear").then((value) => {
+      Image(rearData, "rear").then((value) => {
         setRearResult(value[0]);
       });
-      ImageUpload(sideFrontData, "sidefront").then((value) => {
+      Image(sideFrontData, "sidefront").then((value) => {
         setSideFrontResult(value[0]);
       });
-      ImageUpload(sideRearData, "siderear").then((value) => {
+      Image(sideRearData, "siderear").then((value) => {
         setSideRearResult(value[0]);
       });
     }
@@ -121,6 +118,8 @@ export default function Form() {
       nextStep();
     } */
   };
+  //console.log(frontData, sideFrontData, rearData, sideRearData);
+
   const onBrandChange = (event: any) => {
     const { value } = event.target;
     setFormData({
@@ -257,7 +256,7 @@ export default function Form() {
       console.log(error);
     }
   };
-  console.log(formData);
+  //console.log(formData);
   //
   return (
     <div>
@@ -330,11 +329,22 @@ export default function Form() {
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
               <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
-                //fix
-                <FrontUpload handleFrontImage={handleFrontData} />
-                <RearUpload handleRearImage={handleRearData} />
-                <SideFrontUpload handleSideFrontImage={handleSideFrontData} />
-                <SideRearUpload handleSideRearImage={handleSideRearData} />
+                <ImageUpload
+                  label="มุมด้านหน้า"
+                  handleFrontImage={handleFrontData}
+                />
+                <ImageUpload
+                  label="มุมด้านหลัง"
+                  handleFrontImage={handleRearData}
+                />
+                <ImageUpload
+                  label="มุมเฉียงจากด้านหน้า"
+                  handleFrontImage={handleSideFrontData}
+                />
+                <ImageUpload
+                  label="มุมเฉียงจากด้านหลัง"
+                  handleFrontImage={handleSideRearData}
+                />
               </div>
               <div className="absolute bottom-5 space-x-10">
                 <NextButton handleClick={handlePredictModel} />
