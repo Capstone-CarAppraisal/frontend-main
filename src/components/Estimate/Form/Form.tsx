@@ -3,15 +3,15 @@
 import React, { useRef, useState } from "react";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
-import PriceCard from "../Summary/PriceCard";
-import CarBrandCard from "../Summary/CarBrandCard";
-import CarImageCard from "../Summary/CarImageCard";
-import LowestPriceCard from "../Summary/LowestPriceCard";
-import HighestPriceCard from "../Summary/HighestPriceCard";
-import AverageMarketPriceCard from "../Summary/AverageMarketPriceCard";
-import AverageMarketPriceByYearCard from "../Summary/AverageMarketPriceByYearCard";
-import PriceRankCard from "../Summary/PriceRankCard";
-import CarDetailCard from "../Summary/CarDetailCard";
+import PriceCard from "../Summary/SummaryCard/PriceCard";
+import CarBrandCard from "../Summary/SummaryCard/CarBrandCard";
+import CarImageCard from "../Summary/SummaryCard/CarImageCard";
+import LowestPriceCard from "../Summary/SummaryCard/LowestPriceCard";
+import HighestPriceCard from "../Summary/SummaryCard/HighestPriceCard";
+import AverageMarketPriceCard from "../Summary/SummaryCard/AverageMarketPriceCard";
+import AverageMarketPriceByYearCard from "../Summary/SummaryCard/AverageMarketPriceByYearCard";
+import PriceRankCard from "../Summary/SummaryCard/PriceRankCard";
+import CarDetailCard from "../Summary/SummaryCard/CarDetailCard";
 import ImageUpload from "./ImageUpload";
 import Image from "@/libs/Image";
 import useHttp from "@/hooks/useHttp";
@@ -477,7 +477,6 @@ export default function Form() {
                       >
                         ระบบเกียร์
                       </label>
-
                       <div className="flex gap-x-32 mt-5">
                         <div className="flex items-center">
                           <input

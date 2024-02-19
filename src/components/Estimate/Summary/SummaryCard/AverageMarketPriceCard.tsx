@@ -1,4 +1,4 @@
-import { LineChart } from "./Chart/LineChart";
+import { LineChart } from "../Chart/LineChart";
 
 export default function AverageMarketPriceCard() {
   const chartData = {

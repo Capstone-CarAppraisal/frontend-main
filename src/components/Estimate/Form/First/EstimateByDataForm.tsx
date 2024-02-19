@@ -2,15 +2,15 @@
 
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import React, { useState } from "react";
-import PriceCard from "../../Summary/PriceCard";
-import CarBrandCard from "../../Summary/CarBrandCard";
-import CarImageCard from "../../Summary/CarImageCard";
-import LowestPriceCard from "../../Summary/LowestPriceCard";
-import HighestPriceCard from "../../Summary/HighestPriceCard";
-import AverageMarketPriceCard from "../../Summary/AverageMarketPriceCard";
-import AverageMarketPriceByYearCard from "../../Summary/AverageMarketPriceByYearCard";
-import PriceRankCard from "../../Summary/PriceRankCard";
-import CarDetailCard from "../../Summary/CarDetailCard";
+import PriceCard from "../../Summary/SummaryCard/PriceCard";
+import CarBrandCard from "../../Summary/SummaryCard/CarBrandCard";
+import CarImageCard from "../../Summary/SummaryCard/CarImageCard";
+import LowestPriceCard from "../../Summary/SummaryCard/LowestPriceCard";
+import HighestPriceCard from "../../Summary/SummaryCard/HighestPriceCard";
+import AverageMarketPriceCard from "../../Summary/SummaryCard/AverageMarketPriceCard";
+import AverageMarketPriceByYearCard from "../../Summary/SummaryCard/AverageMarketPriceByYearCard";
+import PriceRankCard from "../../Summary/SummaryCard/PriceRankCard";
+import CarDetailCard from "../../Summary/SummaryCard/CarDetailCard";
 import NextArrow from "../../../../../public/assets/Nav/NextArrow.svg";
 import NextButton from "@/components/Shared/Button/NextButton";
 import PrevButton from "@/components/Shared/Button/PrevButton";

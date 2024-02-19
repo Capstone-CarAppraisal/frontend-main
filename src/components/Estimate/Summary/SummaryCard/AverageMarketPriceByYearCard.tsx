@@ -1,4 +1,4 @@
-import BarChart from "./Chart/BarChart";
+import BarChart from "../Chart/BarChart";
 
 export default function AverageMarketPriceByYearCard() {
   return (
