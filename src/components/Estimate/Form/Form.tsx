@@ -21,7 +21,8 @@ import ImageUpload from "@/libs/ImageUpload";
 import { selectData, carYear } from "@/data/select";
 
 export default function Form() {
-  const [isLoading, request, data, error] = useHttp();
+  const [isLoading, request, predictValue, error] = useHttp();
+  const [isLoading2, request2, marketDetail, error2] = useHttp();
   const [step, setStep] = useState(0);
 
   const [frontData, setFrontData] = useState<File | null>();
@@ -217,6 +218,8 @@ export default function Form() {
     setStep((prevStep) => prevStep + 1);
   };
 
+  //car_market_detail?car_year=2021&brand=Mazda&model=2&sub_model=1.3&sub_model_name=SP Leather&car_type=Sedan&predict_value=600000
+
   const prevStep = () => {
     setStep((prevStep) => prevStep - 1);
   };
@@ -227,8 +230,24 @@ export default function Form() {
     } catch (error) {
       console.log(error);
     }
+    if (predictValue) {
+      getMarketDetail();
+    }
   };
-  console.log(data.data.prediction);
+  const getMarketDetail = async () => {
+    if (predictValue) {
+      try {
+        await request2(
+          "get",
+          `car_market_detail?car_year=${selectedCarYear}&brand=${selectedBrand}&model=${selectedModel}&sub_model=${selectedSubModel}&sub_model_name=4${selectedSubModelName} Leather&car_type=${selectedType}&predict_value=&${predictValue}`
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  console.log(marketDetail);
+  //
   return (
     <div>
       <div className="mb-2 mx-12 font-sans">
@@ -300,6 +319,7 @@ export default function Form() {
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
               <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
+                //fix
                 <FrontUpload handleFrontImage={handleFrontData} />
                 <RearUpload handleRearImage={handleRearData} />
                 <SideFrontUpload handleSideFrontImage={handleSideFrontData} />
