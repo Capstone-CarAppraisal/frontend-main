@@ -226,24 +226,34 @@ export default function Form() {
 
   const handleSubmit = async () => {
     try {
-      await request("post", "/predict/value", undefined, formData);
+      const response = await request(
+        "post",
+        "/predict/value",
+        undefined,
+        formData
+      );
+      getMarketDetail(response);
     } catch (error) {
       console.log(error);
     }
-    if (predictValue) {
-      getMarketDetail();
-    }
   };
-  const getMarketDetail = async () => {
-    if (predictValue) {
-      try {
-        await request2(
-          "get",
-          `car_market_detail?car_year=${selectedCarYear}&brand=${selectedBrand}&model=${selectedModel}&sub_model=${selectedSubModel}&sub_model_name=4${selectedSubModelName} Leather&car_type=${selectedType}&predict_value=&${predictValue}`
-        );
-      } catch (error) {
-        console.log(error);
-      }
+  const getMarketDetail = async (predictValue: any) => {
+    const numericValue = parseInt(selectedSubModel, 10) / 1000;
+    const formattedValue = numericValue.toFixed(1);
+    const model = selectedModel.split(" ");
+    try {
+      await request2(
+        "get",
+        `/car_market_detail?car_year=${selectedCarYear}&brand=${selectedBrand}&model=${
+          model[1]
+        }&sub_model=${formattedValue}&sub_model_name=${selectedSubModelName}&car_type=${selectedType}&predict_value=${Math.floor(
+          predictValue.prediction
+        )}`,
+        undefined,
+        undefined
+      );
+    } catch (error) {
+      console.log(error);
     }
   };
   console.log(marketDetail);
