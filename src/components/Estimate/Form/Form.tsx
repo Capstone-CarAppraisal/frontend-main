@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
 import ImageUpload from "./ImageUpload";
@@ -28,10 +28,12 @@ export default function Form() {
   const [selectedBrand, setSelectedBrand] = useState<any>();
   const [selectedModel, setSelectedModel] = useState<any>();
   const [selectedType, setSelectedType] = useState<any>();
+  const [selectedColor, setSelectedColor] = useState<any>();
   const [selectedSubModel, setSelectedSubModel] = useState<any>();
   const [selectedSubModelName, setSelectedSubModelName] = useState<any>();
   const [selectedCarYear, setSelectedCarYear] = useState<any>();
   const [selectedTransmission, setSelectedTransmission] = useState<any>();
+  const mileAge = useRef("");
 
   const [predictResult, setPredictResult] = useState<any>();
 
@@ -131,14 +133,14 @@ export default function Form() {
       ...formData,
       ["color"]: value,
     });
+    setSelectedColor(value);
   };
 
   const onModelChange = (event: any) => {
     const { value } = event.target;
-    const model = value.split(" ");
     setFormData({
       ...formData,
-      ["model"]: model[1],
+      ["model"]: value,
     });
     setSelectedModel(value);
     setSelectedType("");
@@ -230,13 +232,10 @@ export default function Form() {
   const getMarketDetail = async (predictValue: any) => {
     const numericValue = parseInt(selectedSubModel, 10) / 1000;
     const formattedValue = numericValue.toFixed(1);
-    const model = selectedModel.split(" ");
     try {
       await request2(
         "get",
-        `/car_market_detail?car_year=${selectedCarYear}&brand=${selectedBrand}&model=${
-          model[1]
-        }&sub_model=${formattedValue}&sub_model_name=${selectedSubModelName}&car_type=${selectedType}&predict_value=${Math.floor(
+        `/car_market_detail?car_year=${selectedCarYear}&brand=${selectedBrand}&model=${selectedModel}&sub_model=${formattedValue}&sub_model_name=${selectedSubModelName}&car_type=${selectedType}&predict_value=${Math.floor(
           predictValue.prediction
         )}`,
         undefined,
@@ -248,8 +247,8 @@ export default function Form() {
       nextStep();
     }
   };
-  //console.log(formData);
-  console.log(marketDetail);
+  console.log(formData);
+  console.log(predictValue);
 
   //
   return (
@@ -363,6 +362,7 @@ export default function Form() {
                         name="เลือกยี่ห้อรถ"
                         handleChange={onBrandChange}
                         option={Object.keys(selectData)}
+                        value={selectedBrand}
                       />
                     </div>
                     <div className="px-4">
@@ -374,6 +374,7 @@ export default function Form() {
                           selectedBrand &&
                           Object.keys(selectData[selectedBrand])
                         }
+                        value={selectedModel}
                       />
                     </div>
                   </div>
@@ -388,6 +389,7 @@ export default function Form() {
                           selectedModel &&
                           Object.keys(selectData[selectedBrand][selectedModel])
                         }
+                        value={selectedType}
                       />
                     </div>
                     <div className="px-4">
@@ -401,6 +403,7 @@ export default function Form() {
                         id="hs-select-label"
                         className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
                         onChange={onColorChange}
+                        value={formData["color"]}
                       >
                         <option value="">เลือกสีรถ</option>
                         {color.map((color) => (
@@ -412,7 +415,17 @@ export default function Form() {
                 </div>
                 <div className="absolute bottom-5 flex flex-row space-x-10">
                   <PrevButton handleClick={prevStep} />
-                  <NextButton handleClick={nextStep} />
+                  <NextButton
+                    handleClick={nextStep}
+                    isDisabled={
+                      !(
+                        selectedBrand &&
+                        selectedModel &&
+                        selectedType &&
+                        selectedColor
+                      )
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -440,6 +453,7 @@ export default function Form() {
                             ]
                           )
                         }
+                        value={selectedSubModel}
                       />
                     </div>
                     <div className="col-span-3">
@@ -453,6 +467,7 @@ export default function Form() {
                             selectedType
                           ][selectedSubModel]
                         }
+                        value={selectedSubModelName}
                       />
                     </div>
                   </div>
@@ -463,6 +478,7 @@ export default function Form() {
                         name="เลือกปีรถ"
                         handleChange={onCarYearChange}
                         option={carYear}
+                        value={selectedCarYear}
                       />
                     </div>
 
@@ -527,7 +543,18 @@ export default function Form() {
                 </div>
                 <div className="absolute bottom-5 space-x-10 flex flex-row">
                   <PrevButton handleClick={prevStep} />
-                  <NextButton handleClick={handleSubmit} />
+                  <NextButton
+                    handleClick={handleSubmit}
+                    isDisabled={
+                      !(
+                        selectedSubModel &&
+                        selectedSubModelName &&
+                        formData["mile"] &&
+                        selectedCarYear &&
+                        selectedTransmission
+                      )
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -541,12 +568,25 @@ export default function Form() {
               ผลการประเมิน
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-              <Summary
-                model={selectedModel}
-                modelDetail={`${selectedSubModel} ${selectedSubModelName} ${selectedType}`}
-                carMarketDetail={marketDetail}
-                predictValue={predictValue}
-              />
+              {marketDetail == null ? (
+                <Summary
+                  model={selectedModel}
+                  modelDetail={`${(
+                    parseInt(selectedSubModel, 10) / 1000
+                  ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
+                  predictValue={predictValue.prediction}
+                />
+              ) : (
+                <Summary
+                  model={selectedModel}
+                  modelDetail={`${(
+                    parseInt(selectedSubModel, 10) / 1000
+                  ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
+                  carMarketDetail={marketDetail}
+                  predictValue={predictValue.prediction}
+                />
+              )}
+
               <div className="absolute bottom-5  space-x-10">
                 <PrevButton handleClick={prevStep} />
               </div>
