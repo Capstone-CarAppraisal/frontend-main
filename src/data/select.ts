@@ -15,12 +15,12 @@ interface CarModels {
 
 export const selectData: CarBrands = {
   Mazda: {
-    "Mazda 121": {
+    "121": {
       Sedan: {
         "1300": ["1.3"],
       },
     },
-    "Mazda 2": {
+    "2": {
       Sedan: {
         "1300": [
           "C",
@@ -80,7 +80,7 @@ export const selectData: CarBrands = {
         ],
       },
     },
-    "Mazda 3": {
+    "3": {
       Sedan: {
         "1600": ["Groove", "S", "S Plus", "Spirit", "V"],
         "2000": [
@@ -116,12 +116,12 @@ export const selectData: CarBrands = {
         ],
       },
     },
-    "Mazda 323": {
+    "323": {
       Hatchback: {
         "1800": ["Astina EGI"],
       },
     },
-    "Mazda BT-50": {
+    "BT-50": {
       Pickup: {
         "1900": [
           "Double Cab Hi-Racer SP",
@@ -138,8 +138,8 @@ export const selectData: CarBrands = {
         ],
       },
     },
-    "Mazda BT-50 Pro": {
-      pickup: {
+    "BT-50 PRO": {
+      Pickup: {
         "2200": [
           "DOUBLE CAB",
           "DOUBLE CAB ECLIPSE",
@@ -161,7 +161,7 @@ export const selectData: CarBrands = {
         "3200": ["DOUBLE CAB R 4WD"],
       },
     },
-    "Mazda CX-3": {
+    "CX-3": {
       SUV: {
         "1500": ["XDL"],
         "2000": [
@@ -176,41 +176,41 @@ export const selectData: CarBrands = {
         ],
       },
     },
-    "Mazda CX-30": {
+    "CX-30": {
       SUV: {
         "2000": ["C", "Carbon Edition", "S", "SP"],
       },
     },
-    "Mazda CX-5": {
+    "CX-5": {
       SUV: {
         "2000": ["C", "S", "SP"],
         "2200": ["XD", "XDL 4WD"],
         "2500": ["S", "Turbo SP 4WD"],
       },
     },
-    "Mazda CX-7": {
+    "CX-7": {
       Wagon: {
         "2300": ["2.3T 4WD Wagon"],
       },
     },
-    "Mazda CX-8": {
+    "CX-8": {
       SUV: {
         "2200": ["XDL Exclusive 4WD"],
         "2500": ["S", "SP"],
       },
     },
-    "Mazda CX-9": {
+    "CX-9": {
       SUV: {
         "3700": ["4WD"],
       },
     },
-    "Mazda Familia": {
+    Familia: {
       Pickup: {
         "800": ["800"],
         "1400": ["SINGLE STD"],
       },
     },
-    "Mazda Fighter": {
+    Fighter: {
       Pickup: {
         "2500": [
           "DOUBLE CAB 4WD",
@@ -222,12 +222,12 @@ export const selectData: CarBrands = {
         "2900": ["DOUBLE CAB"],
       },
     },
-    "Mazda Magnum Thunder": {
+    "Magnum Thunder": {
       Pickup: {
         "2500": ["STD"],
       },
     },
-    "Mazda MX-5": {
+    "MX-5": {
       Convertible: {
         "1500": ["1.5"],
         "1600": ["1.6"],
@@ -235,17 +235,17 @@ export const selectData: CarBrands = {
         "2000": ["2.0", "30th Anniversary"],
       },
     },
-    "Mazda RX-7": {
+    "RX-7": {
       Coupe: {
         "1300": ["1.3"],
       },
     },
-    "Mazda RX-8": {
+    "RX-8": {
       Coupe: {
         "1300": ["1.3", "Roadster"],
       },
     },
-    "Mazda Savanna": {
+    Savanna: {
       Coupe: {
         "1100": ["1.1"],
       },
