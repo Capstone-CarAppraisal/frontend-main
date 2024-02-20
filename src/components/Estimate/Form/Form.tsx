@@ -9,10 +9,12 @@ import useHttp from "@/hooks/useHttp";
 import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
+import toast from "react-hot-toast";
 
 export default function Form() {
   const [isLoading, request, predictValue, error] = useHttp();
   const [isLoading2, request2, marketDetail, error2] = useHttp();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
 
   const [frontData, setFrontData] = useState<File | null>();
@@ -207,6 +209,9 @@ export default function Form() {
 
   //console.log(predictResult);
   //console.log(frontResult, rearResult, sideFrontResult, sideRearResult);
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const nextStep = (step?: any, data?: any) => {
     setStep((prevStep) => prevStep + 1);
@@ -226,7 +231,10 @@ export default function Form() {
       );
       getMarketDetail(response);
     } catch (error) {
-      console.log(error);
+      toast.error("โปรดตรวจสอบข้อมูล", {
+        duration: 4000,
+        className: "font-sans",
+      });
     }
   };
   const getMarketDetail = async (predictValue: any) => {
@@ -502,7 +510,7 @@ export default function Form() {
                           />
                           <label
                             htmlFor="hs-radio-group-1"
-                            className="text-xl text-gray-500 ms-2 dark:text-gray-400"
+                            className="text-xl text-black ms-2"
                           >
                             เกียร์ธรรมดา
                           </label>
@@ -511,7 +519,7 @@ export default function Form() {
                           <input
                             type="radio"
                             name="hs-radio-group"
-                            className="border-[#707070]  text-rose focus:ring-0"
+                            className="border-[#707070] text-rose focus:ring-0"
                             id="hs-radio-group-3"
                             value="AT"
                             checked={selectedTransmission === "AT"}
@@ -519,7 +527,7 @@ export default function Form() {
                           />
                           <label
                             htmlFor="hs-radio-group-3"
-                            className="text-xl text-gray-500 ms-2 dark:text-gray-400"
+                            className="text-xl text-black ms-2"
                           >
                             เกียร์อัตโนมัติ
                           </label>
@@ -570,6 +578,7 @@ export default function Form() {
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
               {marketDetail == null ? (
                 <Summary
+                  brand={selectedBrand}
                   model={selectedModel}
                   modelDetail={`${(
                     parseInt(selectedSubModel, 10) / 1000
@@ -578,6 +587,7 @@ export default function Form() {
                 />
               ) : (
                 <Summary
+                  brand={selectedBrand}
                   model={selectedModel}
                   modelDetail={`${(
                     parseInt(selectedSubModel, 10) / 1000
