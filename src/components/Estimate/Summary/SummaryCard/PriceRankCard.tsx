@@ -8,10 +8,10 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
         <div className="flex flex-col w-full space-y-2 mt-10">
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue">
-              {rankData[0].rank}.
+              {rankData ? `${rankData[0].rank}.` : "-"}
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              ฿{Math.round(rankData[0].cost / 1000)}K
+              {rankData ? `฿${Math.round(rankData[0].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -22,28 +22,28 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue">
-              {rankData[1].rank}.
+              {rankData ? `${rankData[1].rank}.` : "-"}
             </p>
             <p className="text-lg font-normal text-dark-blue">
-              ฿{Math.round(rankData[1].cost / 1000)}K
+              {rankData ? `฿${Math.round(rankData[1].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-bold text-dark-blue">
-              {rankData[2].rank}.
+              {rankData ? `${rankData[2].rank}.` : "-"}
             </p>
             <p className="text-lg font-bold text-dark-blue">
-              ฿{Math.round(rankData[2].cost / 1000)}K
+              {rankData ? `฿${Math.round(rankData[2].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue">
-              {rankData[3].rank}.
+              {rankData ? `${rankData[3].rank}.` : "-"}
             </p>
             <p className="text-lg font-normal text-dark-blue">
-              ฿{Math.round(rankData[3].cost / 1000)}K
+              {rankData ? `฿${Math.round(rankData[3].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -54,10 +54,10 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
           <hr className="border-white"></hr>
           <div className="flex justify-between text-lg">
             <p className="text-lg font-normal text-dark-blue">
-              {rankData[4].rank}.
+              {rankData ? `${rankData[4].rank}.` : "-"}
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              ฿{Math.round(rankData[4].cost / 1000)}K
+              {rankData ? `฿${Math.round(rankData[4].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>

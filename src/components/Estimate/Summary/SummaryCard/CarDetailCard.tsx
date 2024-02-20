@@ -7,13 +7,13 @@ export default function CarDetailCard({
   averageMile,
   amountInMarket,
 }: {
-  firstHandPrice: any;
-  averagePrice: any;
-  soldAverage: any;
-  SD: any;
-  soldAverageSD: any;
-  averageMile: any;
-  amountInMarket: any;
+  firstHandPrice?: any;
+  averagePrice?: any;
+  soldAverage?: any;
+  SD?: any;
+  soldAverageSD?: any;
+  averageMile?: any;
+  amountInMarket?: any;
 }) {
   return (
     <div className="flex bg-light-blue  h-[450px] w-full">
@@ -25,7 +25,7 @@ export default function CarDetailCard({
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue">ราคามือ 1</p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {firstHandPrice}
+              {firstHandPrice ? firstHandPrice : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -34,7 +34,7 @@ export default function CarDetailCard({
               ราคาในตลาดเฉลี่ย
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {averagePrice}
+              {averagePrice ? averagePrice : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -43,7 +43,7 @@ export default function CarDetailCard({
               ราคาขายออกเฉลี่ย
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {soldAverage}
+              {soldAverage ? soldAverage : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -52,7 +52,7 @@ export default function CarDetailCard({
               ส่วนเบี่ยงเบนมาตรฐานราคาในตลาด
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {SD}
+              {SD ? SD : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -61,7 +61,7 @@ export default function CarDetailCard({
               ส่วนเบี่ยงเบนมาตรฐานราคาขายออก
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {soldAverageSD}
+              {soldAverageSD ? soldAverageSD : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -70,7 +70,7 @@ export default function CarDetailCard({
               เลขไมล์เฉลี่ย (กม.)
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {averageMile}
+              {averageMile ? averageMile : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -79,7 +79,7 @@ export default function CarDetailCard({
               จำนวนรถในตลาด (คัน)
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
-              {amountInMarket}
+              {amountInMarket ? amountInMarket : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>

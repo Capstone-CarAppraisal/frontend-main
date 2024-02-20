@@ -31,54 +31,92 @@ export default function Summary({
     } else if (state == 1) {
       return `฿${rounded}K`;
     } else if (state == 2) {
-      `${rounded}K`;
+      return `${rounded}K`;
     }
   };
 
-  return (
-    <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
-      <div>
-        <PriceCard
-          price={Math.round(predictValue / 1000).toString()}
-          percent={getPercentFromFirstHand(
-            predictValue,
-            carMarketDetail["First car cost"]
-          )}
-        />
+  if (carMarketDetail) {
+    return (
+      <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+        <div>
+          <PriceCard
+            price={convertNumber(predictValue, 0)}
+            percent={getPercentFromFirstHand(
+              predictValue,
+              carMarketDetail["First car cost"]
+            )}
+          />
+        </div>
+        <div>
+          <CarBrandCard model={model} subModel={modelDetail} />
+        </div>
+        <div>
+          <CarImageCard />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <LowestHighestPriceCard
+            label="ราคาตลาดต่ำสุด"
+            present={convertNumber(carMarketDetail["Min price"], 0)}
+          />
+          <LowestHighestPriceCard
+            label="ราคาตลาดสูงสุด"
+            present={convertNumber(carMarketDetail["Max price"], 0)}
+          />
+        </div>
+        <div>
+          <AverageMarketPriceCard />
+        </div>
+        <div>
+          <AverageMarketPriceByYearCard />
+        </div>
+        <div>
+          <PriceRankCard rankData={carMarketDetail["Car show"]} />
+        </div>
+        <div>
+          <CarDetailCard
+            firstHandPrice={convertNumber(carMarketDetail["First car cost"], 1)}
+            averagePrice={convertNumber(carMarketDetail["Average Cost"], 1)}
+            soldAverage={convertNumber(400000, 1)}
+            SD={convertNumber(carMarketDetail["SD Cost"], 1)}
+            soldAverageSD={convertNumber(45000, 1)}
+            averageMile={convertNumber(carMarketDetail["Average Mile"], 2)}
+            amountInMarket={carMarketDetail["Number of Cars"]}
+          />
+        </div>
+        <div></div>
       </div>
-      <div>
-        <CarBrandCard model={model} subModel={modelDetail} />
+    );
+  } else {
+    return (
+      <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+        <div>
+          <PriceCard price={convertNumber(predictValue, 0)} />
+        </div>
+        <div>
+          <CarBrandCard model={model} subModel={modelDetail} />
+        </div>
+        <div>
+          <CarImageCard />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <LowestHighestPriceCard label="ราคาตลาดต่ำสุด" />
+          <LowestHighestPriceCard label="ราคาตลาดสูงสุด" />
+        </div>
+        <div>
+          <AverageMarketPriceCard />
+        </div>
+        <div>
+          <AverageMarketPriceByYearCard />
+        </div>
+        <div>
+          <PriceRankCard />
+        </div>
+        <div>
+          <CarDetailCard />
+        </div>
+        <div></div>
       </div>
-      <div>
-        <CarImageCard />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <LowestHighestPriceCard label="ราคาตลาดต่ำสุด" />
-        <LowestHighestPriceCard label="ราคาตลาดสูงสุด" />
-      </div>
-      <div>
-        <AverageMarketPriceCard />
-      </div>
-      <div>
-        <AverageMarketPriceByYearCard />
-      </div>
-      <div>
-        <PriceRankCard />
-      </div>
-      <div>
-        <CarDetailCard
-          firstHandPrice={convertNumber(carMarketDetail["First car cost"], 1)}
-          averagePrice={convertNumber(carMarketDetail["Average Cost"], 1)}
-          soldAverage={convertNumber(400000, 1)}
-          SD={convertNumber(carMarketDetail["SD cost"], 1)}
-          soldAverageSD={convertNumber(45000, 1)}
-          averageMile={convertNumber(carMarketDetail["Average Mile"], 2)}
-          amountInMarket={convertNumber(carMarketDetail["Number of Cars"], 0)}
-        />
-      </div>
-      <div>
-        <PriceRankCard />
-      </div>
-    </div>
-  );
+    );
+  }
+  
 }
