@@ -9,11 +9,13 @@ import PriceCard from "./SummaryCard/PriceCard";
 import PriceRankCard from "./SummaryCard/PriceRankCard";
 
 export default function Summary({
+  brand,
   model,
   modelDetail,
   carMarketDetail,
   predictValue,
 }: {
+  brand: string;
   model: string;
   modelDetail: string;
   carMarketDetail?: any;
@@ -48,7 +50,7 @@ export default function Summary({
           />
         </div>
         <div>
-          <CarBrandCard model={model} subModel={modelDetail} />
+          <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
         </div>
         <div>
           <CarImageCard />
@@ -93,7 +95,7 @@ export default function Summary({
           <PriceCard price={convertNumber(predictValue, 0)} />
         </div>
         <div>
-          <CarBrandCard model={model} subModel={modelDetail} />
+          <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
         </div>
         <div>
           <CarImageCard />
@@ -118,5 +120,4 @@ export default function Summary({
       </div>
     );
   }
-  
 }

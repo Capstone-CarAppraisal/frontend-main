@@ -4,12 +4,14 @@ export default function PriceCard({ price, percent }: { price: any; percent?: nu
   return (
     <div className="flex bg-light-blue h-[200px] w-full items-center ">
       <div className="flex flex-col p-5 w-full">
-        <h1 className="font-bold text-dark-blue">
+        <h1 className="font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
           <span className="text-5xl">฿</span>
           <span className="text-6xl">{price}</span>
           <span className="text-5xl">K</span>
         </h1>
-        <p className="text-2xl font-bold text-dark-blue">ราคาประเมิน</p>
+        <p className="text-2xl font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
+          ราคาประเมิน
+        </p>
         <div>
           {percent && (
             <div className="mt-2">
@@ -26,10 +28,10 @@ export default function PriceCard({ price, percent }: { price: any; percent?: nu
                 />
               </div>
               <div className="mt-2 flex justify-between items-center">
-                <span className="text-base text-rose font-semibold">
+                <span className="text-base text-rose font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
                   {percent}%
                 </span>
-                <h3 className="text-base font-normal text-rose">
+                <h3 className="text-base font-normal text-rose overflow-hidden whitespace-nowrap text-ellipsis">
                   จากราคามือ 1
                 </h3>
               </div>

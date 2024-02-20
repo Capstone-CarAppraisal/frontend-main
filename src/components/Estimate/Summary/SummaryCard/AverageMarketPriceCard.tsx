@@ -17,7 +17,9 @@ export default function AverageMarketPriceCard() {
     <div className="flex bg-light-blue  h-[200px] w-full items-center">
       <div className="flex flex-col p-5 w-full">
         <div className="mt-2">
-          <h2 className="text-xl font-bold text-dark-blue">ราคาตลาดเฉลี่ย</h2>
+          <h2 className="text-xl font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
+            ราคาตลาดเฉลี่ย
+          </h2>
           <LineChart />
         </div>
       </div>
