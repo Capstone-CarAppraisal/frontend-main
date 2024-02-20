@@ -29,6 +29,7 @@ const useHttp = () => {
     } catch (error) {
       setError(true);
       setData(null);
+      throw new Error("Failed");
     } finally {
       setIsLoading(false);
     }
