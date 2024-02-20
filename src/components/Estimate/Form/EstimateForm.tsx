@@ -11,7 +11,7 @@ import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
 
-export default function Form() {
+export default function EstimateForm() {
   const [isLoading, request, predictValue, error] = useHttp();
   const [isLoading2, request2, marketDetail, error2] = useHttp();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,16 +35,8 @@ export default function Form() {
   const [selectedSubModelName, setSelectedSubModelName] = useState<any>();
   const [selectedCarYear, setSelectedCarYear] = useState<any>();
   const [selectedTransmission, setSelectedTransmission] = useState<any>();
-  const mileAge = useRef("");
 
   const [predictResult, setPredictResult] = useState<any>();
-
-  const isSelectAllImage = [
-    frontData,
-    rearData,
-    setFrontData,
-    sideRearData,
-  ].every((image) => image != null);
 
   const handleFrontData = (data: File) => {
     setFrontData(data);

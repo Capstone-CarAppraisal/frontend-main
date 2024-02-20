@@ -1,4 +1,4 @@
-import Form from "@/components/Estimate/Form/Form";
+import Form from "@/components/Estimate/Form/EstimateForm";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function EstimatePage() {
