@@ -28,7 +28,7 @@ const useHttp = () => {
       return response.data; // Return the response data for immediate use
     } catch (error) {
       setError(true);
-      throw error; // Rethrow to allow catching in the calling code
+      setData(null);
     } finally {
       setIsLoading(false);
     }
