@@ -3,11 +3,13 @@ export default function SelectInputWithLabel({
   name,
   handleChange,
   option,
+  value,
 }: {
   label: string;
   name: string;
   handleChange: any;
   option: any;
+  value: any;
 }) {
   return (
     <div className="">
@@ -21,6 +23,7 @@ export default function SelectInputWithLabel({
         id="hs-select-label"
         className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
         onChange={handleChange}
+        value={value}
       >
         <option>{name}</option>
         {option &&
