@@ -15,11 +15,6 @@ interface CarModels {
 
 export const selectData: CarBrands = {
   Mazda: {
-    "121": {
-      Sedan: {
-        "1300": ["1.3"],
-      },
-    },
     "2": {
       Sedan: {
         "1300": [
@@ -116,28 +111,6 @@ export const selectData: CarBrands = {
         ],
       },
     },
-    "323": {
-      Hatchback: {
-        "1800": ["Astina EGI"],
-      },
-    },
-    "BT-50": {
-      Pickup: {
-        "1900": [
-          "Double Cab Hi-Racer SP",
-          "Freestyle Cab C",
-          "Freestyle Cab Hi-Racer C",
-          "Freestyle Cab Hi-Racer S",
-          "Standard Cab E",
-        ],
-        "2500": [
-          "DOUBLE CAB Hi-Racer",
-          "FREE STYLE CAB Hi-Racer",
-          "FREE STYLE CAB V",
-          "SINGLE S",
-        ],
-      },
-    },
     "BT-50 PRO": {
       Pickup: {
         "2200": [
@@ -188,66 +161,10 @@ export const selectData: CarBrands = {
         "2500": ["S", "Turbo SP 4WD"],
       },
     },
-    "CX-7": {
-      Wagon: {
-        "2300": ["2.3T 4WD Wagon"],
-      },
-    },
     "CX-8": {
       SUV: {
         "2200": ["XDL Exclusive 4WD"],
         "2500": ["S", "SP"],
-      },
-    },
-    "CX-9": {
-      SUV: {
-        "3700": ["4WD"],
-      },
-    },
-    Familia: {
-      Pickup: {
-        "800": ["800"],
-        "1400": ["SINGLE STD"],
-      },
-    },
-    Fighter: {
-      Pickup: {
-        "2500": [
-          "DOUBLE CAB 4WD",
-          "DOUBLE CAB Mid",
-          "FREE STYLE CAB Lux",
-          "FREE STYLE CAB Mid",
-          "SUPER SALOON Super Saloon STR Base",
-        ],
-        "2900": ["DOUBLE CAB"],
-      },
-    },
-    "Magnum Thunder": {
-      Pickup: {
-        "2500": ["STD"],
-      },
-    },
-    "MX-5": {
-      Convertible: {
-        "1500": ["1.5"],
-        "1600": ["1.6"],
-        "1800": ["1.8"],
-        "2000": ["2.0", "30th Anniversary"],
-      },
-    },
-    "RX-7": {
-      Coupe: {
-        "1300": ["1.3"],
-      },
-    },
-    "RX-8": {
-      Coupe: {
-        "1300": ["1.3", "Roadster"],
-      },
-    },
-    Savanna: {
-      Coupe: {
-        "1100": ["1.1"],
       },
     },
   },
