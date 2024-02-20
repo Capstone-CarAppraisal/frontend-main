@@ -21,11 +21,11 @@ export default function SelectInputWithLabel({
       </label>
       <select
         id="hs-select-label"
-        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
+        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg  text-lg focus:border-blue-500 focus:text-black"
         onChange={handleChange}
         value={value}
       >
-        <option>{name}</option>
+        <option value="">{name}</option>
         {option &&
           option.map((option: any) => (
             <option key={option} value={option}>
