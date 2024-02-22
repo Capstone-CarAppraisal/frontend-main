@@ -4,12 +4,14 @@ export default function SelectInputWithLabel({
   handleChange,
   option,
   value,
+  isSelected,
 }: {
   label: string;
   name: string;
   handleChange: any;
   option: any;
   value: any;
+  isSelected: any;
 }) {
   return (
     <div className="">
@@ -21,7 +23,9 @@ export default function SelectInputWithLabel({
       </label>
       <select
         id="hs-select-label"
-        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg  text-lg focus:border-blue-500 focus:text-black"
+        className={`py-3 px-4 pe-9 block  border-[#BCBCBC] ${
+          isSelected ? "text-black" : "text-[#BCBCBC]"
+        } w-full rounded-lg  text-lg focus:border-blue-500 focus:text-black`}
         onChange={handleChange}
         value={value}
       >
@@ -29,8 +33,8 @@ export default function SelectInputWithLabel({
           {name}
         </option>
         {option &&
-          option.map((option: any) => (
-            <option key={option} value={option}>
+          option.map((option: any, index: any) => (
+            <option key={index} value={option}>
               {option}
             </option>
           ))}
