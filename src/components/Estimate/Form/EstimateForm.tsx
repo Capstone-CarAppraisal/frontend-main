@@ -34,6 +34,7 @@ export default function EstimateForm() {
   const [selectedSubModelName, setSelectedSubModelName] = useState<any>();
   const [selectedCarYear, setSelectedCarYear] = useState<any>();
   const [selectedTransmission, setSelectedTransmission] = useState<any>();
+  const [mile, setMile] = useState<any>();
 
   const handleFrontData = (data: File) => {
     setFrontData(data);
@@ -253,6 +254,7 @@ export default function EstimateForm() {
       ...formData,
       ["mile"]: parseInt(value),
     });
+    setMile(value);
   };
 
   const nextStep = (step?: any, data?: any) => {
@@ -299,7 +301,6 @@ export default function EstimateForm() {
       nextStep();
     }
   };
-  console.log(formData);
 
   return (
     <div>
@@ -419,6 +420,7 @@ export default function EstimateForm() {
                         handleChange={onBrandChange}
                         option={Object.keys(selectData)}
                         value={selectedBrand}
+                        isSelected={selectedBrand}
                       />
                     </div>
                     <div className="px-4">
@@ -431,6 +433,7 @@ export default function EstimateForm() {
                           Object.keys(selectData[selectedBrand])
                         }
                         value={selectedModel}
+                        isSelected={selectedModel}
                       />
                     </div>
                   </div>
@@ -446,6 +449,7 @@ export default function EstimateForm() {
                           Object.keys(selectData[selectedBrand][selectedModel])
                         }
                         value={selectedType}
+                        isSelected={selectedType}
                       />
                     </div>
                     <div className="px-4">
@@ -457,13 +461,17 @@ export default function EstimateForm() {
                       </label>
                       <select
                         id="hs-select-label"
-                        className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
+                        className={`py-3 px-4 pe-9 block ${
+                          selectedColor ? "text-black" : "text-[#BCBCBC]"
+                        }  border-[#BCBCBC] w-full rounded-lg text-lg`}
                         onChange={onColorChange}
                         value={selectedColor}
                       >
                         <option value="">เลือกสีรถ</option>
-                        {color.map((color) => (
-                          <option value={color.value}>{color.option}</option>
+                        {color.map((color, index) => (
+                          <option key={index} value={color.value}>
+                            {color.option}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -513,6 +521,7 @@ export default function EstimateForm() {
                             )
                           }
                           value={selectedSubModel}
+                          isSelected={selectedSubModel}
                         />
                       </div>
                       <div className="col-span-3">
@@ -527,6 +536,7 @@ export default function EstimateForm() {
                             ][selectedSubModel]
                           }
                           value={selectedSubModelName}
+                          isSelected={selectedSubModelName}
                         />
                       </div>
                     </div>
@@ -538,6 +548,7 @@ export default function EstimateForm() {
                           handleChange={onCarYearChange}
                           option={carYear}
                           value={selectedCarYear}
+                          isSelected={selectedCarYear}
                         />
                       </div>
 
@@ -596,7 +607,7 @@ export default function EstimateForm() {
                           onChange={onMileAgeChange}
                           className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
                           placeholder="ระบุเลขไมล์"
-                          value={formData["mile"]}
+                          value={mile}
                         />
                       </div>
                     </div>
