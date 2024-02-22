@@ -25,7 +25,9 @@ export default function SelectInputWithLabel({
         onChange={handleChange}
         value={value}
       >
-        <option value="">{name}</option>
+        <option key="" value="">
+          {name}
+        </option>
         {option &&
           option.map((option: any) => (
             <option key={option} value={option}>
