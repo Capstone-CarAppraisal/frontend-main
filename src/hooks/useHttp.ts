@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 
 const useHttp = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any>();
   const [error, setError] = useState<boolean>(false);
   const request = async (
@@ -13,7 +12,6 @@ const useHttp = () => {
     headers?: any
   ) => {
     try {
-      setIsLoading(true);
       const response = await axios({
         method,
         url: "http://localhost:8000" + url,
@@ -31,9 +29,8 @@ const useHttp = () => {
       setData(null);
       throw new Error("Failed");
     } finally {
-      setIsLoading(false);
     }
   };
-  return [isLoading, request, data, error];
+  return [request, data, error];
 };
 export default useHttp;
