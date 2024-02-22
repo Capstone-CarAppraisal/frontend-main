@@ -10,10 +10,14 @@ import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
+import { log } from "console";
+import LoadingSpinner from "@/components/Shared/LoadingSpinner";
 
 export default function EstimateForm() {
-  const [isLoading, request, predictValue, error] = useHttp();
-  const [isLoading2, request2, marketDetail, error2] = useHttp();
+  const [request, predictValue, error] = useHttp();
+  const [request2, marketDetail, error2] = useHttp();
+  const [request3, carDetail, error3] = useHttp();
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
 
@@ -21,11 +25,6 @@ export default function EstimateForm() {
   const [rearData, setRearData] = useState<File | null>();
   const [sideFrontData, setSideFrontData] = useState<File | null>();
   const [sideRearData, setSideRearData] = useState<File | null>();
-
-  const [frontResult, setFrontResult] = useState<any>();
-  const [rearResult, setRearResult] = useState<any>();
-  const [sideFrontResult, setSideFrontResult] = useState<any>();
-  const [sideRearResult, setSideRearResult] = useState<any>();
 
   const [selectedBrand, setSelectedBrand] = useState<any>();
   const [selectedModel, setSelectedModel] = useState<any>();
@@ -35,8 +34,6 @@ export default function EstimateForm() {
   const [selectedSubModelName, setSelectedSubModelName] = useState<any>();
   const [selectedCarYear, setSelectedCarYear] = useState<any>();
   const [selectedTransmission, setSelectedTransmission] = useState<any>();
-
-  const [predictResult, setPredictResult] = useState<any>();
 
   const handleFrontData = (data: File) => {
     setFrontData(data);
@@ -66,47 +63,106 @@ export default function EstimateForm() {
   });
 
   const handlePredictModel = async () => {
-    if (frontData && rearData && sideFrontData && sideRearData) {
-      console.log("y");
-      Image(frontData, "front").then((value) => {
-        setFrontResult(value[0]);
-      });
-      Image(rearData, "rear").then((value) => {
-        setRearResult(value[0]);
-      });
-      Image(sideFrontData, "sidefront").then((value) => {
-        setSideFrontResult(value[0]);
-      });
-      Image(sideRearData, "siderear").then((value) => {
-        setSideRearResult(value[0]);
+    setIsLoading(true);
+    let frontRes, rearRes, sideFrontRes, sideRearRes;
+    let frontColor, rearColor, sideFrontColor, sideRearColor;
+    if (frontData || rearData || sideFrontData || sideRearData) {
+      if (frontData) {
+        try {
+          const front = await Image(frontData, "front");
+          frontRes = front[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const front1 = await Image(frontData, "color");
+          frontColor = front1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (rearData) {
+        try {
+          const rear = await Image(rearData, "rear");
+          rearRes = rear[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const rear1 = await Image(rearData, "color");
+          rearColor = rear1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (sideFrontData) {
+        try {
+          const sideFront = await Image(sideFrontData, "sidefront");
+          sideFrontRes = sideFront[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const sideFront1 = await Image(sideFrontData, "color");
+          frontColor = sideFront1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (sideRearData) {
+        try {
+          const sideRear = await Image(sideRearData, "siderear");
+          sideRearRes = sideRear[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const sideRear1 = await Image(sideRearData, "color");
+          sideRearColor = sideRear1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    if (frontRes || rearRes || sideFrontRes || sideRearRes) {
+      let predictJSON = {
+        front: frontRes,
+        rear: rearRes,
+        sidefront: sideFrontRes,
+        siderear: sideRearRes,
+      };
+      let predictColorJSON = {
+        front: frontColor,
+        rear: rearColor,
+        sidefront: sideFrontColor,
+        siderear: sideRearColor,
+      };
+      const predictResponse = await request3(
+        "post",
+        "/predict/onecar",
+        undefined,
+        JSON.stringify(predictJSON)
+      );
+
+      const predictColorResponse = await request3(
+        "post",
+        "/predict/onecolor",
+        undefined,
+        JSON.stringify(predictColorJSON)
+      );
+      setSelectedBrand(predictResponse.Prediction.Brand);
+      setSelectedModel(predictResponse.Prediction.Model);
+      setSelectedColor(predictColorResponse.Prediction.color.toLowerCase());
+      setFormData({
+        ...formData,
+        ["model"]: predictResponse.Prediction.Model,
+        ["brand"]: predictResponse.Prediction.Brand,
+        ["color"]: predictColorResponse.Prediction.color.toLowerCase(),
       });
     }
+    setIsLoading(false);
     nextStep();
-    /* if (frontResult && rearResult && sideFrontResult && sideRearResult) {
-      if (
-        ((frontResult.Model == rearResult.Model) == sideFrontResult.Model) ==
-        sideRearResult.Model
-      ) {
-        tempData.Model = frontResult.Model;
-      }
-      if (
-        ((frontResult.ModelYear == rearResult.ModelYear) ==
-          sideFrontResult.ModelYear) ==
-        sideRearResult.ModelYear
-      ) {
-        tempData.ModelYear = frontResult.ModelYear;
-      }
-      if (
-        ((frontResult.Door == rearResult.Door) == sideFrontResult.Door) ==
-        sideRearResult.Door
-      ) {
-        tempData.Door = frontResult.Door;
-      }
-      setPredictResult(tempData);
-      nextStep();
-    } */
   };
-  //console.log(frontData, sideFrontData, rearData, sideRearData);
 
   const onBrandChange = (event: any) => {
     const { value } = event.target;
@@ -199,12 +255,6 @@ export default function EstimateForm() {
     });
   };
 
-  //console.log(predictResult);
-  //console.log(frontResult, rearResult, sideFrontResult, sideRearResult);
-  const onCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   const nextStep = (step?: any, data?: any) => {
     setStep((prevStep) => prevStep + 1);
   };
@@ -230,6 +280,7 @@ export default function EstimateForm() {
     }
   };
   const getMarketDetail = async (predictValue: any) => {
+    setIsLoading(true);
     const numericValue = parseInt(selectedSubModel, 10) / 1000;
     const formattedValue = numericValue.toFixed(1);
     try {
@@ -241,16 +292,15 @@ export default function EstimateForm() {
         undefined,
         undefined
       );
+      setIsLoading(false);
       nextStep();
     } catch (error) {
-      console.log("kuy");
+      setIsLoading(false);
       nextStep();
     }
   };
   console.log(formData);
-  console.log(predictValue);
 
-  //
   return (
     <div>
       <div className="mb-2 mx-12 font-sans">
@@ -313,34 +363,40 @@ export default function EstimateForm() {
           </ul>
         </div>
       </div>
-
       {step === 0 && (
         <div className="flex justify-center w-full h-[1000px] font-sans pt-8">
-          <div className="flex flex-col w-[80vw]">
+          <div className="flex flex-col w-[80vw] relative">
             <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
               เพิ่มภาพรถยนต์
             </div>
             <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
-              <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
-                <ImageUpload
-                  label="มุมด้านหน้า"
-                  handleFrontImage={handleFrontData}
-                />
-                <ImageUpload
-                  label="มุมด้านหลัง"
-                  handleFrontImage={handleRearData}
-                />
-                <ImageUpload
-                  label="มุมเฉียงจากด้านหน้า"
-                  handleFrontImage={handleSideFrontData}
-                />
-                <ImageUpload
-                  label="มุมเฉียงจากด้านหลัง"
-                  handleFrontImage={handleSideRearData}
-                />
-              </div>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
+                  <ImageUpload
+                    label="มุมด้านหน้า"
+                    handleFrontImage={handleFrontData}
+                  />
+                  <ImageUpload
+                    label="มุมด้านหลัง"
+                    handleFrontImage={handleRearData}
+                  />
+                  <ImageUpload
+                    label="มุมเฉียงจากด้านหน้า"
+                    handleFrontImage={handleSideFrontData}
+                  />
+                  <ImageUpload
+                    label="มุมเฉียงจากด้านหลัง"
+                    handleFrontImage={handleSideRearData}
+                  />
+                </div>
+              )}
+
               <div className="absolute bottom-5 space-x-10">
-                <NextButton handleClick={handlePredictModel} />
+                <div className="flex flex-col space-y-2">
+                  <NextButton handleClick={handlePredictModel} />
+                </div>
               </div>
             </div>
           </div>
@@ -403,7 +459,7 @@ export default function EstimateForm() {
                         id="hs-select-label"
                         className="py-3 px-4 pe-9 block text-[#BCBCBC] border-[#BCBCBC] w-full rounded-lg text-lg focus:border-blue-500"
                         onChange={onColorChange}
-                        value={formData["color"]}
+                        value={selectedColor}
                       >
                         <option value="">เลือกสีรถ</option>
                         {color.map((color) => (
@@ -438,109 +494,115 @@ export default function EstimateForm() {
                 กรอกลักษณะภายในรถ
               </div>
               <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-                <div className="grid grid-row-3 w-[87%] mb-20 gap-3">
-                  <div className="grid grid-cols-4 gap-20">
-                    <div>
-                      <SelectInputWithLabel
-                        label="เลขซีซี"
-                        name="เลือกเลขซีซี"
-                        handleChange={onSubModelChange}
-                        option={
-                          selectedType &&
-                          Object.keys(
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <div className="grid grid-row-3 w-[87%] mb-20 gap-3">
+                    <div className="grid grid-cols-4 gap-20">
+                      <div>
+                        <SelectInputWithLabel
+                          label="เลขซีซี"
+                          name="เลือกเลขซีซี"
+                          handleChange={onSubModelChange}
+                          option={
+                            selectedType &&
+                            Object.keys(
+                              selectData[selectedBrand][selectedModel][
+                                selectedType
+                              ]
+                            )
+                          }
+                          value={selectedSubModel}
+                        />
+                      </div>
+                      <div className="col-span-3">
+                        <SelectInputWithLabel
+                          label="รุ่นย่อย"
+                          name="เลือกรุ่นย่อยรถ"
+                          handleChange={onSubModelNameChange}
+                          option={
+                            selectedSubModel &&
                             selectData[selectedBrand][selectedModel][
                               selectedType
-                            ]
-                          )
-                        }
-                        value={selectedSubModel}
-                      />
+                            ][selectedSubModel]
+                          }
+                          value={selectedSubModelName}
+                        />
+                      </div>
                     </div>
-                    <div className="col-span-3">
-                      <SelectInputWithLabel
-                        label="รุ่นย่อย"
-                        name="เลือกรุ่นย่อยรถ"
-                        handleChange={onSubModelNameChange}
-                        option={
-                          selectedSubModel &&
-                          selectData[selectedBrand][selectedModel][
-                            selectedType
-                          ][selectedSubModel]
-                        }
-                        value={selectedSubModelName}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-4 gap-20">
-                    <div>
-                      <SelectInputWithLabel
-                        label="ปีรถ"
-                        name="เลือกปีรถ"
-                        handleChange={onCarYearChange}
-                        option={carYear}
-                        value={selectedCarYear}
-                      />
-                    </div>
+                    <div className="grid grid-cols-4 gap-20">
+                      <div>
+                        <SelectInputWithLabel
+                          label="ปีรถ"
+                          name="เลือกปีรถ"
+                          handleChange={onCarYearChange}
+                          option={carYear}
+                          value={selectedCarYear}
+                        />
+                      </div>
 
-                    <div className="col-span-3">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
-                        ระบบเกียร์
-                      </label>
-                      <div className="flex gap-x-32 mt-5">
-                        <div className="flex items-center">
-                          <input
-                            type="radio"
-                            name="hs-radio-group"
-                            className="border-[#707070] text-rose focus:ring-0"
-                            id="hs-radio-group-1"
-                            value="MT"
-                            checked={selectedTransmission === "MT"}
-                            onChange={onTransmissionTypeChange}
-                          />
-                          <label
-                            htmlFor="hs-radio-group-1"
-                            className="text-xl text-black ms-2"
-                          >
-                            เกียร์ธรรมดา
-                          </label>
-                        </div>
-                        <div className="flex items-center">
-                          <input
-                            type="radio"
-                            name="hs-radio-group"
-                            className="border-[#707070] text-rose focus:ring-0"
-                            id="hs-radio-group-3"
-                            value="AT"
-                            checked={selectedTransmission === "AT"}
-                            onChange={onTransmissionTypeChange}
-                          />
-                          <label
-                            htmlFor="hs-radio-group-3"
-                            className="text-xl text-black ms-2"
-                          >
-                            เกียร์อัตโนมัติ
-                          </label>
+                      <div className="col-span-3">
+                        <label
+                          htmlFor="hs-select-label"
+                          className="block text-sm mb-2 text-black text-xl font-normal"
+                        >
+                          ระบบเกียร์
+                        </label>
+                        <div className="flex gap-x-32 mt-5">
+                          <div className="flex items-center">
+                            <input
+                              type="radio"
+                              name="hs-radio-group"
+                              className="border-[#707070] text-rose focus:ring-0"
+                              id="hs-radio-group-1"
+                              value="MT"
+                              checked={selectedTransmission === "MT"}
+                              onChange={onTransmissionTypeChange}
+                            />
+                            <label
+                              htmlFor="hs-radio-group-1"
+                              className="text-xl text-black ms-2"
+                            >
+                              เกียร์ธรรมดา
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="radio"
+                              name="hs-radio-group"
+                              className="border-[#707070] text-rose focus:ring-0"
+                              id="hs-radio-group-3"
+                              value="AT"
+                              checked={selectedTransmission === "AT"}
+                              onChange={onTransmissionTypeChange}
+                            />
+                            <label
+                              htmlFor="hs-radio-group-3"
+                              className="text-xl text-black ms-2"
+                            >
+                              เกียร์อัตโนมัติ
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="grid grid-cols-4 gap-20">
-                    <div>
-                      <label className="block text-sm mb-2 text-black text-xl font-normal">
-                        เลขไมล์ (km)
-                      </label>
-                      <input
-                        type="text"
-                        onChange={onMileAgeChange}
-                        className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
-                        placeholder="ระบุเลขไมล์"
-                      />
+                    <div className="grid grid-cols-4 gap-20">
+                      <div>
+                        <label className="block text-sm mb-2 text-black text-xl font-normal">
+                          เลขไมล์ (km)
+                        </label>
+                        <input
+                          type="text"
+                          onChange={onMileAgeChange}
+                          className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
+                          placeholder="ระบุเลขไมล์"
+                          value={formData["mile"]}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
+
                 <div className="absolute bottom-5 space-x-10 flex flex-row">
                   <PrevButton handleClick={prevStep} />
                   <NextButton
