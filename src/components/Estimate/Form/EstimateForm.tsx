@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
 import ImageUpload from "./ImageUpload";
@@ -10,7 +10,6 @@ import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
-import { log } from "console";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
 
 export default function EstimateForm() {
@@ -62,6 +61,106 @@ export default function EstimateForm() {
     modelyear_end: 2000,
     mile: 0,
   });
+
+  const onBrandChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["brand"]: value,
+    });
+    setSelectedBrand(value);
+    setSelectedModel("");
+    setSelectedType("");
+    setSelectedSubModel("");
+    setSelectedSubModelName("");
+  };
+
+  const onColorChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["color"]: value,
+    });
+    setSelectedColor(value);
+  };
+
+  const onModelChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["model"]: value,
+    });
+    setSelectedModel(value);
+    setSelectedType("");
+    setSelectedSubModel("");
+    setSelectedSubModelName("");
+  };
+  const onTypeChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["car_type"]: value,
+    });
+    setSelectedType(value);
+    setSelectedSubModel("");
+    setSelectedSubModelName("");
+  };
+
+  const onSubModelChange = (event: any) => {
+    const { value } = event.target;
+    const numericValue = parseInt(value, 10) / 1000;
+    const formattedValue = numericValue.toFixed(1);
+    setFormData({
+      ...formData,
+      ["sub_model"]: formattedValue,
+    });
+    setSelectedSubModel(value);
+    setSelectedSubModelName("");
+  };
+
+  const onSubModelNameChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["sub_model_name"]: value,
+    });
+    setSelectedSubModelName(value);
+  };
+
+  const onCarYearChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["car_year"]: parseInt(value),
+    });
+    setSelectedCarYear(value);
+  };
+
+  const onTransmissionTypeChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["transmission"]: value,
+    });
+    setSelectedTransmission(value);
+  };
+
+  const onMileAgeChange = (event: any) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      ["mile"]: parseInt(value),
+    });
+    setMile(value);
+  };
+
+  const nextStep = (step?: any, data?: any) => {
+    setStep((prevStep) => prevStep + 1);
+  };
+
+  const prevStep = () => {
+    setStep((prevStep) => prevStep - 1);
+  };
 
   const handlePredictModel = async () => {
     setIsLoading(true);
@@ -165,106 +264,6 @@ export default function EstimateForm() {
     nextStep();
   };
 
-  const onBrandChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["brand"]: value,
-    });
-    setSelectedBrand(value);
-    setSelectedModel("");
-    setSelectedType("");
-    setSelectedSubModel("");
-    setSelectedSubModelName("");
-  };
-
-  const onColorChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["color"]: value,
-    });
-    setSelectedColor(value);
-  };
-
-  const onModelChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["model"]: value,
-    });
-    setSelectedModel(value);
-    setSelectedType("");
-    setSelectedSubModel("");
-    setSelectedSubModelName("");
-  };
-  const onTypeChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["car_type"]: value,
-    });
-    setSelectedType(value);
-    setSelectedSubModel("");
-    setSelectedSubModelName("");
-  };
-
-  const onSubModelChange = (event: any) => {
-    const { value } = event.target;
-    const numericValue = parseInt(value, 10) / 1000;
-    const formattedValue = numericValue.toFixed(1);
-    setFormData({
-      ...formData,
-      ["sub_model"]: formattedValue,
-    });
-    setSelectedSubModel(value);
-    setSelectedSubModelName("");
-  };
-
-  const onSubModelNameChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["sub_model_name"]: value,
-    });
-    setSelectedSubModelName(value);
-  };
-
-  const onCarYearChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["car_year"]: parseInt(value),
-    });
-    setSelectedCarYear(value);
-  };
-
-  const onTransmissionTypeChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["transmission"]: value,
-    });
-    setSelectedTransmission(value);
-  };
-
-  const onMileAgeChange = (event: any) => {
-    const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["mile"]: parseInt(value),
-    });
-    setMile(value);
-  };
-
-  const nextStep = (step?: any, data?: any) => {
-    setStep((prevStep) => prevStep + 1);
-  };
-
-  const prevStep = () => {
-    setStep((prevStep) => prevStep - 1);
-  };
-
   const handleSubmit = async () => {
     try {
       const response = await request(
@@ -281,6 +280,7 @@ export default function EstimateForm() {
       });
     }
   };
+
   const getMarketDetail = async (predictValue: any) => {
     setIsLoading(true);
     const numericValue = parseInt(selectedSubModel, 10) / 1000;
