@@ -8,12 +8,12 @@ import DeleteImageIcon from "@/../public/assets/Form/DeleteImageIcon.png";
 export default function ImageUpload({
   label,
   handleFrontImage,
+  selectedImage,
 }: {
   label: string;
   handleFrontImage: Function;
+  selectedImage: any;
 }) {
-  const [selectedImage, setSelectedImage] = useState<File | null>();
-
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const handleClick = (event: any) => {
     if (hiddenFileInput.current) {
@@ -23,7 +23,6 @@ export default function ImageUpload({
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      setSelectedImage(file);
       handleFrontImage(file);
     } else {
       handleFrontImage(null);
@@ -31,7 +30,6 @@ export default function ImageUpload({
   };
 
   const removeSelectedImage = () => {
-    setSelectedImage(null);
     handleFrontImage(null);
   };
 

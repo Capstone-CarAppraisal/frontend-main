@@ -378,18 +378,22 @@ export default function EstimateForm() {
                   <ImageUpload
                     label="มุมด้านหน้า"
                     handleFrontImage={handleFrontData}
+                    selectedImage={frontData}
                   />
                   <ImageUpload
                     label="มุมด้านหลัง"
                     handleFrontImage={handleRearData}
+                    selectedImage={rearData}
                   />
                   <ImageUpload
                     label="มุมเฉียงจากด้านหน้า"
                     handleFrontImage={handleSideFrontData}
+                    selectedImage={sideFrontData}
                   />
                   <ImageUpload
                     label="มุมเฉียงจากด้านหลัง"
                     handleFrontImage={handleSideRearData}
+                    selectedImage={sideRearData}
                   />
                 </div>
               )}
