@@ -37,7 +37,7 @@ export default function ImageUpload({
 
   return (
     <div className="relative h-full">
-      <button
+      <div
         onClick={handleClick}
         className="flex flex-col justify-center items-center border border-4 border-dashed border-grey space-y-8 h-full w-full"
       >
@@ -78,7 +78,7 @@ export default function ImageUpload({
             ></input>
           </>
         )}
-      </button>
+      </div>
     </div>
   );
 }
