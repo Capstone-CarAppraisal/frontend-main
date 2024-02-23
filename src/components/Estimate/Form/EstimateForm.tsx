@@ -56,8 +56,6 @@ export default function EstimateForm() {
     car_type: "",
     transmission: "",
     color: "",
-    modelyear_start: 15,
-    modelyear_end: 15,
     mile: 0,
   });
 
