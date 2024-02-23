@@ -179,12 +179,12 @@ export const carYear = [
 
 export const color = [
   { value: "black", option: "สีดำ" },
-  { value: "grey", option: "สีเทา" },
+  { value: "gray", option: "สีเทา" },
   { value: "brown", option: "สีน้ำตาล" },
   { value: "red", option: "สีแดง" },
   { value: "green", option: "สีเขียว" },
   { value: "blue", option: "สีฟ้า" },
-  { value: "lightblue", option: "สีฟ้าอ่อน" },
+  { value: "sky", option: "สีฟ้าอ่อน" },
   { value: "white", option: "สีขาว" },
 ];
 
