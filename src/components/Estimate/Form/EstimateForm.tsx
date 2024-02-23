@@ -456,14 +456,7 @@ export default function EstimateForm() {
                       />
                     </div>
                     <div className="px-4">
-<<<<<<< HEAD
                       <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-=======
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-dark-blue text-xl font-normal"
-                      >
->>>>>>> d919ddba699649844b23eff892353d99381ba577
                         สี
                       </label>
                       <select
@@ -559,14 +552,7 @@ export default function EstimateForm() {
                       </div>
 
                       <div className="col-span-3">
-<<<<<<< HEAD
                         <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-=======
-                        <label
-                          htmlFor="hs-select-label"
-                          className="block text-sm mb-2 text-dark-blue text-xl font-normal"
-                        >
->>>>>>> d919ddba699649844b23eff892353d99381ba577
                           ระบบเกียร์
                         </label>
                         <div className="flex gap-x-32 mt-5">
