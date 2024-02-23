@@ -459,7 +459,7 @@ export default function EstimateForm() {
                     <div className="px-4">
                       <label
                         htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
+                        className="block text-sm mb-2 text-dark-blue text-xl font-normal"
                       >
                         สี
                       </label>
@@ -513,8 +513,8 @@ export default function EstimateForm() {
                     <div className="grid grid-cols-4 gap-20">
                       <div>
                         <SelectInputWithLabel
-                          label="เลขซีซี"
-                          name="เลือกเลขซีซี"
+                          label="ขนาดเครื่องยนต์ (ซีซี)"
+                          name="เลือกขนาดเครื่องยนต์ (ซีซี)"
                           handleChange={onSubModelChange}
                           option={
                             selectedType &&
@@ -559,7 +559,7 @@ export default function EstimateForm() {
                       <div className="col-span-3">
                         <label
                           htmlFor="hs-select-label"
-                          className="block text-sm mb-2 text-black text-xl font-normal"
+                          className="block text-sm mb-2 text-dark-blue text-xl font-normal"
                         >
                           ระบบเกียร์
                         </label>
@@ -603,7 +603,7 @@ export default function EstimateForm() {
                     </div>
                     <div className="grid grid-cols-4 gap-20">
                       <div>
-                        <label className="block text-sm mb-2 text-black text-xl font-normal">
+                        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
                           เลขไมล์ (km)
                         </label>
                         <input

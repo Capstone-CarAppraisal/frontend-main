@@ -17,7 +17,7 @@ export default function SelectInputWithLabel({
     <div className="">
       <label
         htmlFor="hs-select-label"
-        className="block text-sm mb-2 text-black text-xl font-normal"
+        className="block mb-2 text-dark-blue text-xl font-normal"
       >
         {label}
       </label>
