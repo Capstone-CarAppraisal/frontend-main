@@ -15,7 +15,14 @@ export default function SelectInputWithLabel({
 }) {
   return (
     <div className="">
+<<<<<<< HEAD
       <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+=======
+      <label
+        htmlFor="hs-select-label"
+        className="block mb-2 text-dark-blue text-xl font-normal"
+      >
+>>>>>>> d919ddba699649844b23eff892353d99381ba577
         {label}
       </label>
       <select

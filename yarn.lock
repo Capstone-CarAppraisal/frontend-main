@@ -125,11 +125,6 @@
   resolved "https://registry.npmjs.org/@preline/collapse/-/collapse-2.0.1.tgz"
   integrity sha512-/+pfIbRHRJYYOVHCvuveKiDDf1m7WQH3jGsv3Wu/Y3d+2cEyQrUpJYmE4dSyA0zCYp4FxXumMz5KcUh0IlBoew==
 
-"@preline/overlay@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@preline/overlay/-/overlay-2.0.2.tgz#ef715a985f401bfd55d14f2dfcef0a50630630bb"
-  integrity sha512-X3Lw6zRsgxqEnjAqHUYnJD/88NAb2+Q3OlXmvepNmADfUPnWb+rxem2k/M56qiWfP767sZuhDvNeXTlQnGZciA==
-
 "@preline/toggle-count@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@preline/toggle-count/-/toggle-count-2.0.1.tgz"

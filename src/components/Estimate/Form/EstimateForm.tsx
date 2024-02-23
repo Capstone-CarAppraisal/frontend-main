@@ -17,7 +17,6 @@ export default function EstimateForm() {
   const [request2, marketDetail, error2] = useHttp();
   const [request3, carDetail, error3] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
 
   const [frontData, setFrontData] = useState<File | null>();
@@ -457,7 +456,14 @@ export default function EstimateForm() {
                       />
                     </div>
                     <div className="px-4">
+<<<<<<< HEAD
                       <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+=======
+                      <label
+                        htmlFor="hs-select-label"
+                        className="block text-sm mb-2 text-dark-blue text-xl font-normal"
+                      >
+>>>>>>> d919ddba699649844b23eff892353d99381ba577
                         สี
                       </label>
                       <select
@@ -509,8 +515,8 @@ export default function EstimateForm() {
                     <div className="grid grid-cols-4 gap-20">
                       <div>
                         <SelectInputWithLabel
-                          label="เลขซีซี"
-                          name="เลือกเลขซีซี"
+                          label="ขนาดเครื่องยนต์ (ซีซี)"
+                          name="เลือกขนาดเครื่องยนต์ (ซีซี)"
                           handleChange={onSubModelChange}
                           option={
                             selectedType &&
@@ -553,7 +559,14 @@ export default function EstimateForm() {
                       </div>
 
                       <div className="col-span-3">
+<<<<<<< HEAD
                         <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+=======
+                        <label
+                          htmlFor="hs-select-label"
+                          className="block text-sm mb-2 text-dark-blue text-xl font-normal"
+                        >
+>>>>>>> d919ddba699649844b23eff892353d99381ba577
                           ระบบเกียร์
                         </label>
                         <div className="flex gap-x-32 mt-5">
