@@ -17,7 +17,6 @@ export default function EstimateForm() {
   const [request2, marketDetail, error2] = useHttp();
   const [request3, carDetail, error3] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
 
   const [frontData, setFrontData] = useState<File | null>();
