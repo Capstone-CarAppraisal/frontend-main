@@ -57,8 +57,8 @@ export default function EstimateForm() {
     car_type: "",
     transmission: "",
     color: "",
-    modelyear_start: 2000,
-    modelyear_end: 2000,
+    modelyear_start: 15,
+    modelyear_end: 15,
     mile: 0,
   });
 
@@ -457,17 +457,13 @@ export default function EstimateForm() {
                       />
                     </div>
                     <div className="px-4">
-                      <label
-                        htmlFor="hs-select-label"
-                        className="block text-sm mb-2 text-black text-xl font-normal"
-                      >
+                      <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
                         สี
                       </label>
                       <select
-                        id="hs-select-label"
                         className={`py-3 px-4 pe-9 block ${
                           selectedColor ? "text-black" : "text-[#BCBCBC]"
-                        }  border-[#BCBCBC] w-full rounded-lg text-lg`}
+                        }  border-[#BCBCBC] w-full rounded-lg text-lg focus:text-black`}
                         onChange={onColorChange}
                         value={selectedColor}
                       >
@@ -557,10 +553,7 @@ export default function EstimateForm() {
                       </div>
 
                       <div className="col-span-3">
-                        <label
-                          htmlFor="hs-select-label"
-                          className="block text-sm mb-2 text-black text-xl font-normal"
-                        >
+                        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
                           ระบบเกียร์
                         </label>
                         <div className="flex gap-x-32 mt-5">
@@ -569,7 +562,6 @@ export default function EstimateForm() {
                               type="radio"
                               name="hs-radio-group"
                               className="border-[#707070] text-rose focus:ring-0"
-                              id="hs-radio-group-1"
                               value="MT"
                               checked={selectedTransmission === "MT"}
                               onChange={onTransmissionTypeChange}
@@ -584,17 +576,13 @@ export default function EstimateForm() {
                           <div className="flex items-center">
                             <input
                               type="radio"
-                              name="hs-radio-group"
                               className="border-[#707070] text-rose focus:ring-0"
                               id="hs-radio-group-3"
                               value="AT"
                               checked={selectedTransmission === "AT"}
                               onChange={onTransmissionTypeChange}
                             />
-                            <label
-                              htmlFor="hs-radio-group-3"
-                              className="text-xl text-black ms-2"
-                            >
+                            <label className="text-xl text-black ms-2">
                               เกียร์อัตโนมัติ
                             </label>
                           </div>
@@ -603,7 +591,7 @@ export default function EstimateForm() {
                     </div>
                     <div className="grid grid-cols-4 gap-20">
                       <div>
-                        <label className="block text-sm mb-2 text-black text-xl font-normal">
+                        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
                           เลขไมล์ (km)
                         </label>
                         <input
