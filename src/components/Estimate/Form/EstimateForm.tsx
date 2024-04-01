@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import PrevButton from "@/components/Shared/Button/PrevButton";
 import NextButton from "@/components/Shared/Button/NextButton";
 import ImageUpload from "./ImageUpload";
-import Image from "@/libs/Image";
+import SentImage from "@/libs/Image";
 import useHttp from "@/hooks/useHttp";
 import { selectData, carYear, color } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
+import MSCIcon from "../../../../public/assets/Form/MSCExampleIcon.svg";
 
 export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
@@ -166,13 +168,13 @@ export default function EstimateForm() {
     if (frontData || rearData || sideFrontData || sideRearData) {
       if (frontData) {
         try {
-          const front = await Image(frontData, "front");
+          const front = await SentImage(frontData, "front");
           frontRes = front[0].prediction;
         } catch (err) {
           console.log(err);
         }
         try {
-          const front1 = await Image(frontData, "color");
+          const front1 = await SentImage(frontData, "color");
           frontColor = front1[0].prediction;
         } catch (err) {
           console.log(err);
@@ -180,13 +182,13 @@ export default function EstimateForm() {
       }
       if (rearData) {
         try {
-          const rear = await Image(rearData, "rear");
+          const rear = await SentImage(rearData, "rear");
           rearRes = rear[0].prediction;
         } catch (err) {
           console.log(err);
         }
         try {
-          const rear1 = await Image(rearData, "color");
+          const rear1 = await SentImage(rearData, "color");
           rearColor = rear1[0].prediction;
         } catch (err) {
           console.log(err);
@@ -194,13 +196,13 @@ export default function EstimateForm() {
       }
       if (sideFrontData) {
         try {
-          const sideFront = await Image(sideFrontData, "sidefront");
+          const sideFront = await SentImage(sideFrontData, "sidefront");
           sideFrontRes = sideFront[0].prediction;
         } catch (err) {
           console.log(err);
         }
         try {
-          const sideFront1 = await Image(sideFrontData, "color");
+          const sideFront1 = await SentImage(sideFrontData, "color");
           frontColor = sideFront1[0].prediction;
         } catch (err) {
           console.log(err);
@@ -208,13 +210,13 @@ export default function EstimateForm() {
       }
       if (sideRearData) {
         try {
-          const sideRear = await Image(sideRearData, "siderear");
+          const sideRear = await SentImage(sideRearData, "siderear");
           sideRearRes = sideRear[0].prediction;
         } catch (err) {
           console.log(err);
         }
         try {
-          const sideRear1 = await Image(sideRearData, "color");
+          const sideRear1 = await SentImage(sideRearData, "color");
           sideRearColor = sideRear1[0].prediction;
         } catch (err) {
           console.log(err);
@@ -318,7 +320,7 @@ export default function EstimateForm() {
                   </span>
                 </span>
                 <span className="ms-2  text-xl font-normal text-dark-blue">
-                  ลักษณะภายนอก
+                  ภาพรถยนตร์และรหัส
                 </span>
               </span>
             </li>
@@ -336,7 +338,7 @@ export default function EstimateForm() {
                   </span>
                 </span>
                 <span className="ms-2 text-xl font-normal text-dark-blue">
-                  ลักษณะภายใน
+                  ลักษณะรถยนต์
                 </span>
               </span>
             </li>
@@ -362,43 +364,90 @@ export default function EstimateForm() {
         </div>
       </div>
       {step === 0 && (
-        <div className="flex justify-center w-full h-[1000px] font-sans pt-8">
-          <div className="flex flex-col w-[80vw] relative">
-            <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
-              เพิ่มภาพรถยนต์
+        <div className="flex justify-center w-full h-[2000px] font-sans pt-8">
+          <div className="flex flex-col w-[80vw]">
+            <div className="space-y-8 my-8">
+              <h1 className="text-dark-blue text-5xl font-bold">
+                ภาพรถยนต์และรหัส
+              </h1>
+              <p className="text-2xl text-black font-normal">
+                หากผู้ใช้งานไม่มีภาพหรือรหัสรถยนต์แต่ทราบรุ่นและลักษณะรถยนต์แน่ชัด
+                สามารถข้ามขั้นตอนนี้ไปได้แต่หากคุณมีข้อมูล
+                ไม่เพียงพอสามารถกรอกเพียงข้อมูลที่มีได้
+                เพื่อให้ระบบช่วยระบุรุ่นและลักษณะรถยนต์
+              </p>
             </div>
-            <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center ">
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                <div className="grid grid-cols-2 w-full h-[85%] gap-[1px]">
-                  <ImageUpload
-                    label="มุมด้านหน้า"
-                    handleFrontImage={handleFrontData}
-                    selectedImage={frontData}
-                  />
-                  <ImageUpload
-                    label="มุมด้านหลัง"
-                    handleFrontImage={handleRearData}
-                    selectedImage={rearData}
-                  />
-                  <ImageUpload
-                    label="มุมเฉียงจากด้านหน้า"
-                    handleFrontImage={handleSideFrontData}
-                    selectedImage={sideFrontData}
-                  />
-                  <ImageUpload
-                    label="มุมเฉียงจากด้านหลัง"
-                    handleFrontImage={handleSideRearData}
-                    selectedImage={sideRearData}
-                  />
+            <div className="space-y-10 flex flex-col items-center">
+              <div className="w-full">
+                <div className="bg-dark-blue font-bold text-white text-2xl w-1/5 text-center px-5 py-3">
+                  เพิ่มภาพรถยนต์
                 </div>
-              )}
+                <div className="relative border border-2 border-[#D9D9D9] h-[750px] w-full flex flex-col items-center justify-center">
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <div className="grid grid-cols-2 w-full h-[100%] gap-[1px]">
+                      <ImageUpload
+                        label="มุมด้านหน้า"
+                        handleFrontImage={handleFrontData}
+                        selectedImage={frontData}
+                      />
+                      <ImageUpload
+                        label="มุมด้านหลัง"
+                        handleFrontImage={handleRearData}
+                        selectedImage={rearData}
+                      />
+                      <ImageUpload
+                        label="มุมเฉียงจากด้านหน้า"
+                        handleFrontImage={handleSideFrontData}
+                        selectedImage={sideFrontData}
+                      />
+                      <ImageUpload
+                        label="มุมเฉียงจากด้านหลัง"
+                        handleFrontImage={handleSideRearData}
+                        selectedImage={sideRearData}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="bg-dark-blue font-bold text-white text-2xl w-1/5 text-center px-5 py-3">
+                  รหัส MSC
+                </div>
+                <div className="relative border border-2 border-[#D9D9D9] h-[750px] flex flex-col items-center justify-center">
+                  <div className="flex flex-col items-center justify-center w-3/4 space-y-8">
+                    <h1 className="text-5xl font-bold text-dark-blue">
+                      รหัส MSC
+                    </h1>
+                    <p className="text-xl text-black font-normal">
+                      รหัส MSC (Model System Catalog code)
+                      เป็นรหัสที่ใช้ข้อมูลของรถยนต์อัน ได้แก่ รุ่นรถยนต์
+                      ปีรถยนต์ และสีพิเศษ โดยมีเฉพาะบางแบรนด์รถยนต์เท่านั้น
+                      โดยปัจจุบันระบบรองรับเพียง มาสด้า ที่มีปีรถตั้งแต่ 2018
+                      เป็นต้นไป รหัสนี้สามารถพบได้ใน หนังสือซ่อมบำรุง
+                      โดยมีตัวอย่างดังนี้
+                    </p>
+                    <Image src={MSCIcon} alt="msc-example-img" />
+                    <p className="text-xl text-black font-normal">
+                      กรณีสีปกติรหัส MSC จะมี 7 หลัก เช่น DEMWRAC
+                      แต่ถ้าเป็นสีพิเศษจะมี _ ตามด้วยเลข 1 หลัก ต่อท้ายเช่น
+                      DEMWRAC_1
+                    </p>
+                    <label className="text-xl">ระบุรหัส</label>
+                    <input
+                      type="text"
+                      className="py-3 px-4 block w-1/2 border-[#BCBCBC] rounded-lg text-md text-center"
+                      placeholder="ระบุรหัส"
+                    />
+                  </div>
 
-              <div className="absolute bottom-5 space-x-10">
-                <div className="flex flex-col space-y-2">
-                  <NextButton handleClick={handlePredictModel} />
+                  {/*  */}
                 </div>
+              </div>
+
+              <div className="flex flex-col">
+                <NextButton handleClick={handlePredictModel} />
               </div>
             </div>
           </div>
