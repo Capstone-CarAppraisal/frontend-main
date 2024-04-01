@@ -34,7 +34,7 @@ export default function ImageUpload({
   };
 
   return (
-    <div className="relative h-full">
+    <div className="relative w-full h-full">
       <div
         onClick={handleClick}
         className="flex flex-col justify-center items-center border border-4 border-dashed border-grey space-y-8 h-full w-full"
