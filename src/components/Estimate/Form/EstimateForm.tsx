@@ -416,7 +416,7 @@ export default function EstimateForm() {
                   รหัส MSC
                 </div>
                 <div className="relative border border-2 border-[#D9D9D9] h-[750px] flex flex-col items-center justify-center">
-                  <div className="flex flex-col items-center justify-center w-3/4 space-y-8">
+                  <div className="flex flex-col items-center justify-center w-3/4 space-y-12">
                     <h1 className="text-5xl font-bold text-dark-blue">
                       รหัส MSC
                     </h1>
@@ -446,7 +446,7 @@ export default function EstimateForm() {
                 </div>
               </div>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col mt-16">
                 <NextButton handleClick={handlePredictModel} />
               </div>
             </div>
@@ -455,190 +455,240 @@ export default function EstimateForm() {
       )}
       <div>
         {step === 2 && (
-          <div className="flex justify-center w-full h-[75vh] font-sans pt-8">
+          <div className="flex justify-center w-full h-[1400px] font-sans pt-8">
             <div className="flex flex-col w-[80vw]">
-              <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
-                กรอกลักษณะภายนอกรถ
+              <div className="space-y-8 my-8">
+                <h1 className="text-dark-blue text-5xl font-bold">
+                  รุ่นและลักษณะรถยนต์
+                </h1>
+                <p className="text-2xl text-black font-normal">
+                  กรุณากรอกข้อมูลรุ่นและลักษณะ ช่องที่มีการเติมโดยอัตโนมัติ ✦
+                  มาจากข้อมูลที่คุณกรอกเมื่อหน้าที่ผ่านมา
+                </p>
               </div>
-              <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-                <div className="grid grid-row-2 w-[80%] mb-20">
-                  <div className="grid grid-cols-2 mb-10">
-                    <div className="px-4">
-                      <SelectInputWithLabel
-                        label="ยี่ห้อ"
-                        name="เลือกยี่ห้อรถ"
-                        handleChange={onBrandChange}
-                        option={Object.keys(selectData)}
-                        value={selectedBrand}
-                        isSelected={selectedBrand}
-                      />
-                    </div>
-                    <div className="px-4">
-                      <SelectInputWithLabel
-                        label="รุ่น"
-                        name="เลือกรุ่นรถ"
-                        handleChange={onModelChange}
-                        option={
-                          selectedBrand &&
-                          Object.keys(selectData[selectedBrand])
-                        }
-                        value={selectedModel}
-                        isSelected={selectedModel}
-                      />
-                    </div>
+              <div className=" flex flex-col items-center">
+                <div className="w-full">
+                  <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
+                    กรอกลักษณะภายนอกรถ
                   </div>
-
-                  <div className="grid grid-cols-2">
-                    <div className="px-4">
-                      <SelectInputWithLabel
-                        label="ประเภทรถ"
-                        name="เลือกประเภทรถ"
-                        handleChange={onTypeChange}
-                        option={
-                          selectedModel &&
-                          Object.keys(selectData[selectedBrand][selectedModel])
-                        }
-                        value={selectedType}
-                        isSelected={selectedType}
-                      />
+                  <div className="relative border border-2 border-[#D9D9D9] h-[450px] flex justify-center items-center">
+                    <div className="absolute left-0 top-0 bg-blue text-2xl text-white font-normal px-8 py-3 z-10">
+                      ลักษณะภายนอก
                     </div>
-                    <div className="px-4">
-                      <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-                        สี
-                      </label>
-                      <select
-                        className={`py-3 px-4 pe-9 block ${
-                          selectedColor ? "text-black" : "text-[#BCBCBC]"
-                        }  border-[#BCBCBC] w-full rounded-lg text-lg focus:text-black`}
-                        onChange={onColorChange}
-                        value={selectedColor}
-                      >
-                        <option value="">เลือกสีรถ</option>
-                        {color.map((color, index) => (
-                          <option key={index} value={color.value}>
-                            {color.option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {step === 2 && (
-          <div className="flex justify-center w-full h-[75vh] font-sans pt-8">
-            <div className="flex flex-col w-[80vw]">
-              <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
-                กรอกลักษณะภายในรถ
-              </div>
-              <div className="relative border border-2 border-[#D9D9D9] h-full flex justify-center items-center">
-                {isLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <div className="grid grid-row-3 w-[87%] mb-20 gap-3">
-                    <div className="grid grid-cols-4 gap-20">
-                      <div>
-                        <SelectInputWithLabel
-                          label="ขนาดเครื่องยนต์ (ซีซี)"
-                          name="เลือกขนาดเครื่องยนต์ (ซีซี)"
-                          handleChange={onSubModelChange}
-                          option={
-                            selectedType &&
-                            Object.keys(
-                              selectData[selectedBrand][selectedModel][
-                                selectedType
-                              ]
-                            )
-                          }
-                          value={selectedSubModel}
-                          isSelected={selectedSubModel}
-                        />
-                      </div>
-                      <div className="col-span-3">
-                        <SelectInputWithLabel
-                          label="รุ่นย่อย"
-                          name="เลือกรุ่นย่อยรถ"
-                          handleChange={onSubModelNameChange}
-                          option={
-                            selectedSubModel &&
-                            selectData[selectedBrand][selectedModel][
-                              selectedType
-                            ][selectedSubModel]
-                          }
-                          value={selectedSubModelName}
-                          isSelected={selectedSubModelName}
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-4 gap-20">
-                      <div>
-                        <SelectInputWithLabel
-                          label="ปีรถ"
-                          name="เลือกปีรถ"
-                          handleChange={onCarYearChange}
-                          option={carYear}
-                          value={selectedCarYear}
-                          isSelected={selectedCarYear}
-                        />
+                    <div className="grid grid-row-2 w-[90%]">
+                      <div className="grid grid-cols-2 mb-10 gap-8">
+                        <div className="px-4">
+                          <SelectInputWithLabel
+                            label="ยี่ห้อ"
+                            name="เลือกยี่ห้อรถ"
+                            handleChange={onBrandChange}
+                            option={Object.keys(selectData)}
+                            value={selectedBrand}
+                            isSelected={selectedBrand}
+                          />
+                        </div>
+                        <div className="px-4">
+                          <SelectInputWithLabel
+                            label="รุ่น"
+                            name="เลือกรุ่นรถ"
+                            handleChange={onModelChange}
+                            option={
+                              selectedBrand &&
+                              Object.keys(selectData[selectedBrand])
+                            }
+                            value={selectedModel}
+                            isSelected={selectedModel}
+                          />
+                        </div>
                       </div>
 
-                      <div className="col-span-3">
-                        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-                          ระบบเกียร์
-                        </label>
-                        <div className="flex gap-x-32 mt-5">
-                          <div className="flex items-center">
-                            <input
-                              type="radio"
-                              name="hs-radio-group"
-                              className="border-[#707070] text-rose focus:ring-0"
-                              value="MT"
-                              checked={selectedTransmission === "MT"}
-                              onChange={onTransmissionTypeChange}
-                            />
-                            <label
-                              htmlFor="hs-radio-group-1"
-                              className="text-xl text-black ms-2"
-                            >
-                              เกียร์ธรรมดา
-                            </label>
-                          </div>
-                          <div className="flex items-center">
-                            <input
-                              type="radio"
-                              className="border-[#707070] text-rose focus:ring-0"
-                              id="hs-radio-group-3"
-                              value="AT"
-                              checked={selectedTransmission === "AT"}
-                              onChange={onTransmissionTypeChange}
-                            />
-                            <label className="text-xl text-black ms-2">
-                              เกียร์อัตโนมัติ
-                            </label>
-                          </div>
+                      <div className="grid grid-cols-2 gap-8">
+                        <div className="px-4">
+                          <SelectInputWithLabel
+                            label="ประเภทรถ"
+                            name="เลือกประเภทรถ"
+                            handleChange={onTypeChange}
+                            option={
+                              selectedModel &&
+                              Object.keys(
+                                selectData[selectedBrand][selectedModel]
+                              )
+                            }
+                            value={selectedType}
+                            isSelected={selectedType}
+                          />
+                        </div>
+                        <div className="px-4">
+                          <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                            สี
+                          </label>
+                          <select
+                            className={`py-3 px-4 pe-9 block ${
+                              selectedColor ? "text-black" : "text-[#BCBCBC]"
+                            }  border-[#BCBCBC] w-full rounded-lg text-lg focus:text-black`}
+                            onChange={onColorChange}
+                            value={selectedColor}
+                          >
+                            <option value="">เลือกสีรถ</option>
+                            {color.map((color, index) => (
+                              <option key={index} value={color.value}>
+                                {color.option}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-4 gap-20">
-                      <div>
-                        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-                          เลขไมล์ (km)
-                        </label>
-                        <input
-                          type="text"
-                          onChange={onMileAgeChange}
-                          className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
-                          placeholder="ระบุเลขไมล์"
-                          value={mile}
-                        />
-                      </div>
-                    </div>
                   </div>
-                )}
+                </div>
+                <div className="w-full">
+                  <div className="relative border border-2 border-[#D9D9D9] h-[520px] flex justify-center items-center">
+                    <div className="absolute left-0 top-0 bg-blue text-2xl text-white font-normal px-8 py-3 z-10">
+                      ลักษณะภายใน
+                    </div>
+                    {isLoading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <div className="grid grid-row-3 w-[85%] gap-3">
+                        <div className="grid grid-cols-4 gap-20">
+                          <div>
+                            <SelectInputWithLabel
+                              label="ขนาดเครื่องยนต์ (ซีซี)"
+                              name="เลือกขนาดเครื่องยนต์ (ซีซี)"
+                              handleChange={onSubModelChange}
+                              option={
+                                selectedType &&
+                                Object.keys(
+                                  selectData[selectedBrand][selectedModel][
+                                    selectedType
+                                  ]
+                                )
+                              }
+                              value={selectedSubModel}
+                              isSelected={selectedSubModel}
+                            />
+                          </div>
+                          <div className="col-span-3">
+                            <SelectInputWithLabel
+                              label="รุ่นย่อย"
+                              name="เลือกรุ่นย่อยรถ"
+                              handleChange={onSubModelNameChange}
+                              option={
+                                selectedSubModel &&
+                                selectData[selectedBrand][selectedModel][
+                                  selectedType
+                                ][selectedSubModel]
+                              }
+                              value={selectedSubModelName}
+                              isSelected={selectedSubModelName}
+                            />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-20">
+                          <div>
+                            <SelectInputWithLabel
+                              label="ปีรถ"
+                              name="เลือกปีรถ"
+                              handleChange={onCarYearChange}
+                              option={carYear}
+                              value={selectedCarYear}
+                              isSelected={selectedCarYear}
+                            />
+                          </div>
 
-                <div className="absolute bottom-5 space-x-10 flex flex-row">
+                          <div className="col-span-3">
+                            <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                              ระบบเกียร์
+                            </label>
+                            <div className="flex gap-x-32 mt-5">
+                              <div className="flex items-center">
+                                <input
+                                  type="radio"
+                                  className="border-[#707070] text-rose focus:ring-0"
+                                  id="hs-radio-group-3"
+                                  value="AT"
+                                  checked={selectedTransmission === "AT"}
+                                  onChange={onTransmissionTypeChange}
+                                />
+                                <label className="text-xl text-black ms-2">
+                                  เกียร์อัตโนมัติ
+                                </label>
+                              </div>
+                              <div className="flex items-center">
+                                <input
+                                  type="radio"
+                                  name="hs-radio-group"
+                                  className="border-[#707070] text-rose focus:ring-0"
+                                  value="MT"
+                                  checked={selectedTransmission === "MT"}
+                                  onChange={onTransmissionTypeChange}
+                                />
+                                <label
+                                  htmlFor="hs-radio-group-1"
+                                  className="text-xl text-black ms-2"
+                                >
+                                  เกียร์ธรรมดา
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-20">
+                          {/*  TODO: Change formData */}
+                          <div>
+                            <SelectInputWithLabel
+                              label="โฉมปีเริ่มต้น"
+                              name="เลือกปี"
+                              handleChange={onSubModelChange}
+                              option={
+                                selectedType &&
+                                Object.keys(
+                                  selectData[selectedBrand][selectedModel][
+                                    selectedType
+                                  ]
+                                )
+                              }
+                              value={selectedSubModel}
+                              isSelected={selectedSubModel}
+                            />
+                          </div>
+                          <div>
+                            <SelectInputWithLabel
+                              label="โฉมปีท้ายสุด"
+                              name="เลือกปี"
+                              handleChange={onSubModelChange}
+                              option={
+                                selectedType &&
+                                Object.keys(
+                                  selectData[selectedBrand][selectedModel][
+                                    selectedType
+                                  ]
+                                )
+                              }
+                              value={selectedSubModel}
+                              isSelected={selectedSubModel}
+                            />
+                          </div>
+                          <div className="col-span-2">
+                            <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                              เลขไมล์ (km)
+                            </label>
+                            <input
+                              type="text"
+                              onChange={onMileAgeChange}
+                              className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
+                              placeholder="ระบุเลขไมล์"
+                              value={mile}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/*  */}
+                  </div>
+                </div>
+                <div className="space-x-10 flex flex-row items-center mt-16">
                   <PrevButton handleClick={prevStep} />
                   <NextButton
                     handleClick={handleSubmit}
