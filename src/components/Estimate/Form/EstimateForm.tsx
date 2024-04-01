@@ -19,7 +19,7 @@ export default function EstimateForm() {
   const [request2, marketDetail, error2] = useHttp();
   const [request3, carDetail, error3] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
 
   const [frontData, setFrontData] = useState<File | null>();
   const [rearData, setRearData] = useState<File | null>();
@@ -310,7 +310,7 @@ export default function EstimateForm() {
               <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
                 <span
                   className={`w-10 h-10 flex justify-center items-center flex-shrink-0 text-xl font-bold ${
-                    step === 0 || step === 1
+                    step === 1
                       ? "bg-dark-blue text-white"
                       : "bg-white text-dark-blue border-4 border-lightgrey"
                   }  font-bold rounded-full`}
@@ -363,7 +363,7 @@ export default function EstimateForm() {
           </ul>
         </div>
       </div>
-      {step === 0 && (
+      {step === 1 && (
         <div className="flex justify-center w-full h-[2000px] font-sans pt-8">
           <div className="flex flex-col w-[80vw]">
             <div className="space-y-8 my-8">
@@ -454,7 +454,7 @@ export default function EstimateForm() {
         </div>
       )}
       <div>
-        {step === 1 && (
+        {step === 2 && (
           <div className="flex justify-center w-full h-[75vh] font-sans pt-8">
             <div className="flex flex-col w-[80vw]">
               <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
@@ -522,20 +522,6 @@ export default function EstimateForm() {
                       </select>
                     </div>
                   </div>
-                </div>
-                <div className="absolute bottom-5 flex flex-row space-x-10">
-                  <PrevButton handleClick={prevStep} />
-                  <NextButton
-                    handleClick={nextStep}
-                    isDisabled={
-                      !(
-                        selectedBrand &&
-                        selectedModel &&
-                        selectedType &&
-                        selectedColor
-                      )
-                    }
-                  />
                 </div>
               </div>
             </div>
