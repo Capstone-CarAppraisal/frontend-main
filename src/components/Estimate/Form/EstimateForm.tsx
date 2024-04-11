@@ -13,6 +13,7 @@ import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
 import MSCIcon from "../../../../public/assets/Form/MSCExampleIcon.svg";
+import SelectButton from "@/components/Shared/Button/SelectButton";
 
 export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
@@ -20,6 +21,7 @@ export default function EstimateForm() {
   const [request3, carDetail, error3] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
+  const [summaryViewMode, setSummaryViewMode] = useState(0);
 
   const [frontData, setFrontData] = useState<File | null>();
   const [rearData, setRearData] = useState<File | null>();
@@ -160,6 +162,11 @@ export default function EstimateForm() {
   const prevStep = () => {
     setStep((prevStep) => prevStep - 1);
   };
+
+  const onModeChange = (mode: any) => {
+    setSummaryViewMode(mode);
+  };
+  console.log(summaryViewMode);
 
   const handlePredictModel = async () => {
     setIsLoading(true);
@@ -711,6 +718,16 @@ export default function EstimateForm() {
       {step === 3 && (
         <div className="flex justify-center w-full h-auto font-sans pt-8 items-center">
           <div className="flex flex-col w-[80vw] justify-center  max-w-[1200px]">
+            <div className="flex justify-between w-full mb-8">
+              <h1 className="text-dark-blue text-5xl font-bold">
+                ผลการประเมิน
+              </h1>
+              <SelectButton
+                onChange={onModeChange}
+                activeMode={summaryViewMode}
+              />
+            </div>
+
             <div className="bg-dark-blue font-bold text-white text-2xl w-fit px-5 py-3">
               ผลการประเมิน
             </div>
@@ -723,6 +740,7 @@ export default function EstimateForm() {
                     parseInt(selectedSubModel, 10) / 1000
                   ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
                   predictValue={predictValue.prediction}
+                  viewMode={summaryViewMode}
                 />
               ) : (
                 <Summary
@@ -733,6 +751,7 @@ export default function EstimateForm() {
                   ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
                   carMarketDetail={marketDetail}
                   predictValue={predictValue.prediction}
+                  viewMode={summaryViewMode}
                 />
               )}
 

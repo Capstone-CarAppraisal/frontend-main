@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import AverageMarketPriceByYearCard from "./SummaryCard/AverageMarketPriceByYearCard";
 import AverageMarketPriceCard from "./SummaryCard/AverageMarketPriceCard";
 import CarBrandCard from "./SummaryCard/CarBrandCard";
@@ -7,6 +9,7 @@ import LowestHighestPriceCard from "./SummaryCard/LowestHighestPriceCard";
 
 import PriceCard from "./SummaryCard/PriceCard";
 import PriceRankCard from "./SummaryCard/PriceRankCard";
+import AveragePriceByDistrict from "./SummaryCard/AveragePriceByDistrict";
 
 export default function Summary({
   brand,
@@ -14,12 +17,14 @@ export default function Summary({
   modelDetail,
   carMarketDetail,
   predictValue,
+  viewMode,
 }: {
   brand: string;
   model: string;
   modelDetail: string;
   carMarketDetail?: any;
   predictValue: any;
+  viewMode: any;
 }) {
   const getPercentFromFirstHand = (predictVal: any, firstHandPrice: any) => {
     let percent = Math.round((predictVal / firstHandPrice) * 100);
@@ -38,61 +43,66 @@ export default function Summary({
   };
 
   if (carMarketDetail) {
-    return (
-      <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
-        <div>
-          <PriceCard
-            price={convertNumber(predictValue, 0)}
-            percent={getPercentFromFirstHand(
-              predictValue,
-              carMarketDetail["First car cost"]
-            )}
-          />
+    if (viewMode === 0) {
+      return (
+        <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+          <div className="grid col-span-full">
+            <PriceCard
+              mode={viewMode}
+              price={convertNumber(predictValue, 0)}
+              percent={getPercentFromFirstHand(
+                predictValue,
+                carMarketDetail["First car cost"]
+              )}
+            />
+          </div>
+          {/* <div>
+            <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
+          </div>
+          <div>
+            <CarImageCard />
+          </div> */}
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาตลาดต่ำสุดปัจจุบัน"
+              present={convertNumber(carMarketDetail["Min price"], 0)}
+              mode={viewMode}
+            />
+          </div>
+
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาเฉลี่ยตลาดปัจจุบัน"
+              present={convertNumber(carMarketDetail["Min price"], 0)}
+              mode={viewMode}
+            />
+          </div>
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาตลาดสูงสุดปัจจุบัน"
+              present={convertNumber(carMarketDetail["Max price"], 0)}
+              mode={viewMode}
+            />
+          </div>
+          <div className="grid grid-row gap-4">
+            <AverageMarketPriceCard />
+            <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
+          </div>
+          <div className="grid col-span-2">
+            <AveragePriceByDistrict />
+          </div>
+          <div></div>
         </div>
-        <div>
-          <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
-        </div>
-        <div>
-          <CarImageCard />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <LowestHighestPriceCard
-            label="ราคาตลาดต่ำสุด"
-            present={convertNumber(carMarketDetail["Min price"], 0)}
-          />
-          <LowestHighestPriceCard
-            label="ราคาตลาดสูงสุด"
-            present={convertNumber(carMarketDetail["Max price"], 0)}
-          />
-        </div>
-        <div>
-          <AverageMarketPriceCard />
-        </div>
-        <div>
-          <AverageMarketPriceByYearCard />
-        </div>
-        <div>
-          <PriceRankCard rankData={carMarketDetail["Car show"]} />
-        </div>
-        <div>
-          <CarDetailCard
-            firstHandPrice={convertNumber(carMarketDetail["First car cost"], 1)}
-            averagePrice={convertNumber(carMarketDetail["Average Cost"], 1)}
-            soldAverage={convertNumber(400000, 1)}
-            SD={convertNumber(carMarketDetail["SD Cost"], 1)}
-            soldAverageSD={convertNumber(45000, 1)}
-            averageMile={convertNumber(carMarketDetail["Average Mile"], 2)}
-            amountInMarket={carMarketDetail["Number of Cars"]}
-          />
-        </div>
-        <div></div>
-      </div>
-    );
+      );
+    } else if (viewMode === 1) {
+      // Render different content for mode 2
+      return <div>{/* Content for mode 2 */}</div>;
+    }
   } else {
-    return (
-      <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+    return null;
+    /* <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
         <div>
-          <PriceCard price={convertNumber(predictValue, 0)} />
+          <PriceCard price={convertNumber(predictValue, 0)} mode={viewMode} />
         </div>
         <div>
           <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
@@ -117,7 +127,6 @@ export default function Summary({
           <CarDetailCard />
         </div>
         <div></div>
-      </div>
-    );
+      </div> */
   }
 }

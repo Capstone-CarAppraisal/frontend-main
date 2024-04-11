@@ -1,15 +1,31 @@
-export default function PriceCard({ price, percent }: { price: any; percent?: number }) {
+export default function PriceCard({
+  price,
+  percent,
+  mode,
+}: {
+  price: any;
+  percent?: number;
+  mode: any;
+}) {
   const progressBarWidth = `${percent}%`;
 
   return (
     <div className="flex bg-light-blue h-[200px] w-full items-center ">
       <div className="flex flex-col p-5 w-full">
-        <h1 className="font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
+        <h1
+          className={`font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis ${
+            mode === 0 ? "text-center" : ""
+          }`}
+        >
           <span className="text-5xl">฿</span>
           <span className="text-6xl">{price}</span>
-          <span className="text-5xl">K</span>
+          <span className="text-6xl">,000</span>
         </h1>
-        <p className="text-2xl font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
+        <p
+          className={`text-2xl font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis ${
+            mode === 0 ? "text-center" : ""
+          }`}
+        >
           ราคาประเมิน
         </p>
         <div>
