@@ -19,7 +19,7 @@ export default function SelectButton({
       <button
         type="button"
         className={`w-[160px] py-3 px-4  items-center gap-x-2 text-2xl font-bold text-white  shadow-sm ${
-          activeMode === 1 ? "bg-dark-blue" : "bg-lightgrey"
+          activeMode === 1 ? "bg-rose" : "bg-lightgrey"
         }`}
         onClick={() => onChange(1)}
       >
