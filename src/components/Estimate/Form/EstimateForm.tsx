@@ -14,14 +14,18 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "@/components/Shared/LoadingSpinner";
 import MSCIcon from "../../../../public/assets/Form/MSCExampleIcon.svg";
 import SelectButton from "@/components/Shared/Button/SelectButton";
+import CorrectIcon from "../../../../public/assets/Form/checkIcon.svg";
+import InvalidIcon from "../../../../public/assets/Form/invalidIcon.svg";
 
 export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
   const [request2, marketDetail, error2] = useHttp();
   const [request3, carDetail, error3] = useHttp();
+  const [request4, mscCode, error4] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [summaryViewMode, setSummaryViewMode] = useState(0);
+  const [carDataFromMSC, setCarDataFromMSC] = useState<any>();
 
   const [frontData, setFrontData] = useState<File | null>();
   const [rearData, setRearData] = useState<File | null>();
@@ -37,6 +41,7 @@ export default function EstimateForm() {
   const [selectedCarYear, setSelectedCarYear] = useState<any>();
   const [selectedTransmission, setSelectedTransmission] = useState<any>();
   const [mile, setMile] = useState<any>();
+  const [MSC, setMSC] = useState<any>();
 
   const handleFrontData = (data: File) => {
     setFrontData(data);
@@ -49,6 +54,22 @@ export default function EstimateForm() {
   };
   const handleSideRearData = (data: File) => {
     setSideRearData(data);
+  };
+
+  const onMSCInputChange = async (event: any) => {
+    const { value } = event.target;
+    setMSC(value);
+    try {
+      const response = await request4(
+        "get",
+        `/msc_code?msc_code=${value}`,
+        undefined,
+        MSC
+      );
+      setCarDataFromMSC(response);
+    } catch (error) {
+      console.log("Incorrect MSC");
+    }
   };
 
   const [formData, setFormData] = useState({
@@ -154,6 +175,7 @@ export default function EstimateForm() {
     });
     setMile(value);
   };
+  console.log(MSC);
 
   const nextStep = (step?: any, data?: any) => {
     setStep((prevStep) => prevStep + 1);
@@ -441,15 +463,33 @@ export default function EstimateForm() {
                       แต่ถ้าเป็นสีพิเศษจะมี _ ตามด้วยเลข 1 หลัก ต่อท้ายเช่น
                       DEMWRAC_1
                     </p>
-                    <label className="text-xl">ระบุรหัส</label>
-                    <input
-                      type="text"
-                      className="py-3 px-4 block w-1/2 border-[#BCBCBC] rounded-lg text-md text-center"
-                      placeholder="ระบุรหัส"
-                    />
-                  </div>
 
-                  {/*  */}
+                    <label className="text-xl">ระบุรหัส</label>
+                    <div className="relative w-1/2">
+                      <input
+                        type="text"
+                        className="py-3 px-4 block w-full border-[#BCBCBC] rounded-lg text-md text-center"
+                        placeholder="ระบุรหัส"
+                        onChange={onMSCInputChange}
+                        value={MSC}
+                      />
+
+                      {MSC && !error4 && (
+                        <Image
+                          src={CorrectIcon}
+                          alt="correct-icon"
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                        />
+                      )}
+                      {error4 && (
+                        <Image
+                          src={InvalidIcon}
+                          alt="invalid-icon"
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
