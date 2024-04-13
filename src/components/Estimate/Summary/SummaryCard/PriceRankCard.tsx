@@ -14,11 +14,7 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
               {rankData ? `฿${Math.round(rankData[0].cost / 1000)}K` : "-"}
             </p>
           </div>
-          <hr className="border-white"></hr>
-          <div className="flex justify-between">
-            <p className="text-lg font-normal text-dark-blue">...</p>
-            <p className="text-lg font-normal text-dark-blue">...</p>
-          </div>
+
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue">
@@ -46,11 +42,7 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
               {rankData ? `฿${Math.round(rankData[3].cost / 1000)}K` : "-"}
             </p>
           </div>
-          <hr className="border-white"></hr>
-          <div className="flex justify-between">
-            <p className="text-lg font-normal text-dark-blue">...</p>
-            <p className="text-lg font-normal text-dark-blue">...</p>
-          </div>
+
           <hr className="border-white"></hr>
           <div className="flex justify-between text-lg">
             <p className="text-lg font-normal text-dark-blue">
@@ -58,6 +50,30 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
             </p>
             <p className="text-lg font-normal text-dark-blue font-normal">
               {rankData ? `฿${Math.round(rankData[4].cost / 1000)}K` : "-"}
+            </p>
+          </div>
+          <hr className="border-white"></hr>
+          <div className="flex justify-between text-lg">
+            <p className="text-lg font-normal text-dark-blue">...</p>
+            <p className="text-lg font-normal text-dark-blue font-normal">
+              ...
+            </p>
+          </div>
+          <hr className="border-white"></hr>
+          <div className="flex justify-between text-lg">
+            <p className="text-lg font-normal text-dark-blue">เฉลี่ย</p>
+            <p className="text-lg font-normal text-dark-blue font-normal">
+              {rankData
+                ? `฿${Math.round(
+                    (rankData[4].cost +
+                      rankData[3].cost +
+                      rankData[2].cost +
+                      rankData[1].cost +
+                      rankData[0].cost) /
+                      4 /
+                      1000
+                  )}K`
+                : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
