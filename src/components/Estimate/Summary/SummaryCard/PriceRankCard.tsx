@@ -7,62 +7,50 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
         </div>
         <div className="flex flex-col w-full space-y-2 mt-10">
           <div className="flex justify-between">
-            <p className="text-lg font-normal text-dark-blue">
-              {rankData ? `${rankData[0].rank}.` : "-"}
-            </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-normal text-dark-blue">1.</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData ? `฿${Math.round(rankData[0].cost / 1000)}K` : "-"}
             </p>
           </div>
 
           <hr className="border-white"></hr>
           <div className="flex justify-between">
-            <p className="text-lg font-normal text-dark-blue">
-              {rankData ? `${rankData[1].rank}.` : "-"}
-            </p>
-            <p className="text-lg font-normal text-dark-blue">
+            <p className="text-lg font-normal text-dark-blue">2.</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData ? `฿${Math.round(rankData[1].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
-            <p className="text-lg font-bold text-dark-blue">
-              {rankData ? `${rankData[2].rank}.` : "-"}
-            </p>
-            <p className="text-lg font-bold text-dark-blue">
+            <p className="text-lg font-normal text-dark-blue">3.</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData ? `฿${Math.round(rankData[2].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
-            <p className="text-lg font-normal text-dark-blue">
-              {rankData ? `${rankData[3].rank}.` : "-"}
-            </p>
-            <p className="text-lg font-normal text-dark-blue">
+            <p className="text-lg font-normal text-dark-blue">4.</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData ? `฿${Math.round(rankData[3].cost / 1000)}K` : "-"}
             </p>
           </div>
 
           <hr className="border-white"></hr>
           <div className="flex justify-between text-lg">
-            <p className="text-lg font-normal text-dark-blue">
-              {rankData ? `${rankData[4].rank}.` : "-"}
-            </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-normal text-dark-blue">5.</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData ? `฿${Math.round(rankData[4].cost / 1000)}K` : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between text-lg">
             <p className="text-lg font-normal text-dark-blue">...</p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
-              ...
-            </p>
+            <p className="text-lg font-semibold text-dark-blue">...</p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between text-lg">
-            <p className="text-lg font-normal text-dark-blue">เฉลี่ย</p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">เฉลี่ย</p>
+            <p className="text-lg font-semibold text-dark-blue">
               {rankData
                 ? `฿${Math.round(
                     (rankData[4].cost +
@@ -70,7 +58,7 @@ export default function PriceRankCard({ rankData }: { rankData?: any }) {
                       rankData[2].cost +
                       rankData[1].cost +
                       rankData[0].cost) /
-                      4 /
+                      5 /
                       1000
                   )}K`
                 : "-"}

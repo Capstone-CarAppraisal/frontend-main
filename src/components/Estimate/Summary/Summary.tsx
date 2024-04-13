@@ -131,7 +131,7 @@ export default function Summary({
             </div>
 
             <div>
-              <PriceRankCard />
+              <PriceRankCard rankData={carMarketDetail["Car show"]} />
             </div>
 
             <div>
