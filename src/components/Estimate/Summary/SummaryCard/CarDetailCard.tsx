@@ -26,7 +26,7 @@ export default function CarDetailCard({
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               ราคามือ 1
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {firstHandPrice ? firstHandPrice : "-"}
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function CarDetailCard({
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               ราคาในตลาดเฉลี่ย
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {averagePrice ? averagePrice : "-"}
             </p>
           </div>
@@ -44,25 +44,25 @@ export default function CarDetailCard({
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               ราคาขายออกเฉลี่ย
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {soldAverage ? soldAverage : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
-              ส่วนเบี่ยงเบนมาตรฐานราคาในตลาด
+              S.D. ราคาในตลาด
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {SD ? SD : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
           <div className="flex justify-between">
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
-              ส่วนเบี่ยงเบนมาตรฐานราคาขายออก
+              S.D. ราคาขายออก
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {soldAverageSD ? soldAverageSD : "-"}
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function CarDetailCard({
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               เลขไมล์เฉลี่ย (กม.)
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue">
               {averageMile ? averageMile : "-"}
             </p>
           </div>
@@ -80,7 +80,7 @@ export default function CarDetailCard({
             <p className="text-lg font-normal text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               จำนวนรถในตลาด (คัน)
             </p>
-            <p className="text-lg font-normal text-dark-blue font-normal">
+            <p className="text-lg font-semibold text-dark-blue ">
               {amountInMarket ? amountInMarket : "-"}
             </p>
           </div>
