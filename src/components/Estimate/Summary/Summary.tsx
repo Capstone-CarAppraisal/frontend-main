@@ -6,10 +6,12 @@ import CarBrandCard from "./SummaryCard/CarBrandCard";
 import CarDetailCard from "./SummaryCard/CarDetailCard";
 import CarImageCard from "./SummaryCard/CarImageCard";
 import LowestHighestPriceCard from "./SummaryCard/LowestHighestPriceCard";
-
+import mazdaLogo from "../../../../public/assets/CarLogo/Mazda.svg";
 import PriceCard from "./SummaryCard/PriceCard";
 import PriceRankCard from "./SummaryCard/PriceRankCard";
 import AveragePriceByDistrict from "./SummaryCard/AveragePriceByDistrict";
+import Image from "next/image";
+import CarImage from "../../../../public/assets/CarImage/Mazda2/1.3SPSedan.png";
 
 export default function Summary({
   brand,
@@ -41,6 +43,7 @@ export default function Summary({
       return `${rounded}K`;
     }
   };
+  console.log(carMarketDetail);
 
   if (carMarketDetail) {
     if (viewMode === 0) {
@@ -96,7 +99,150 @@ export default function Summary({
       );
     } else if (viewMode === 1) {
       // Render different content for mode 2
-      return <div>{/* Content for mode 2 */}</div>;
+      return (
+        <div className="pb-[100px] flex flex-row w-full h-full">
+          <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
+            <PriceCard
+              mode={viewMode}
+              price={convertNumber(predictValue, 0)}
+              percent={getPercentFromFirstHand(
+                predictValue,
+                carMarketDetail["First car cost"]
+              )}
+            />
+            <div className="grid grid-cols-2 gap-4">
+              <LowestHighestPriceCard
+                label="ราคาเฉลี่ยตลาดต่ำสุด"
+                present={convertNumber(carMarketDetail["Min price"], 0)}
+                mode={viewMode}
+              />
+              <LowestHighestPriceCard
+                label="ราคาเฉลี่ยตลาดสูงสุด"
+                present={convertNumber(carMarketDetail["Min price"], 0)}
+                mode={viewMode}
+              />
+            </div>
+            <div>
+              <AverageMarketPriceCard />
+            </div>
+
+            <div>
+              <AverageMarketPriceByYearCard />
+            </div>
+
+            <div>
+              <PriceRankCard />
+            </div>
+
+            <div>
+              <CarDetailCard
+                firstHandPrice={convertNumber(
+                  carMarketDetail["First car cost"],
+                  1
+                )}
+                averagePrice={convertNumber(carMarketDetail["Average Cost"], 1)}
+                soldAverage={convertNumber(400000, 1)}
+                SD={convertNumber(carMarketDetail["SD Cost"], 1)}
+                soldAverageSD={convertNumber(45000, 1)}
+                averageMile={convertNumber(carMarketDetail["Average Mile"], 2)}
+                amountInMarket={carMarketDetail["Number of Cars"]}
+              />
+            </div>
+          </div>
+          <div className="bg-dark-blue w-[30%] absolute top-0 right-0 bottom-0">
+            <div className="flex flex-col w-full p-4 gap-4">
+              <div className="flex flex-row w-full">
+                <Image src={mazdaLogo} alt="car-logo" width={80} height={80} />
+                <div className="flex-flex-col">
+                  <p className="text-white text-lg font-semibold">
+                    {brand} {model}
+                  </p>
+                  <p className="text-white text-lg font-semibold">
+                    {modelDetail}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full">
+                <Image src={CarImage} alt="car-Image" />
+              </div>
+              <div className="flex flex-col p-5 w-full">
+                <div>
+                  <h2 className="text-2xl font-bold text-dark-blue">ยี่ห้อ</h2>
+                </div>
+                <div className="flex flex-col w-full space-y-2 mt-4">
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ยี่ห้อ
+                    </p>
+                    <p className="text-lg font-semibold text-white">Mazda</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      รุ่น
+                    </p>
+                    <p className="text-lg font-semibold text-white">2</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      รุ่นย่อย
+                    </p>
+                    <p className="text-lg font-semibold text-white">1.3 SP</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ปีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">2020</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ประเภทรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      รถเก๋ง 4 ประตู
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      สีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">แดง</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ประเภทเกียร์
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      อัตโนมัติ
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between text-lg">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      โฉมปีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">19-23</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between text-lg">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      เลขไมล์ (กม.)
+                    </p>
+                    <p className="text-lg font-semibold text-white">30,150</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     }
   } else {
     return null;
