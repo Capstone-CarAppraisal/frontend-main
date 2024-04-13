@@ -41,6 +41,8 @@ export default function Summary({
       return `฿${rounded}K`;
     } else if (state == 2) {
       return `${rounded}K`;
+    } else if (state == 3) {
+      return `฿${rounded},000`;
     }
   };
   console.log(carMarketDetail);
@@ -52,7 +54,7 @@ export default function Summary({
           <div className="grid col-span-full">
             <PriceCard
               mode={viewMode}
-              price={convertNumber(predictValue, 0)}
+              price={convertNumber(predictValue, 3)}
               percent={getPercentFromFirstHand(
                 predictValue,
                 carMarketDetail["First car cost"]
@@ -104,7 +106,7 @@ export default function Summary({
           <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
             <PriceCard
               mode={viewMode}
-              price={convertNumber(predictValue, 0)}
+              price={convertNumber(predictValue, 1)}
               percent={getPercentFromFirstHand(
                 predictValue,
                 carMarketDetail["First car cost"]
