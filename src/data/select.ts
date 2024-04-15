@@ -170,6 +170,24 @@ export const selectData: CarBrands = {
   },
 };
 
+export function findCarType(
+  brand: string,
+  model: string,
+  submodel: string
+): string | null {
+  const car = selectData[brand]?.[model];
+  if (!car) return null;
+
+  for (const type in car) {
+    for (const engine in car[type]) {
+      if (car[type][engine].includes(submodel)) {
+        return type;
+      }
+    }
+  }
+  return null;
+}
+
 export const carYear = [
   1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
   2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,

@@ -7,7 +7,7 @@ import NextButton from "@/components/Shared/Button/NextButton";
 import ImageUpload from "./ImageUpload";
 import SentImage from "@/libs/Image";
 import useHttp from "@/hooks/useHttp";
-import { selectData, carYear, color } from "@/data/select";
+import { selectData, carYear, color, findCarType } from "@/data/select";
 import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
 import Summary from "../Summary/Summary";
 import toast from "react-hot-toast";
@@ -21,7 +21,7 @@ export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
   const [request2, marketDetail, error2] = useHttp();
   const [request3, carDetail, error3] = useHttp();
-  const [request4, mscCode, error4] = useHttp();
+  const [request4, mscRes, error4] = useHttp();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [summaryViewMode, setSummaryViewMode] = useState(0);
@@ -188,13 +188,31 @@ export default function EstimateForm() {
   const onModeChange = (mode: any) => {
     setSummaryViewMode(mode);
   };
-  console.log(summaryViewMode);
-
   const handlePredictModel = async () => {
     setIsLoading(true);
     let frontRes, rearRes, sideFrontRes, sideRearRes;
     let frontColor, rearColor, sideFrontColor, sideRearColor;
-    if (frontData || rearData || sideFrontData || sideRearData) {
+    if (MSC && !error4) {
+      try {
+        const response = await request4(
+          "get",
+          `/msc_code?msc_code=${MSC}`,
+          undefined,
+          undefined
+        );
+        console.log(mscRes);
+        setSelectedBrand("Mazda");
+        setSelectedModel(mscRes.model);
+        setSelectedType(
+          findCarType("Mazda", mscRes.model, mscRes.submodel_name)
+        );
+        setSelectedSubModel(parseFloat(mscRes.submodel) * 1000);
+        setSelectedSubModelName(mscRes.submodel_name);
+        setSelectedCarYear(mscRes.model_year);
+      } catch (error) {
+        console.log("Incorrect MSC");
+      }
+    } else if (frontData || rearData || sideFrontData || sideRearData) {
       if (frontData) {
         try {
           const front = await SentImage(frontData, "front");
@@ -474,14 +492,14 @@ export default function EstimateForm() {
                         value={MSC}
                       />
 
-                      {MSC && !error4 && (
+                      {!error4 && MSC && (
                         <Image
                           src={CorrectIcon}
                           alt="correct-icon"
                           className="absolute right-2 top-1/2 transform -translate-y-1/2"
                         />
                       )}
-                      {error4 && (
+                      {error4 && MSC && (
                         <Image
                           src={InvalidIcon}
                           alt="invalid-icon"
