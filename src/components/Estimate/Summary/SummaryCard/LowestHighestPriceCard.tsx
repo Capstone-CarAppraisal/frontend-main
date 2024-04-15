@@ -26,6 +26,11 @@ export default function LowestHighestPriceCard({
               <span className="text-3xl">{present}</span>
               {mode === 0 && <span className="text-3xl">,000</span>}
               {mode === 1 && <span className="text-2xl">K</span>}
+              {mode === 0 && (
+                <p className="font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis text-center">
+                  <span className="text-center">2.4%</span>
+                </p>
+              )}
             </h1>
           ) : (
             <h1 className=" font-bold text-dark-blue">-</h1>
@@ -36,11 +41,6 @@ export default function LowestHighestPriceCard({
             </p>
           )}
         </div>
-        {mode === 0 && (
-          <p className="font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis text-center">
-            <span className="text-center">2.4%</span>
-          </p>
-        )}
 
         {mode === 1 && (
           <div>
