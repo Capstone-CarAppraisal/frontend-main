@@ -209,6 +209,19 @@ export default function EstimateForm() {
         setSelectedSubModel(parseFloat(mscRes.submodel) * 1000);
         setSelectedSubModelName(mscRes.submodel_name);
         setSelectedCarYear(mscRes.model_year);
+        setFormData({
+          ...formData,
+          ["brand"]: "Mazda",
+          ["model"]: mscRes.model,
+          ["car_type"]: findCarType(
+            "Mazda",
+            mscRes.model,
+            mscRes.submodel_name
+          ),
+          ["sub_model"]: mscRes.submodel.toString(),
+          ["sub_model_name"]: mscRes.submodel_name,
+          ["car_year"]: mscRes.model_year,
+        });
       } catch (error) {
         console.log("Incorrect MSC");
       }
@@ -798,6 +811,17 @@ export default function EstimateForm() {
                     parseInt(selectedSubModel, 10) / 1000
                   ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
                   predictValue={predictValue.prediction}
+                  carDetail={JSON.stringify({
+                    selectedBrand,
+                    selectedModel,
+                    selectedType,
+                    selectedColor,
+                    selectedSubModel,
+                    selectedSubModelName,
+                    selectedCarYear,
+                    selectedTransmission,
+                    mile,
+                  })}
                   viewMode={summaryViewMode}
                 />
               ) : (
@@ -809,6 +833,17 @@ export default function EstimateForm() {
                   ).toFixed(1)} ${selectedSubModelName} ${selectedType}`}
                   carMarketDetail={marketDetail}
                   predictValue={predictValue.prediction}
+                  carDetail={JSON.stringify({
+                    selectedBrand,
+                    selectedModel,
+                    selectedType,
+                    selectedColor,
+                    selectedSubModel,
+                    selectedSubModelName,
+                    selectedCarYear,
+                    selectedTransmission,
+                    mile,
+                  })}
                   viewMode={summaryViewMode}
                 />
               )}

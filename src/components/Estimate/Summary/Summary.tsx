@@ -12,6 +12,7 @@ import PriceRankCard from "./SummaryCard/PriceRankCard";
 import AveragePriceByDistrict from "./SummaryCard/AveragePriceByDistrict";
 import Image from "next/image";
 import CarImage from "../../../../public/assets/CarImage/Mazda2/1.3SPSedan.png";
+import { translateColorToThai, convertTransmission } from "@/data/select";
 
 export default function Summary({
   brand,
@@ -19,6 +20,7 @@ export default function Summary({
   modelDetail,
   carMarketDetail,
   predictValue,
+  carDetail,
   viewMode,
 }: {
   brand: string;
@@ -26,12 +28,16 @@ export default function Summary({
   modelDetail: string;
   carMarketDetail?: any;
   predictValue: any;
+  carDetail: any;
   viewMode: any;
 }) {
   const getPercentFromFirstHand = (predictVal: any, firstHandPrice: any) => {
     let percent = Math.round((predictVal / firstHandPrice) * 100);
     return percent;
   };
+  const parsedCarDetail = JSON.parse(carDetail);
+
+  console.log(parsedCarDetail);
 
   const convertNumber = (value: any, state: any) => {
     let rounded = Math.round(value / 1000);
@@ -168,36 +174,44 @@ export default function Summary({
                 <Image src={CarImage} alt="car-Image" />
               </div>
               <div className="flex flex-col p-5 w-full">
-                <div>
-                  <h2 className="text-2xl font-bold text-dark-blue">ยี่ห้อ</h2>
-                </div>
                 <div className="flex flex-col w-full space-y-2 mt-4">
                   <div className="flex justify-between">
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ยี่ห้อ
                     </p>
-                    <p className="text-lg font-semibold text-white">Mazda</p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedBrand}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between">
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่น
                     </p>
-                    <p className="text-lg font-semibold text-white">2</p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedModel}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between">
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่นย่อย
                     </p>
-                    <p className="text-lg font-semibold text-white">1.3 SP</p>
+                    <p className="text-lg font-semibold text-white">
+                      {(
+                        parseInt(parsedCarDetail.selectedSubModel, 10) / 1000
+                      ).toFixed(1)}{" "}
+                      {parsedCarDetail.selectedSubModelName}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between">
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ปีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">2020</p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedCarYear}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between">
@@ -205,7 +219,7 @@ export default function Summary({
                       ประเภทรถ
                     </p>
                     <p className="text-lg font-semibold text-white">
-                      รถเก๋ง 4 ประตู
+                      {parsedCarDetail.selectedType}
                     </p>
                   </div>
                   <hr className="border-white"></hr>
@@ -213,7 +227,9 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       สีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">แดง</p>
+                    <p className="text-lg font-semibold text-white">
+                      {translateColorToThai(parsedCarDetail.selectedColor)}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between">
@@ -221,7 +237,9 @@ export default function Summary({
                       ประเภทเกียร์
                     </p>
                     <p className="text-lg font-semibold text-white">
-                      อัตโนมัติ
+                      {convertTransmission(
+                        parsedCarDetail.selectedTransmission
+                      )}
                     </p>
                   </div>
                   <hr className="border-white"></hr>
@@ -236,7 +254,9 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       เลขไมล์ (กม.)
                     </p>
-                    <p className="text-lg font-semibold text-white">30,150</p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.mile}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                 </div>
@@ -247,7 +267,181 @@ export default function Summary({
       );
     }
   } else {
-    return null;
+    if (viewMode === 0) {
+      return (
+        <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+          <div className="grid col-span-full">
+            <PriceCard mode={viewMode} price={convertNumber(predictValue, 3)} />
+          </div>
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาตลาดต่ำสุดปัจจุบัน"
+              mode={viewMode}
+            />
+          </div>
+
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาเฉลี่ยตลาดปัจจุบัน"
+              mode={viewMode}
+            />
+          </div>
+          <div>
+            <LowestHighestPriceCard
+              label="ราคาตลาดสูงสุดปัจจุบัน"
+              mode={viewMode}
+            />
+          </div>
+          <div className="grid grid-row gap-4">
+            <AverageMarketPriceCard />
+            <CarBrandCard brand={brand} model={model} subModel={modelDetail} />
+          </div>
+          <div className="grid col-span-2">
+            <AveragePriceByDistrict />
+          </div>
+          <div></div>
+        </div>
+      );
+    } else if (viewMode === 1) {
+      return (
+        <div className="pb-[100px] flex flex-row w-full h-full">
+          <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
+            <PriceCard mode={viewMode} price={convertNumber(predictValue, 1)} />
+            <div className="grid grid-cols-2 gap-4">
+              <LowestHighestPriceCard
+                label="ราคาเฉลี่ยตลาดต่ำสุด"
+                mode={viewMode}
+              />
+              <LowestHighestPriceCard
+                label="ราคาเฉลี่ยตลาดสูงสุด"
+                mode={viewMode}
+              />
+            </div>
+            <div>
+              <AverageMarketPriceCard />
+            </div>
+
+            <div>
+              <AverageMarketPriceByYearCard />
+            </div>
+
+            <div>
+              <PriceRankCard />
+            </div>
+
+            <div>
+              <CarDetailCard />
+            </div>
+          </div>
+          <div className="bg-dark-blue w-[30%] absolute top-0 right-0 bottom-0">
+            <div className="flex flex-col w-full p-4 gap-4">
+              <div className="flex flex-row w-full">
+                <Image src={mazdaLogo} alt="car-logo" width={80} height={80} />
+                <div className="flex-flex-col">
+                  <p className="text-white text-lg font-semibold">
+                    {brand} {model}
+                  </p>
+                  <p className="text-white text-lg font-semibold">
+                    {modelDetail}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full">
+                <Image src={CarImage} alt="car-Image" />
+              </div>
+              <div className="flex flex-col p-5 w-full">
+                <div className="flex flex-col w-full space-y-2 mt-4">
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ยี่ห้อ
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedBrand}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      รุ่น
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedModel}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      รุ่นย่อย
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {(
+                        parseInt(parsedCarDetail.selectedSubModel, 10) / 1000
+                      ).toFixed(1)}{" "}
+                      {parsedCarDetail.selectedSubModelName}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ปีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedCarYear}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ประเภทรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedType}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      สีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {translateColorToThai(parsedCarDetail.selectedColor)}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      ประเภทเกียร์
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {convertTransmission(
+                        parsedCarDetail.selectedTransmission
+                      )}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between text-lg">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      โฉมปีรถ
+                    </p>
+                    <p className="text-lg font-semibold text-white">19-23</p>
+                  </div>
+                  <hr className="border-white"></hr>
+                  <div className="flex justify-between text-lg">
+                    <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      เลขไมล์ (กม.)
+                    </p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.mile}
+                    </p>
+                  </div>
+                  <hr className="border-white"></hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
     /* <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
         <div>
           <PriceCard price={convertNumber(predictValue, 0)} mode={viewMode} />

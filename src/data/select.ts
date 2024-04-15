@@ -174,10 +174,8 @@ export function findCarType(
   brand: string,
   model: string,
   submodel: string
-): string | null {
+): string {
   const car = selectData[brand]?.[model];
-  if (!car) return null;
-
   for (const type in car) {
     for (const engine in car[type]) {
       if (car[type][engine].includes(submodel)) {
@@ -185,7 +183,7 @@ export function findCarType(
       }
     }
   }
-  return null;
+  return "Error";
 }
 
 export const carYear = [
@@ -193,7 +191,6 @@ export const carYear = [
   2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
   2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,
 ];
-
 
 export const color = [
   { value: "black", option: "สีดำ" },
@@ -206,3 +203,22 @@ export const color = [
   { value: "white", option: "สีขาว" },
 ];
 
+export const colorTranslations: Record<string, string> = {
+  black: "สีดำ",
+  gray: "สีเทา",
+  brown: "สีน้ำตาล",
+  red: "สีแดง",
+  green: "สีเขียว",
+  blue: "สีฟ้า",
+  sky: "สีฟ้าอ่อน",
+  white: "สีขาว",
+};
+
+export function translateColorToThai(colorName: string): string {
+  return colorTranslations[colorName] || "Unknown color";
+}
+
+export function convertTransmission(trans: any) {
+  if (trans == "AT") return "อัตโนมัติ";
+  if (trans == "MT") return "ธรรมดา";
+}
