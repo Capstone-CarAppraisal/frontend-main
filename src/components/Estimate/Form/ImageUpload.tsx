@@ -9,10 +9,12 @@ export default function ImageUpload({
   label,
   handleFrontImage,
   selectedImage,
+  imgSrc,
 }: {
   label: string;
   handleFrontImage: Function;
   selectedImage: any;
+  imgSrc: any;
 }) {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const handleClick = (event: any) => {
@@ -63,7 +65,7 @@ export default function ImageUpload({
           </div>
         ) : (
           <>
-            <Image src={FormCarIcon} alt="form-car-icn" className=""></Image>
+            <Image src={imgSrc} alt="form-car-icon" className=""></Image>
             <p className="text-2xl text-grey font-normal">
               วางรูปของคุณที่นี่หรือคลิกเพื่ออัพโหลดรูป
             </p>

@@ -16,6 +16,10 @@ import MSCIcon from "../../../../public/assets/Form/MSCExampleIcon.svg";
 import SelectButton from "@/components/Shared/Button/SelectButton";
 import CorrectIcon from "../../../../public/assets/Form/checkIcon.svg";
 import InvalidIcon from "../../../../public/assets/Form/invalidIcon.svg";
+import frontCarIcon from "@/../public/assets/Form/FrontCarIcon.svg";
+import rearCarIcon from "@/../public/assets/Form/RearCarIcon.svg";
+import sideFrontCarIcon from "@/../public/assets/Form/SideFrontCarIcon.svg";
+import sideRearCarIcon from "@/../public/assets/Form/SideRearIcon.svg";
 
 export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
@@ -451,21 +455,25 @@ export default function EstimateForm() {
                         label="มุมด้านหน้า"
                         handleFrontImage={handleFrontData}
                         selectedImage={frontData}
+                        imgSrc={frontCarIcon}
                       />
                       <ImageUpload
                         label="มุมด้านหลัง"
                         handleFrontImage={handleRearData}
                         selectedImage={rearData}
+                        imgSrc={rearCarIcon}
                       />
                       <ImageUpload
                         label="มุมเฉียงจากด้านหน้า"
                         handleFrontImage={handleSideFrontData}
                         selectedImage={sideFrontData}
+                        imgSrc={sideFrontCarIcon}
                       />
                       <ImageUpload
                         label="มุมเฉียงจากด้านหลัง"
                         handleFrontImage={handleSideRearData}
                         selectedImage={sideRearData}
+                        imgSrc={sideRearCarIcon}
                       />
                     </div>
                   )}
