@@ -203,6 +203,29 @@ export const color = [
   { value: "white", option: "สีขาว" },
 ];
 
+export const district = [
+  {
+    value: "N",
+    option: "ภาคเหนือ",
+  },
+  {
+    value: "NE",
+    option: "ภาคตะวันออกเฉียงเหนือ",
+  },
+  {
+    value: "E",
+    option: "ภาคตะวันออก",
+  },
+  {
+    value: "W",
+    option: "ภาคตะวันตก",
+  },
+  {
+    value: "S",
+    option: "ภาคใต้",
+  },
+]; 
+
 export const colorTranslations: Record<string, string> = {
   black: "สีดำ",
   gray: "สีเทา",

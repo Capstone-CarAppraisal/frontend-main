@@ -1,9 +1,24 @@
+import SelectInputWithLabel from "@/components/Shared/SelectInputWithLabel";
+import { district } from "@/data/select";
+
 export default function AveragePriceByDistrict({}: {}) {
   return (
     <div className="flex bg-light-blue  h-full w-full">
       <div className="flex flex-col p-5 w-full">
-        <div>
-          <h2 className="text-2xl font-bold text-dark-blue">ข้อมูลรถรุ่นนี้</h2>
+        <div className="flex justify-between">
+          <h2 className="text-2xl font-bold text-dark-blue">
+            ราคาเฉลี่ยในแต่ละเขต
+          </h2>
+          <select className="py-3 px-4 pe-9 block text-black border-[#BCBCBC] w-[40%] rounded-lg text-sm">
+            <option selected value="BKK">
+              กรุงเทพและปริมณฑล
+            </option>
+            {district.map((district, index) => (
+              <option key={index} value={district.value}>
+                {district.option}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="flex flex-col w-full space-y-2 mt-8">
           <div className="flex justify-between">
