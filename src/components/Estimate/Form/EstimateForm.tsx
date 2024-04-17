@@ -39,6 +39,8 @@ export default function EstimateForm() {
   const [selectedBrand, setSelectedBrand] = useState<any>();
   const [selectedModel, setSelectedModel] = useState<any>();
   const [selectedType, setSelectedType] = useState<any>();
+  const [selectedStartModelYear, setSelectedStartModelYear] = useState<any>();
+  const [selectedEndModelYear, setSelectedEndModelYear] = useState<any>();
   const [selectedColor, setSelectedColor] = useState<any>();
   const [selectedSubModel, setSelectedSubModel] = useState<any>();
   const [selectedSubModelName, setSelectedSubModelName] = useState<any>();
@@ -169,6 +171,15 @@ export default function EstimateForm() {
       ["transmission"]: value,
     });
     setSelectedTransmission(value);
+  };
+  const onStartModelYearChange = (event: any) => {
+    const { value } = event.target;
+    setSelectedStartModelYear(value);
+  };
+
+  const onEndModelYearChange = (event: any) => {
+    const { value } = event.target;
+    setSelectedEndModelYear(value);
   };
 
   const onMileAgeChange = (event: any) => {
@@ -725,34 +736,20 @@ export default function EstimateForm() {
                             <SelectInputWithLabel
                               label="โฉมปีเริ่มต้น"
                               name="เลือกปี"
-                              handleChange={onSubModelChange}
-                              option={
-                                selectedType &&
-                                Object.keys(
-                                  selectData[selectedBrand][selectedModel][
-                                    selectedType
-                                  ]
-                                )
-                              }
-                              value={selectedSubModel}
-                              isSelected={selectedSubModel}
+                              option={carYear}
+                              value={selectedStartModelYear}
+                              isSelected={selectedStartModelYear}
+                              handleChange={onStartModelYearChange}
                             />
                           </div>
                           <div>
                             <SelectInputWithLabel
                               label="โฉมปีท้ายสุด"
                               name="เลือกปี"
-                              handleChange={onSubModelChange}
-                              option={
-                                selectedType &&
-                                Object.keys(
-                                  selectData[selectedBrand][selectedModel][
-                                    selectedType
-                                  ]
-                                )
-                              }
-                              value={selectedSubModel}
-                              isSelected={selectedSubModel}
+                              option={carYear}
+                              value={selectedEndModelYear}
+                              isSelected={selectedEndModelYear}
+                              handleChange={onEndModelYearChange}
                             />
                           </div>
                           <div className="col-span-2">
@@ -785,7 +782,9 @@ export default function EstimateForm() {
                         formData["mile"] &&
                         selectedCarYear &&
                         selectedTransmission &&
-                        selectedColor
+                        selectedColor &&
+                        selectedStartModelYear &&
+                        selectedEndModelYear
                       )
                     }
                   />
