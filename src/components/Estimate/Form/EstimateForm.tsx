@@ -784,7 +784,8 @@ export default function EstimateForm() {
                         selectedSubModelName &&
                         formData["mile"] &&
                         selectedCarYear &&
-                        selectedTransmission
+                        selectedTransmission &&
+                        selectedColor
                       )
                     }
                   />
