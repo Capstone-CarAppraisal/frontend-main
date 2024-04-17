@@ -6,18 +6,21 @@ export default function SelectInputWithLabel({
   value,
   isSelected,
 }: {
-  label: string;
+  label?: string;
   name: string;
-  handleChange: any;
+  handleChange?: any;
   option: any;
   value: any;
   isSelected: any;
 }) {
   return (
     <div className="">
-      <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-        {label}
-      </label>
+      {label && (
+        <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+          {label}
+        </label>
+      )}
+
       <select
         className={`py-3 px-4 pe-9 block  border-[#BCBCBC] ${
           isSelected ? "text-black" : "text-[#BCBCBC]"
