@@ -149,13 +149,13 @@ export default function Summary({
               <CarDetailCard
                 firstHandPrice={convertNumber(
                   carMarketDetail["First car cost"],
-                  1
+                  0
                 )}
-                averagePrice={convertNumber(carMarketDetail["Average Cost"], 1)}
-                soldAverage={convertNumber(400000, 1)}
-                SD={convertNumber(carMarketDetail["SD Cost"], 1)}
-                soldAverageSD={convertNumber(45000, 1)}
-                averageMile={convertNumber(carMarketDetail["Average Mile"], 2)}
+                averagePrice={convertNumber(carMarketDetail["Average Cost"], 0)}
+                soldAverage={convertNumber(400000, 0)}
+                SD={convertNumber(carMarketDetail["SD Cost"], 0)}
+                soldAverageSD={convertNumber(45000, 0)}
+                averageMile={convertNumber(carMarketDetail["Average Mile"], 0)}
                 amountInMarket={carMarketDetail["Number of Cars"]}
               />
             </div>

@@ -1,3 +1,5 @@
+import NumberAnimate from "./NumberAnimate";
+
 export default function CarDetailCard({
   firstHandPrice,
   averagePrice,
@@ -27,7 +29,7 @@ export default function CarDetailCard({
               ราคามือ 1
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {firstHandPrice ? firstHandPrice : "-"}
+              {firstHandPrice ? "฿" + firstHandPrice + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -36,7 +38,7 @@ export default function CarDetailCard({
               ราคาในตลาดเฉลี่ย
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {averagePrice ? averagePrice : "-"}
+              {averagePrice ? "฿" + averagePrice + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -45,7 +47,7 @@ export default function CarDetailCard({
               ราคาขายออกเฉลี่ย
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {soldAverage ? soldAverage : "-"}
+              {soldAverage ? "฿" + soldAverage + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -54,7 +56,7 @@ export default function CarDetailCard({
               S.D. ราคาในตลาด
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {SD ? SD : "-"}
+              {SD ? "฿" + SD + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -63,7 +65,7 @@ export default function CarDetailCard({
               S.D. ราคาขายออก
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {soldAverageSD ? soldAverageSD : "-"}
+              {soldAverageSD ? "฿" + soldAverageSD + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
@@ -72,7 +74,7 @@ export default function CarDetailCard({
               เลขไมล์เฉลี่ย (กม.)
             </p>
             <p className="text-lg font-semibold text-dark-blue">
-              {averageMile ? averageMile : "-"}
+              {averageMile ? averageMile + "K" : "-"}
             </p>
           </div>
           <hr className="border-white"></hr>
