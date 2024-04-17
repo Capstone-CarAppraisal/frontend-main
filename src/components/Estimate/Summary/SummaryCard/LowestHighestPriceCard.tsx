@@ -1,13 +1,21 @@
+import Image from "next/image";
+import increase from "../../../../../public/assets/Summary/UpIcon.svg";
+import decrease from "../../../../../public/assets/Summary/DownIcon.svg";
+
 export default function LowestHighestPriceCard({
   label,
   present,
   past,
   mode,
+  status,
+  percent,
 }: {
   label: string;
   present?: string;
   past?: string;
   mode: any;
+  status?: any;
+  percent?: any;
 }) {
   return (
     <div className="flex bg-light-blue  h-[200px] w-full items-center ">
@@ -26,11 +34,6 @@ export default function LowestHighestPriceCard({
               <span className="text-3xl">{present}</span>
               {mode === 0 && <span className="text-3xl">,000</span>}
               {mode === 1 && <span className="text-2xl">K</span>}
-              {mode === 0 && (
-                <p className="font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis text-center">
-                  <span className="text-center">2.4%</span>
-                </p>
-              )}
             </h1>
           ) : (
             <h1 className=" font-bold text-dark-blue">-</h1>
@@ -41,6 +44,30 @@ export default function LowestHighestPriceCard({
             </p>
           )}
         </div>
+        {mode === 0 && (
+          <div className="flex justify-center font-bold space-x-2 overflow-hidden whitespace-nowrap text-ellipsis text-center">
+            {status === "increase" && (
+              <>
+                <Image
+                  src={increase}
+                  alt="status-icon"
+                  className="align-middle"
+                />
+                <span className="text-green align-middle">{percent}%</span>
+              </>
+            )}
+            {status === "decrease" && (
+              <>
+                <Image
+                  src={decrease}
+                  alt="status-icon"
+                  className="align-middle"
+                />
+                <span className="text-rose align-middle">{percent}%</span>
+              </>
+            )}
+          </div>
+        )}
 
         {mode === 1 && (
           <div>

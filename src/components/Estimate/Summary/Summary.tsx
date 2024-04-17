@@ -78,6 +78,8 @@ export default function Summary({
               label="ราคาตลาดต่ำสุดปัจจุบัน"
               present={convertNumber(carMarketDetail["Min price"], 0)}
               mode={viewMode}
+              status={"decrease"}
+              percent={2.5}
             />
           </div>
 
@@ -86,6 +88,8 @@ export default function Summary({
               label="ราคาเฉลี่ยตลาดปัจจุบัน"
               present={convertNumber(carMarketDetail["Min price"], 0)}
               mode={viewMode}
+              status={"decrease"}
+              percent={0.5}
             />
           </div>
           <div>
@@ -93,6 +97,8 @@ export default function Summary({
               label="ราคาตลาดสูงสุดปัจจุบัน"
               present={convertNumber(carMarketDetail["Max price"], 0)}
               mode={viewMode}
+              status={"increase"}
+              percent={1.5}
             />
           </div>
           <div className="grid grid-row gap-4">
