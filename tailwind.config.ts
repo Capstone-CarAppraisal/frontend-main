@@ -18,6 +18,7 @@ const config: Config = {
         white: "#FFFFFF",
         black: "#000000",
         lightgrey: "#BCBCBC",
+        green: "#007605",
       },
       fontFamily: {
         sans: ["var(--font-noto-sans)"],
