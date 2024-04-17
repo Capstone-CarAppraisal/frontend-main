@@ -1,3 +1,5 @@
+import NumberAnimate from "./NumberAnimate";
+
 export default function PriceCard({
   price,
   percent,
@@ -17,7 +19,11 @@ export default function PriceCard({
             mode === 0 ? "text-center" : ""
           }`}
         >
-          <span className="text-6xl">{price}</span>
+          <span className="text-5xl">฿</span>
+          <span className="text-6xl">
+            <NumberAnimate start={0} end={price} duration={3} />
+          </span>
+          {mode === 1 && <span className="text-5xl">K</span>}
         </h1>
         <p
           className={`text-2xl font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis ${

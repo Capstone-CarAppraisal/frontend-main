@@ -40,15 +40,12 @@ export default function Summary({
   console.log(parsedCarDetail);
 
   const convertNumber = (value: any, state: any) => {
-    let rounded = Math.round(value / 1000);
+    const rounded = Math.floor(value / 1000);
+    const floor = Math.floor(value / 1000) * 1000;
     if (state == 0) {
-      return rounded.toString();
+      return rounded;
     } else if (state == 1) {
-      return `฿${rounded}K`;
-    } else if (state == 2) {
-      return `${rounded}K`;
-    } else if (state == 3) {
-      return `฿${rounded},000`;
+      return floor;
     }
   };
   console.log(carMarketDetail);
@@ -60,7 +57,7 @@ export default function Summary({
           <div className="grid col-span-full">
             <PriceCard
               mode={viewMode}
-              price={convertNumber(predictValue, 3)}
+              price={convertNumber(predictValue, 1)}
               percent={getPercentFromFirstHand(
                 predictValue,
                 carMarketDetail["First car cost"]
@@ -76,7 +73,7 @@ export default function Summary({
           <div>
             <LowestHighestPriceCard
               label="ราคาตลาดต่ำสุดปัจจุบัน"
-              present={convertNumber(carMarketDetail["Min price"], 0)}
+              present={convertNumber(carMarketDetail["Min price"], 1)}
               mode={viewMode}
               status={"decrease"}
               percent={2.5}
@@ -86,7 +83,7 @@ export default function Summary({
           <div>
             <LowestHighestPriceCard
               label="ราคาเฉลี่ยตลาดปัจจุบัน"
-              present={convertNumber(carMarketDetail["Min price"], 0)}
+              present={convertNumber(carMarketDetail["Min price"], 1)}
               mode={viewMode}
               status={"decrease"}
               percent={0.5}
@@ -95,7 +92,7 @@ export default function Summary({
           <div>
             <LowestHighestPriceCard
               label="ราคาตลาดสูงสุดปัจจุบัน"
-              present={convertNumber(carMarketDetail["Max price"], 0)}
+              present={convertNumber(carMarketDetail["Max price"], 1)}
               mode={viewMode}
               status={"increase"}
               percent={1.5}
@@ -118,7 +115,7 @@ export default function Summary({
           <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
             <PriceCard
               mode={viewMode}
-              price={convertNumber(predictValue, 1)}
+              price={convertNumber(predictValue, 0)}
               percent={getPercentFromFirstHand(
                 predictValue,
                 carMarketDetail["First car cost"]

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import increase from "../../../../../public/assets/Summary/UpIcon.svg";
 import decrease from "../../../../../public/assets/Summary/DownIcon.svg";
+import NumberAnimate from "./NumberAnimate";
 
 export default function LowestHighestPriceCard({
   label,
@@ -11,8 +12,8 @@ export default function LowestHighestPriceCard({
   percent,
 }: {
   label: string;
-  present?: string;
-  past?: string;
+  present?: any;
+  past?: any;
   mode: any;
   status?: any;
   percent?: any;
@@ -31,8 +32,9 @@ export default function LowestHighestPriceCard({
           {present ? (
             <h1 className=" font-bold text-dark-blue overflow-hidden whitespace-nowrap text-ellipsis">
               <span className="text-2xl">฿</span>
-              <span className="text-3xl">{present}</span>
-              {mode === 0 && <span className="text-3xl">,000</span>}
+              <span className="text-3xl">
+                <NumberAnimate start={0} end={present} duration={3} />
+              </span>
               {mode === 1 && <span className="text-2xl">K</span>}
             </h1>
           ) : (
