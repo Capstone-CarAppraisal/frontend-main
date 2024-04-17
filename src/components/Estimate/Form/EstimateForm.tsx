@@ -796,7 +796,7 @@ export default function EstimateForm() {
       </div>
       {step === 3 && (
         <div className="flex justify-center w-full h-auto font-sans pt-8 items-center">
-          <div className="flex flex-col w-[80vw] justify-center  max-w-[1200px]">
+          <div className="flex flex-col w-[80vw] justify-center max-w-[1200px]">
             <div className="flex justify-between w-full mb-8">
               <h1 className="text-dark-blue text-5xl font-bold">
                 ผลการประเมิน
@@ -855,10 +855,9 @@ export default function EstimateForm() {
                   viewMode={summaryViewMode}
                 />
               )}
-
-              <div className="absolute bottom-5  space-x-10">
-                <PrevButton handleClick={prevStep} />
-              </div>
+            </div>
+            <div className="flex justify-center mt-6">
+              <PrevButton handleClick={prevStep} />
             </div>
           </div>
         </div>

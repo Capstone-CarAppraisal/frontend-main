@@ -56,7 +56,7 @@ export default function Summary({
   if (carMarketDetail) {
     if (viewMode === 0) {
       return (
-        <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+        <div className="pt-8 pb-[50px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
           <div className="grid col-span-full">
             <PriceCard
               mode={viewMode}
@@ -114,7 +114,7 @@ export default function Summary({
     } else if (viewMode === 1) {
       // Render different content for mode 2
       return (
-        <div className="pb-[100px] flex flex-row w-full h-full">
+        <div className="pb-[50px] flex flex-row w-full h-full">
           <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
             <PriceCard
               mode={viewMode}
@@ -275,7 +275,7 @@ export default function Summary({
   } else {
     if (viewMode === 0) {
       return (
-        <div className="pt-8 pb-[100px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
+        <div className="pt-8 pb-[50px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
           <div className="grid col-span-full">
             <PriceCard mode={viewMode} price={convertNumber(predictValue, 3)} />
           </div>
@@ -310,7 +310,7 @@ export default function Summary({
       );
     } else if (viewMode === 1) {
       return (
-        <div className="pb-[100px] flex flex-row w-full h-full">
+        <div className="pb-[50px] flex flex-row w-full h-full">
           <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
             <PriceCard mode={viewMode} price={convertNumber(predictValue, 1)} />
             <div className="grid grid-cols-2 gap-4">
