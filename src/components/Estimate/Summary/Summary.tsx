@@ -274,7 +274,7 @@ export default function Summary({
       return (
         <div className="pt-8 pb-[50px] grid grid-cols-3 w-[95%] flex justify-center gap-4 h-full">
           <div className="grid col-span-full">
-            <PriceCard mode={viewMode} price={convertNumber(predictValue, 3)} />
+            <PriceCard mode={viewMode} price={convertNumber(predictValue, 1)} />
           </div>
           <div>
             <LowestHighestPriceCard
@@ -309,7 +309,7 @@ export default function Summary({
       return (
         <div className="pb-[50px] flex flex-row w-full h-full">
           <div className="bg-white w-[70%] grid grid-cols-2 p-4 gap-4">
-            <PriceCard mode={viewMode} price={convertNumber(predictValue, 1)} />
+            <PriceCard mode={viewMode} price={convertNumber(predictValue, 0)} />
             <div className="grid grid-cols-2 gap-4">
               <LowestHighestPriceCard
                 label="ราคาเฉลี่ยตลาดต่ำสุด"
