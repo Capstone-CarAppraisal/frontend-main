@@ -20,6 +20,7 @@ import frontCarIcon from "@/../public/assets/Form/FrontCarIcon.svg";
 import rearCarIcon from "@/../public/assets/Form/RearCarIcon.svg";
 import sideFrontCarIcon from "@/../public/assets/Form/SideFrontCarIcon.svg";
 import sideRearCarIcon from "@/../public/assets/Form/SideRearIcon.svg";
+import { carType } from "@/data/select";
 
 export default function EstimateForm() {
   const [request, predictValue, error] = useHttp();
@@ -589,6 +590,7 @@ export default function EstimateForm() {
                             label="รุ่น"
                             name="เลือกรุ่นรถ"
                             handleChange={onModelChange}
+                            isDisabled={!selectedBrand}
                             option={
                               selectedBrand &&
                               Object.keys(selectData[selectedBrand])
@@ -601,19 +603,24 @@ export default function EstimateForm() {
 
                       <div className="grid grid-cols-2 gap-8">
                         <div className="px-4">
-                          <SelectInputWithLabel
-                            label="ประเภทรถ"
-                            name="เลือกประเภทรถ"
-                            handleChange={onTypeChange}
-                            option={
-                              selectedModel &&
-                              Object.keys(
-                                selectData[selectedBrand][selectedModel]
-                              )
-                            }
+                          <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                            ประเภทรถ
+                          </label>
+                          <select
+                            className={`py-3 px-4 pe-9 block ${
+                              selectedColor ? "text-black" : "text-[#BCBCBC]"
+                            }  border-[#BCBCBC] w-full rounded-lg text-lg focus:text-black`}
+                            onChange={onTypeChange}
                             value={selectedType}
-                            isSelected={selectedType}
-                          />
+                            disabled={!(selectedBrand && selectedModel)}
+                          >
+                            <option value="">เลือกประเภทรถ</option>
+                            {carType.map((type, index) => (
+                              <option key={index} value={type.value}>
+                                {type.option}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         <div className="px-4">
                           <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
@@ -661,6 +668,13 @@ export default function EstimateForm() {
                                   ]
                                 )
                               }
+                              isDisabled={
+                                !(
+                                  selectedBrand &&
+                                  selectedModel &&
+                                  selectedType
+                                )
+                              }
                               value={selectedSubModel}
                               isSelected={selectedSubModel}
                             />
@@ -676,6 +690,14 @@ export default function EstimateForm() {
                                   selectedType
                                 ][selectedSubModel]
                               }
+                              isDisabled={
+                                !(
+                                  selectedBrand &&
+                                  selectedModel &&
+                                  selectedType &&
+                                  selectedSubModel
+                                )
+                              }
                               value={selectedSubModelName}
                               isSelected={selectedSubModelName}
                             />
@@ -688,6 +710,15 @@ export default function EstimateForm() {
                               name="เลือกปีรถ"
                               handleChange={onCarYearChange}
                               option={carYear}
+                              isDisabled={
+                                !(
+                                  selectedBrand &&
+                                  selectedModel &&
+                                  selectedType &&
+                                  selectedSubModel &&
+                                  selectedSubModelName
+                                )
+                              }
                               value={selectedCarYear}
                               isSelected={selectedCarYear}
                             />

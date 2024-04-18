@@ -226,6 +226,29 @@ export const district = [
   },
 ]; 
 
+export const carType = [
+  { value: "Sedan", option: "รถเก๋ง 4 ประตู (Sedan)" },
+  {
+    value: "Hatchback",
+    option: "รถเก๋ง 5 ประตู (Hatchback)",
+  },
+  {
+    value: "Pickup",
+    option: "รถกระบะ (Pickup)",
+  },
+  {
+    value: "SUV",
+    option: "รถเอนกประสงค์ (SUV)",
+  },
+];
+
+export const carTypeTranslation: Record<string, string> = {
+  Sedan: "รถเก๋ง 4 ประตู",
+  Hatchback: "รถเก๋ง 5 ประตู",
+  Pickup: "รถกระบะ",
+  SUV: "รถเอนกประสงค์",
+};
+
 export const colorTranslations: Record<string, string> = {
   black: "สีดำ",
   gray: "สีเทา",
@@ -237,6 +260,10 @@ export const colorTranslations: Record<string, string> = {
   white: "สีขาว",
 };
 
+export function convertCarType(type: string): string {
+  return carTypeTranslation[type] || "Error";
+}
+
 export function translateColorToThai(colorName: string): string {
   return colorTranslations[colorName] || "Unknown color";
 }
@@ -245,3 +272,4 @@ export function convertTransmission(trans: any) {
   if (trans == "AT") return "อัตโนมัติ";
   if (trans == "MT") return "ธรรมดา";
 }
+
