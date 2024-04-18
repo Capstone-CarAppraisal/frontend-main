@@ -12,7 +12,11 @@ import PriceRankCard from "./SummaryCard/PriceRankCard";
 import AveragePriceByDistrict from "./SummaryCard/AveragePriceByDistrict";
 import Image from "next/image";
 import CarImage from "../../../../public/assets/CarImage/Mazda2/1.3SPSedan.png";
-import { translateColorToThai, convertTransmission } from "@/data/select";
+import {
+  translateColorToThai,
+  convertTransmission,
+  convertCarType,
+} from "@/data/select";
 
 export default function Summary({
   brand,
@@ -182,7 +186,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ยี่ห้อ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedBrand}
                     </p>
                   </div>
@@ -191,7 +195,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่น
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedModel}
                     </p>
                   </div>
@@ -200,7 +204,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่นย่อย
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {(
                         parseInt(parsedCarDetail.selectedSubModel, 10) / 1000
                       ).toFixed(1)}{" "}
@@ -212,7 +216,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ปีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedCarYear}
                     </p>
                   </div>
@@ -221,8 +225,8 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ประเภทรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
-                      {parsedCarDetail.selectedType}
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      {convertCarType(parsedCarDetail.selectedType)}
                     </p>
                   </div>
                   <hr className="border-white"></hr>
@@ -230,7 +234,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       สีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {translateColorToThai(parsedCarDetail.selectedColor)}
                     </p>
                   </div>
@@ -239,7 +243,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ประเภทเกียร์
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {convertTransmission(
                         parsedCarDetail.selectedTransmission
                       )}
@@ -250,14 +254,16 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       โฉมปีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">19-23</p>
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      19-23
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between text-lg">
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       เลขไมล์ (กม.)
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.mile}
                     </p>
                   </div>
@@ -358,7 +364,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ยี่ห้อ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedBrand}
                     </p>
                   </div>
@@ -367,7 +373,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่น
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedModel}
                     </p>
                   </div>
@@ -376,7 +382,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       รุ่นย่อย
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {(
                         parseInt(parsedCarDetail.selectedSubModel, 10) / 1000
                       ).toFixed(1)}{" "}
@@ -388,7 +394,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ปีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.selectedCarYear}
                     </p>
                   </div>
@@ -397,8 +403,8 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ประเภทรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
-                      {parsedCarDetail.selectedType}
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
+                      {convertCarType(parsedCarDetail.selectedType)}
                     </p>
                   </div>
                   <hr className="border-white"></hr>
@@ -406,7 +412,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       สีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {translateColorToThai(parsedCarDetail.selectedColor)}
                     </p>
                   </div>
@@ -415,7 +421,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       ประเภทเกียร์
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {convertTransmission(
                         parsedCarDetail.selectedTransmission
                       )}
@@ -433,7 +439,7 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       เลขไมล์ (กม.)
                     </p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       {parsedCarDetail.mile}
                     </p>
                   </div>
