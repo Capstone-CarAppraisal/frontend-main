@@ -5,6 +5,7 @@ export default function SelectInputWithLabel({
   option,
   value,
   isSelected,
+  isDisabled,
 }: {
   label?: string;
   name: string;
@@ -12,6 +13,7 @@ export default function SelectInputWithLabel({
   option: any;
   value: any;
   isSelected: any;
+  isDisabled?: any;
 }) {
   return (
     <div className="">
@@ -27,6 +29,7 @@ export default function SelectInputWithLabel({
         } w-full rounded-lg  text-lg focus:border-blue-500 focus:text-black`}
         onChange={handleChange}
         value={value}
+        disabled={isDisabled}
       >
         <option key="" value="">
           {name}
