@@ -203,7 +203,6 @@ export default function EstimateForm() {
     });
     setMile(value);
   };
-  console.log(formData);
 
   const nextStep = (step?: any, data?: any) => {
     setStep((prevStep) => prevStep + 1);
@@ -330,6 +329,7 @@ export default function EstimateForm() {
         undefined,
         JSON.stringify(predictJSON)
       );
+      console.log(predictResponse);
 
       const predictColorResponse = await request3(
         "post",
@@ -337,6 +337,15 @@ export default function EstimateForm() {
         undefined,
         JSON.stringify(predictColorJSON)
       );
+      const modelStart = parseInt(
+        predictResponse.Prediction.ModelYear.split("-")[0]
+      );
+      const modelEnd = parseInt(
+        predictResponse.Prediction.ModelYear.split("-")[1]
+      );
+
+      setSelectedStartModelYear(2000 + modelStart);
+      setSelectedEndModelYear(2000 + modelEnd);
       setSelectedBrand(predictResponse.Prediction.Brand);
       setSelectedModel(predictResponse.Prediction.Model);
       setSelectedColor(predictColorResponse.Prediction.color.toLowerCase());
@@ -620,7 +629,7 @@ export default function EstimateForm() {
                           </label>
                           <select
                             className={`py-3 px-4 pe-9 block ${
-                              selectedColor ? "text-black" : "text-[#BCBCBC]"
+                              selectedType ? "text-black" : "text-[#BCBCBC]"
                             }  border-[#BCBCBC] w-full rounded-lg text-lg focus:text-black`}
                             onChange={onTypeChange}
                             value={selectedType}
