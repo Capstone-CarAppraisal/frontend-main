@@ -87,6 +87,8 @@ export default function EstimateForm() {
     sub_model_name: "",
     car_type: "",
     transmission: "",
+    modelyear_start: 0,
+    modelyear_end: 0,
     color: "",
     mile: 0,
   });
@@ -175,11 +177,21 @@ export default function EstimateForm() {
   };
   const onStartModelYearChange = (event: any) => {
     const { value } = event.target;
+    const editVal = value % 100;
+    setFormData({
+      ...formData,
+      ["modelyear_start"]: editVal,
+    });
     setSelectedStartModelYear(value);
   };
 
   const onEndModelYearChange = (event: any) => {
     const { value } = event.target;
+    const editVal = value % 100;
+    setFormData({
+      ...formData,
+      ["modelyear_end"]: editVal,
+    });
     setSelectedEndModelYear(value);
   };
 
@@ -191,7 +203,7 @@ export default function EstimateForm() {
     });
     setMile(value);
   };
-  console.log(MSC);
+  console.log(formData);
 
   const nextStep = (step?: any, data?: any) => {
     setStep((prevStep) => prevStep + 1);
