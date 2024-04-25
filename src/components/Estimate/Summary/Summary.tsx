@@ -87,7 +87,7 @@ export default function Summary({
           <div>
             <LowestHighestPriceCard
               label="ราคาเฉลี่ยตลาดปัจจุบัน"
-              present={convertNumber(carMarketDetail["Min price"], 1)}
+              present={convertNumber(carMarketDetail["Average Cost"], 1)}
               mode={viewMode}
               status={"decrease"}
               percent={0.5}
@@ -127,13 +127,13 @@ export default function Summary({
             />
             <div className="grid grid-cols-2 gap-4">
               <LowestHighestPriceCard
-                label="ราคาเฉลี่ยตลาดต่ำสุด"
+                label="ราคาตลาดต่ำสุด"
                 present={convertNumber(carMarketDetail["Min price"], 0)}
                 mode={viewMode}
               />
               <LowestHighestPriceCard
-                label="ราคาเฉลี่ยตลาดสูงสุด"
-                present={convertNumber(carMarketDetail["Min price"], 0)}
+                label="ราคาตลาดสูงสุด"
+                present={convertNumber(carMarketDetail["Max price"], 0)}
                 mode={viewMode}
               />
             </div>
@@ -255,7 +255,7 @@ export default function Summary({
                       โฉมปีรถ
                     </p>
                     <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
-                    {parsedCarDetail.selectedStartModelYear % 100}-
+                      {parsedCarDetail.selectedStartModelYear % 100}-
                       {parsedCarDetail.selectedEndModelYear % 100}
                     </p>
                   </div>
@@ -319,11 +319,11 @@ export default function Summary({
             <PriceCard mode={viewMode} price={convertNumber(predictValue, 0)} />
             <div className="grid grid-cols-2 gap-4">
               <LowestHighestPriceCard
-                label="ราคาเฉลี่ยตลาดต่ำสุด"
+                label="ราคาตลาดต่ำสุด"
                 mode={viewMode}
               />
               <LowestHighestPriceCard
-                label="ราคาเฉลี่ยตลาดสูงสุด"
+                label="ราคาตลาดสูงสุด"
                 mode={viewMode}
               />
             </div>
