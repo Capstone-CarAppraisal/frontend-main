@@ -79,26 +79,9 @@ export default function EstimateForm() {
     }
   };
 
-  const [formData, setFormData] = useState({
-    car_year: 0,
-    brand: "",
-    model: "",
-    sub_model: "",
-    sub_model_name: "",
-    car_type: "",
-    transmission: "",
-    modelyear_start: 0,
-    modelyear_end: 0,
-    color: "",
-    mile: 0,
-  });
 
   const onBrandChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["brand"]: value,
-    });
     setSelectedBrand(value);
     setSelectedModel("");
     setSelectedType("");
@@ -108,19 +91,11 @@ export default function EstimateForm() {
 
   const onColorChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["color"]: value,
-    });
     setSelectedColor(value);
   };
 
   const onModelChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["model"]: value,
-    });
     setSelectedModel(value);
     setSelectedType("");
     setSelectedSubModel("");
@@ -128,10 +103,6 @@ export default function EstimateForm() {
   };
   const onTypeChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["car_type"]: value,
-    });
     setSelectedType(value);
     setSelectedSubModel("");
     setSelectedSubModelName("");
@@ -139,68 +110,36 @@ export default function EstimateForm() {
 
   const onSubModelChange = (event: any) => {
     const { value } = event.target;
-    const numericValue = parseInt(value, 10) / 1000;
-    const formattedValue = numericValue.toFixed(1);
-    setFormData({
-      ...formData,
-      ["sub_model"]: formattedValue,
-    });
     setSelectedSubModel(value);
     setSelectedSubModelName("");
   };
 
   const onSubModelNameChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["sub_model_name"]: value,
-    });
     setSelectedSubModelName(value);
   };
 
   const onCarYearChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["car_year"]: parseInt(value),
-    });
     setSelectedCarYear(value);
   };
 
   const onTransmissionTypeChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["transmission"]: value,
-    });
     setSelectedTransmission(value);
   };
   const onStartModelYearChange = (event: any) => {
     const { value } = event.target;
-    const editVal = value % 100;
-    setFormData({
-      ...formData,
-      ["modelyear_start"]: editVal,
-    });
     setSelectedStartModelYear(value);
   };
 
   const onEndModelYearChange = (event: any) => {
     const { value } = event.target;
-    const editVal = value % 100;
-    setFormData({
-      ...formData,
-      ["modelyear_end"]: editVal,
-    });
     setSelectedEndModelYear(value);
   };
 
   const onMileAgeChange = (event: any) => {
     const { value } = event.target;
-    setFormData({
-      ...formData,
-      ["mile"]: parseInt(value),
-    });
     setMile(value);
   };
 
@@ -216,10 +155,121 @@ export default function EstimateForm() {
     setSummaryViewMode(mode);
   };
   const handlePredictModel = async () => {
+    setSelectedBrand("");
+    setSelectedModel("");
+    setSelectedType("");
+    setSelectedCarYear(0);
+    setSelectedSubModel("");
+    setSelectedColor("");
+    setSelectedSubModelName("");
+    setSelectedStartModelYear(0);
+    setSelectedEndModelYear(0);
+    setSelectedTransmission("");
+    setMile("");
     setIsLoading(true);
     let frontRes, rearRes, sideFrontRes, sideRearRes;
     let frontColor, rearColor, sideFrontColor, sideRearColor;
-    if (MSC && !error4) {
+    if (
+      MSC &&
+      !error4 &&
+      (frontData || rearData || sideFrontData || sideRearData)
+    ) {
+      if (frontData) {
+        try {
+          const front = await SentImage(frontData, "front");
+          frontRes = front[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const front1 = await SentImage(frontData, "color");
+          frontColor = front1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (rearData) {
+        try {
+          const rear = await SentImage(rearData, "rear");
+          rearRes = rear[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const rear1 = await SentImage(rearData, "color");
+          rearColor = rear1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (sideFrontData) {
+        try {
+          const sideFront = await SentImage(sideFrontData, "sidefront");
+          sideFrontRes = sideFront[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const sideFront1 = await SentImage(sideFrontData, "color");
+          frontColor = sideFront1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (sideRearData) {
+        try {
+          const sideRear = await SentImage(sideRearData, "siderear");
+          sideRearRes = sideRear[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+        try {
+          const sideRear1 = await SentImage(sideRearData, "color");
+          sideRearColor = sideRear1[0].prediction;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (frontRes || rearRes || sideFrontRes || sideRearRes) {
+        let predictJSON = {
+          front: frontRes,
+          rear: rearRes,
+          sidefront: sideFrontRes,
+          siderear: sideRearRes,
+        };
+        let predictColorJSON = {
+          front: frontColor,
+          rear: rearColor,
+          sidefront: sideFrontColor,
+          siderear: sideRearColor,
+        };
+        const predictResponse = await request3(
+          "post",
+          "/predict/onecar",
+          undefined,
+          JSON.stringify(predictJSON)
+        );
+        console.log(predictResponse);
+
+        const predictColorResponse = await request3(
+          "post",
+          "/predict/onecolor",
+          undefined,
+          JSON.stringify(predictColorJSON)
+        );
+        const modelStart = parseInt(
+          predictResponse.Prediction.ModelYear.split("-")[0]
+        );
+        const modelEnd = parseInt(
+          predictResponse.Prediction.ModelYear.split("-")[1]
+        );
+
+        setSelectedStartModelYear(2000 + modelStart);
+        setSelectedEndModelYear(2000 + modelEnd);
+        setSelectedBrand(predictResponse.Prediction.Brand);
+        setSelectedModel(predictResponse.Prediction.Model);
+        setSelectedColor(predictColorResponse.Prediction.color.toLowerCase());
+      }
       try {
         const response = await request4(
           "get",
@@ -236,19 +286,6 @@ export default function EstimateForm() {
         setSelectedSubModel(parseFloat(mscRes.submodel) * 1000);
         setSelectedSubModelName(mscRes.submodel_name);
         setSelectedCarYear(mscRes.model_year);
-        setFormData({
-          ...formData,
-          ["brand"]: "Mazda",
-          ["model"]: mscRes.model,
-          ["car_type"]: findCarType(
-            "Mazda",
-            mscRes.model,
-            mscRes.submodel_name
-          ),
-          ["sub_model"]: mscRes.submodel.toString(),
-          ["sub_model_name"]: mscRes.submodel_name,
-          ["car_year"]: mscRes.model_year,
-        });
       } catch (error) {
         console.log("Incorrect MSC");
       }
@@ -309,64 +346,94 @@ export default function EstimateForm() {
           console.log(err);
         }
       }
-    }
-    if (frontRes || rearRes || sideFrontRes || sideRearRes) {
-      let predictJSON = {
-        front: frontRes,
-        rear: rearRes,
-        sidefront: sideFrontRes,
-        siderear: sideRearRes,
-      };
-      let predictColorJSON = {
-        front: frontColor,
-        rear: rearColor,
-        sidefront: sideFrontColor,
-        siderear: sideRearColor,
-      };
-      const predictResponse = await request3(
-        "post",
-        "/predict/onecar",
-        undefined,
-        JSON.stringify(predictJSON)
-      );
-      console.log(predictResponse);
+      if (frontRes || rearRes || sideFrontRes || sideRearRes) {
+        let predictJSON = {
+          front: frontRes,
+          rear: rearRes,
+          sidefront: sideFrontRes,
+          siderear: sideRearRes,
+        };
+        let predictColorJSON = {
+          front: frontColor,
+          rear: rearColor,
+          sidefront: sideFrontColor,
+          siderear: sideRearColor,
+        };
+        const predictResponse = await request3(
+          "post",
+          "/predict/onecar",
+          undefined,
+          JSON.stringify(predictJSON)
+        );
+        console.log(predictResponse);
 
-      const predictColorResponse = await request3(
-        "post",
-        "/predict/onecolor",
-        undefined,
-        JSON.stringify(predictColorJSON)
-      );
-      const modelStart = parseInt(
-        predictResponse.Prediction.ModelYear.split("-")[0]
-      );
-      const modelEnd = parseInt(
-        predictResponse.Prediction.ModelYear.split("-")[1]
-      );
+        const predictColorResponse = await request3(
+          "post",
+          "/predict/onecolor",
+          undefined,
+          JSON.stringify(predictColorJSON)
+        );
+        const modelStart = parseInt(
+          predictResponse.Prediction.ModelYear.split("-")[0]
+        );
+        const modelEnd = parseInt(
+          predictResponse.Prediction.ModelYear.split("-")[1]
+        );
 
-      setSelectedStartModelYear(2000 + modelStart);
-      setSelectedEndModelYear(2000 + modelEnd);
-      setSelectedBrand(predictResponse.Prediction.Brand);
-      setSelectedModel(predictResponse.Prediction.Model);
-      setSelectedColor(predictColorResponse.Prediction.color.toLowerCase());
-      setFormData({
-        ...formData,
-        ["model"]: predictResponse.Prediction.Model,
-        ["brand"]: predictResponse.Prediction.Brand,
-        ["color"]: predictColorResponse.Prediction.color.toLowerCase(),
-      });
+        setSelectedStartModelYear(2000 + modelStart);
+        setSelectedEndModelYear(2000 + modelEnd);
+        setSelectedBrand(predictResponse.Prediction.Brand);
+        setSelectedModel(predictResponse.Prediction.Model);
+        setSelectedColor(predictColorResponse.Prediction.color.toLowerCase());
+      }
+    } else if (MSC && !error4) {
+      try {
+        const response = await request4(
+          "get",
+          `/msc_code?msc_code=${MSC}`,
+          undefined,
+          undefined
+        );
+        console.log(mscRes);
+        setSelectedBrand("Mazda");
+        setSelectedModel(mscRes.model);
+        setSelectedType(
+          findCarType("Mazda", mscRes.model, mscRes.submodel_name)
+        );
+        setSelectedSubModel(parseFloat(mscRes.submodel) * 1000);
+        setSelectedSubModelName(mscRes.submodel_name);
+        setSelectedCarYear(mscRes.model_year);
+      } catch (error) {
+        console.log("Incorrect MSC");
+      }
     }
     setIsLoading(false);
     nextStep();
   };
 
   const handleSubmit = async () => {
+    const numericValue = parseInt(selectedSubModel, 10) / 1000;
+    const formattedSubModel = numericValue.toFixed(1);
+    const submitData = JSON.stringify({
+      car_year: selectedCarYear,
+      brand: selectedBrand,
+      model: selectedModel,
+      sub_model: formattedSubModel,
+      sub_model_name: selectedSubModelName,
+      car_type: selectedType,
+      transmission: selectedTransmission,
+      modelyear_start: parseInt(selectedStartModelYear) % 100,
+      modelyear_end: parseInt(selectedEndModelYear) % 100,
+      color: selectedColor,
+      mile: mile,
+    });
+
     try {
       const response = await request(
         "post",
         "/predict/value",
         undefined,
-        formData
+        submitData
       );
       getMarketDetail(response);
     } catch (error) {
@@ -831,7 +898,7 @@ export default function EstimateForm() {
                       !(
                         selectedSubModel &&
                         selectedSubModelName &&
-                        formData["mile"] &&
+                        mile &&
                         selectedCarYear &&
                         selectedTransmission &&
                         selectedColor &&
