@@ -255,7 +255,8 @@ export default function Summary({
                       โฉมปีรถ
                     </p>
                     <p className="text-lg font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis">
-                      19-23
+                    {parsedCarDetail.selectedStartModelYear % 100}-
+                      {parsedCarDetail.selectedEndModelYear % 100}
                     </p>
                   </div>
                   <hr className="border-white"></hr>
@@ -432,7 +433,10 @@ export default function Summary({
                     <p className="text-lg font-normal text-white overflow-hidden whitespace-nowrap text-ellipsis">
                       โฉมปีรถ
                     </p>
-                    <p className="text-lg font-semibold text-white">19-23</p>
+                    <p className="text-lg font-semibold text-white">
+                      {parsedCarDetail.selectedStartModelYear % 100}-
+                      {parsedCarDetail.selectedEndModelYear % 100}
+                    </p>
                   </div>
                   <hr className="border-white"></hr>
                   <div className="flex justify-between text-lg">
