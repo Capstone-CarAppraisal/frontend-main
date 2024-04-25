@@ -49,7 +49,7 @@ export const selectData: CarBrands = {
           "C Sports",
           "E Sports",
           "High Connect",
-          "S Leather Sports",
+          "S Sports Leather",
           "S Sports",
           "SP Sports",
           "Sports 100th Anniversary Edition",
