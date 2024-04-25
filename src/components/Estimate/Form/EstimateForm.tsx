@@ -546,36 +546,32 @@ export default function EstimateForm() {
                   เพิ่มภาพรถยนต์
                 </div>
                 <div className="relative border border-2 border-[#D9D9D9] h-[750px] w-full flex flex-col items-center justify-center">
-                  {isLoading ? (
-                    <LoadingSpinner />
-                  ) : (
-                    <div className="grid grid-cols-2 w-full h-[100%] gap-[1px]">
-                      <ImageUpload
-                        label="มุมด้านหน้า"
-                        handleFrontImage={handleFrontData}
-                        selectedImage={frontData}
-                        imgSrc={frontCarIcon}
-                      />
-                      <ImageUpload
-                        label="มุมด้านหลัง"
-                        handleFrontImage={handleRearData}
-                        selectedImage={rearData}
-                        imgSrc={rearCarIcon}
-                      />
-                      <ImageUpload
-                        label="มุมเฉียงจากด้านหน้า"
-                        handleFrontImage={handleSideFrontData}
-                        selectedImage={sideFrontData}
-                        imgSrc={sideFrontCarIcon}
-                      />
-                      <ImageUpload
-                        label="มุมเฉียงจากด้านหลัง"
-                        handleFrontImage={handleSideRearData}
-                        selectedImage={sideRearData}
-                        imgSrc={sideRearCarIcon}
-                      />
-                    </div>
-                  )}
+                  <div className="grid grid-cols-2 w-full h-[100%] gap-[1px]">
+                    <ImageUpload
+                      label="มุมด้านหน้า"
+                      handleFrontImage={handleFrontData}
+                      selectedImage={frontData}
+                      imgSrc={frontCarIcon}
+                    />
+                    <ImageUpload
+                      label="มุมด้านหลัง"
+                      handleFrontImage={handleRearData}
+                      selectedImage={rearData}
+                      imgSrc={rearCarIcon}
+                    />
+                    <ImageUpload
+                      label="มุมเฉียงจากด้านหน้า"
+                      handleFrontImage={handleSideFrontData}
+                      selectedImage={sideFrontData}
+                      imgSrc={sideFrontCarIcon}
+                    />
+                    <ImageUpload
+                      label="มุมเฉียงจากด้านหลัง"
+                      handleFrontImage={handleSideRearData}
+                      selectedImage={sideRearData}
+                      imgSrc={sideRearCarIcon}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="w-full">
@@ -631,8 +627,9 @@ export default function EstimateForm() {
                 </div>
               </div>
 
-              <div className="flex flex-col mt-16">
-                <NextButton handleClick={handlePredictModel} />
+              <div className="flex flex-col mt-16 gap-6">
+                <NextButton handleClick={handlePredictModel} />{" "}
+                {isLoading && <LoadingSpinner />}
               </div>
             </div>
           </div>
@@ -737,175 +734,169 @@ export default function EstimateForm() {
                     <div className="absolute left-0 top-0 bg-blue text-2xl text-white font-normal px-8 py-3 z-10">
                       ลักษณะภายใน
                     </div>
-                    {isLoading ? (
-                      <LoadingSpinner />
-                    ) : (
-                      <div className="grid grid-row-3 w-[85%] gap-3">
-                        <div className="grid grid-cols-4 gap-20">
-                          <div>
-                            <SelectInputWithLabel
-                              label="ขนาดเครื่องยนต์ (ซีซี)"
-                              name="เลือกขนาดเครื่องยนต์ (ซีซี)"
-                              handleChange={onSubModelChange}
-                              option={
-                                selectedType &&
-                                Object.keys(
-                                  selectData[selectedBrand][selectedModel][
-                                    selectedType
-                                  ]
-                                )
-                              }
-                              isDisabled={
-                                !(
-                                  selectedBrand &&
-                                  selectedModel &&
-                                  selectedType
-                                )
-                              }
-                              value={selectedSubModel}
-                              isSelected={selectedSubModel}
-                            />
-                          </div>
-                          <div className="col-span-3">
-                            <SelectInputWithLabel
-                              label="รุ่นย่อย"
-                              name="เลือกรุ่นย่อยรถ"
-                              handleChange={onSubModelNameChange}
-                              option={
-                                selectedSubModel &&
+
+                    <div className="grid grid-row-3 w-[85%] gap-3">
+                      <div className="grid grid-cols-4 gap-20">
+                        <div>
+                          <SelectInputWithLabel
+                            label="ขนาดเครื่องยนต์ (ซีซี)"
+                            name="เลือกขนาดเครื่องยนต์ (ซีซี)"
+                            handleChange={onSubModelChange}
+                            option={
+                              selectedType &&
+                              Object.keys(
                                 selectData[selectedBrand][selectedModel][
                                   selectedType
-                                ][selectedSubModel]
-                              }
-                              isDisabled={
-                                !(
-                                  selectedBrand &&
-                                  selectedModel &&
-                                  selectedType &&
-                                  selectedSubModel
-                                )
-                              }
-                              value={selectedSubModelName}
-                              isSelected={selectedSubModelName}
-                            />
-                          </div>
+                                ]
+                              )
+                            }
+                            isDisabled={
+                              !(selectedBrand && selectedModel && selectedType)
+                            }
+                            value={selectedSubModel}
+                            isSelected={selectedSubModel}
+                          />
                         </div>
-                        <div className="grid grid-cols-4 gap-20">
-                          <div>
-                            <SelectInputWithLabel
-                              label="ปีรถ"
-                              name="เลือกปีรถ"
-                              handleChange={onCarYearChange}
-                              option={carYear}
-                              isDisabled={
-                                !(
-                                  selectedBrand &&
-                                  selectedModel &&
-                                  selectedType &&
-                                  selectedSubModel &&
-                                  selectedSubModelName
-                                )
-                              }
-                              value={selectedCarYear}
-                              isSelected={selectedCarYear}
-                            />
-                          </div>
+                        <div className="col-span-3">
+                          <SelectInputWithLabel
+                            label="รุ่นย่อย"
+                            name="เลือกรุ่นย่อยรถ"
+                            handleChange={onSubModelNameChange}
+                            option={
+                              selectedSubModel &&
+                              selectData[selectedBrand][selectedModel][
+                                selectedType
+                              ][selectedSubModel]
+                            }
+                            isDisabled={
+                              !(
+                                selectedBrand &&
+                                selectedModel &&
+                                selectedType &&
+                                selectedSubModel
+                              )
+                            }
+                            value={selectedSubModelName}
+                            isSelected={selectedSubModelName}
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-4 gap-20">
+                        <div>
+                          <SelectInputWithLabel
+                            label="ปีรถ"
+                            name="เลือกปีรถ"
+                            handleChange={onCarYearChange}
+                            option={carYear}
+                            isDisabled={
+                              !(
+                                selectedBrand &&
+                                selectedModel &&
+                                selectedType &&
+                                selectedSubModel &&
+                                selectedSubModelName
+                              )
+                            }
+                            value={selectedCarYear}
+                            isSelected={selectedCarYear}
+                          />
+                        </div>
 
-                          <div className="col-span-3">
-                            <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-                              ระบบเกียร์
-                            </label>
-                            <div className="flex gap-x-32 mt-5">
-                              <div className="flex items-center">
-                                <input
-                                  type="radio"
-                                  className="border-[#707070] text-rose focus:ring-0"
-                                  id="hs-radio-group-3"
-                                  value="AT"
-                                  checked={selectedTransmission === "AT"}
-                                  onChange={onTransmissionTypeChange}
-                                />
-                                <label className="text-xl text-black ms-2">
-                                  เกียร์อัตโนมัติ
-                                </label>
-                              </div>
-                              <div className="flex items-center">
-                                <input
-                                  type="radio"
-                                  name="hs-radio-group"
-                                  className="border-[#707070] text-rose focus:ring-0"
-                                  value="MT"
-                                  checked={selectedTransmission === "MT"}
-                                  onChange={onTransmissionTypeChange}
-                                />
-                                <label
-                                  htmlFor="hs-radio-group-1"
-                                  className="text-xl text-black ms-2"
-                                >
-                                  เกียร์ธรรมดา
-                                </label>
-                              </div>
+                        <div className="col-span-3">
+                          <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                            ระบบเกียร์
+                          </label>
+                          <div className="flex gap-x-32 mt-5">
+                            <div className="flex items-center">
+                              <input
+                                type="radio"
+                                className="border-[#707070] text-rose focus:ring-0"
+                                id="hs-radio-group-3"
+                                value="AT"
+                                checked={selectedTransmission === "AT"}
+                                onChange={onTransmissionTypeChange}
+                              />
+                              <label className="text-xl text-black ms-2">
+                                เกียร์อัตโนมัติ
+                              </label>
+                            </div>
+                            <div className="flex items-center">
+                              <input
+                                type="radio"
+                                name="hs-radio-group"
+                                className="border-[#707070] text-rose focus:ring-0"
+                                value="MT"
+                                checked={selectedTransmission === "MT"}
+                                onChange={onTransmissionTypeChange}
+                              />
+                              <label
+                                htmlFor="hs-radio-group-1"
+                                className="text-xl text-black ms-2"
+                              >
+                                เกียร์ธรรมดา
+                              </label>
                             </div>
                           </div>
                         </div>
-                        <div className="grid grid-cols-4 gap-20">
-                          {/*  TODO: Change formData */}
-                          <div>
-                            <SelectInputWithLabel
-                              label="โฉมปีเริ่มต้น"
-                              name="เลือกปี"
-                              option={carYear}
-                              value={selectedStartModelYear}
-                              isSelected={selectedStartModelYear}
-                              handleChange={onStartModelYearChange}
-                            />
-                          </div>
-                          <div>
-                            <SelectInputWithLabel
-                              label="โฉมปีท้ายสุด"
-                              name="เลือกปี"
-                              option={carYear}
-                              value={selectedEndModelYear}
-                              isSelected={selectedEndModelYear}
-                              handleChange={onEndModelYearChange}
-                            />
-                          </div>
-                          <div className="col-span-2">
-                            <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
-                              เลขไมล์ (km)
-                            </label>
-                            <input
-                              type="text"
-                              onChange={onMileAgeChange}
-                              className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
-                              placeholder="ระบุเลขไมล์"
-                              value={mile}
-                            />
-                          </div>
+                      </div>
+                      <div className="grid grid-cols-4 gap-20">
+                        {/*  TODO: Change formData */}
+                        <div>
+                          <SelectInputWithLabel
+                            label="โฉมปีเริ่มต้น"
+                            name="เลือกปี"
+                            option={carYear}
+                            value={selectedStartModelYear}
+                            isSelected={selectedStartModelYear}
+                            handleChange={onStartModelYearChange}
+                          />
+                        </div>
+                        <div>
+                          <SelectInputWithLabel
+                            label="โฉมปีท้ายสุด"
+                            name="เลือกปี"
+                            option={carYear}
+                            value={selectedEndModelYear}
+                            isSelected={selectedEndModelYear}
+                            handleChange={onEndModelYearChange}
+                          />
+                        </div>
+                        <div className="col-span-2">
+                          <label className="block text-sm mb-2 text-dark-blue text-xl font-normal">
+                            เลขไมล์ (km)
+                          </label>
+                          <input
+                            type="text"
+                            onChange={onMileAgeChange}
+                            className="py-3 px-4 block w-full border-[#BCBCBC] text-black placeholder:text-[#BCBCBC] rounded-lg text-lg focus:border-blue-500 focus:ring-blue-500"
+                            placeholder="ระบุเลขไมล์"
+                            value={mile}
+                          />
                         </div>
                       </div>
-                    )}
-
-                    {/*  */}
+                    </div>
                   </div>
                 </div>
-                <div className="space-x-10 flex flex-row items-center mt-16">
-                  <PrevButton handleClick={prevStep} />
-                  <NextButton
-                    handleClick={handleSubmit}
-                    isDisabled={
-                      !(
-                        selectedSubModel &&
-                        selectedSubModelName &&
-                        mile &&
-                        selectedCarYear &&
-                        selectedTransmission &&
-                        selectedColor &&
-                        selectedStartModelYear &&
-                        selectedEndModelYear
-                      )
-                    }
-                  />
+                <div className="flex flex-col gap-6">
+                  <div className="space-x-10 flex flex-row items-center mt-16">
+                    <PrevButton handleClick={prevStep} />
+                    <NextButton
+                      handleClick={handleSubmit}
+                      isDisabled={
+                        !(
+                          selectedSubModel &&
+                          selectedSubModelName &&
+                          mile &&
+                          selectedCarYear &&
+                          selectedTransmission &&
+                          selectedColor &&
+                          selectedStartModelYear &&
+                          selectedEndModelYear
+                        )
+                      }
+                    />
+                  </div>
+                  {isLoading && <LoadingSpinner />}
                 </div>
               </div>
             </div>
