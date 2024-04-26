@@ -936,6 +936,8 @@ export default function EstimateForm() {
                     selectedSubModel,
                     selectedSubModelName,
                     selectedCarYear,
+                    selectedStartModelYear,
+                    selectedEndModelYear,
                     selectedTransmission,
                     mile,
                   })}
