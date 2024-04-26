@@ -484,7 +484,7 @@ export default function EstimateForm() {
                   </span>
                 </span>
                 <span className="ms-2  text-xl font-normal text-dark-blue">
-                  ภาพรถยนตร์และรหัส
+                  ภาพรถยนต์และรหัส
                 </span>
               </span>
             </li>
