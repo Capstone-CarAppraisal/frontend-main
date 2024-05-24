@@ -79,7 +79,6 @@ export default function EstimateForm() {
     }
   };
 
-
   const onBrandChange = (event: any) => {
     const { value } = event.target;
     setSelectedBrand(value);

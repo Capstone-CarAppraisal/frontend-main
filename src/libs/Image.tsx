@@ -1,17 +1,17 @@
 "use client";
 
+//upload image to backend
 export default async function Image(data: any, side: string) {
   if (data) {
     const formData = new FormData();
-    formData.append("files", data); // Append the file to the form data
+    formData.append("files", data);
 
-    // Adjust the URL to your FastAPI endpoint
     const url = `http://localhost:8000/predict/${side}`;
 
     try {
       const response = await fetch(url, {
         method: "POST",
-        body: formData, // Send the form data as the request body
+        body: formData,
       });
 
       if (!response.ok) {
@@ -19,6 +19,7 @@ export default async function Image(data: any, side: string) {
       }
 
       const predictJSON = await response.json();
+      // return prediction
       return predictJSON["All prediction"];
     } catch (error) {
       console.error("An error occurred:", error);
